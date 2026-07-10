@@ -13,6 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
     
+    // Server-side mapping to catch cached React apps sending IDs (e.g. M2, P30, H170)
+    require_once 'locations_map.php';
+    if (isset($data['mandal']) && isset($LOCATION_MAP[$data['mandal']])) {
+        $data['mandal'] = $LOCATION_MAP[$data['mandal']];
+    }
+    if (isset($data['panchayat']) && isset($LOCATION_MAP[$data['panchayat']])) {
+        $data['panchayat'] = $LOCATION_MAP[$data['panchayat']];
+    }
+    if (isset($data['village']) && isset($LOCATION_MAP[$data['village']])) {
+        $data['village'] = $LOCATION_MAP[$data['village']];
+    }
+    
     try {
         $pdo->beginTransaction();
         
