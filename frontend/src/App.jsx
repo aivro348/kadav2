@@ -27,9 +27,10 @@ function App() {
 
         {/* Surveyor Routes */}
         <Route path="/surveyor" element={<SurveyorLayout />}>
-          <Route index element={<SurveyList />} />
+          <Route index element={<Dashboard />} />
+          <Route path="surveys" element={<SurveyList />} />
           <Route path="new" element={<NewSurvey />} />
-          <Route path=":id" element={<ViewSurvey />} />
+          <Route path="surveys/:id" element={<ViewSurvey />} />
         </Route>
 
         {/* Default Fallback */}

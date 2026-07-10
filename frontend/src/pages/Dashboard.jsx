@@ -17,11 +17,15 @@ export default function Dashboard() {
   const [surveys, setSurveys] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const username = localStorage.getItem('rws_username') || 'surveyor';
+  const isAdmin = username === 'admin';
+  const basePath = isAdmin ? '/admin' : '/surveyor';
+
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=admin`);
+        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
         if (response.ok) {
           const data = await response.json();
           setSurveys(data);
@@ -57,20 +61,26 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{t('dashboard.title')}</h1>
+        <h1 className="text-2xl font-bold text-slate-900">
+          {isAdmin ? t('dashboard.title') : 'My Surveys Dashboard'}
+        </h1>
         <div className="mt-4 sm:mt-0 flex space-x-3">
-          <Link to="/surveys/new" className="btn-primary flex items-center">
-            <PlusCircle size={18} className="mr-2" />
-            {t('nav.new_survey')}
-          </Link>
-          <Link to="/surveys" className="btn-secondary flex items-center">
+          {!isAdmin && (
+            <Link to={`${basePath}/new`} className="btn-primary flex items-center">
+              <PlusCircle size={18} className="mr-2" />
+              {t('nav.new_survey')}
+            </Link>
+          )}
+          <Link to={`${basePath}/surveys`} className="btn-secondary flex items-center">
             <List size={18} className="mr-2" />
             {t('nav.survey_list')}
           </Link>
-          <Link to="/reports" className="btn-secondary flex items-center hidden sm:flex">
-            <BarChart3 size={18} className="mr-2" />
-            {t('nav.reports')}
-          </Link>
+          {isAdmin && (
+            <Link to={`${basePath}/reports`} className="btn-secondary flex items-center hidden sm:flex">
+              <BarChart3 size={18} className="mr-2" />
+              {t('nav.reports')}
+            </Link>
+          )}
         </div>
       </div>
 
@@ -93,7 +103,7 @@ export default function Dashboard() {
       <div className="card !p-0 overflow-hidden">
         <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center">
           <h3 className="text-lg font-semibold text-slate-800">{t('dashboard.recent_surveys')}</h3>
-          <Link to="/surveys" className="text-sm text-primary-600 hover:text-primary-700 font-medium">{t('dashboard.view_all')}</Link>
+          <Link to={`${basePath}/surveys`} className="text-sm text-primary-600 hover:text-primary-700 font-medium">{t('dashboard.view_all')}</Link>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-slate-200">
@@ -110,7 +120,7 @@ export default function Dashboard() {
               {recentSurveys.map((survey) => (
                 <tr key={survey.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary-600">
-                    <Link to={`/surveys/${survey.id}`}>{survey.id}</Link>
+                    <Link to={`${basePath}/surveys/${survey.id}`}>{survey.id}</Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">{survey.village}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -125,8 +135,10 @@ export default function Dashboard() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{survey.date}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link to={`/surveys/${survey.id}`} className="text-primary-600 hover:text-primary-900 mr-3">{t('dashboard.view')}</Link>
-                    <Link to={`/surveys/${survey.id}/edit`} className="text-slate-600 hover:text-slate-900">{t('dashboard.edit')}</Link>
+                    <Link to={`${basePath}/surveys/${survey.id}`} className="text-primary-600 hover:text-primary-900 mr-3">{t('dashboard.view')}</Link>
+                    {!isAdmin && (
+                      <Link to={`${basePath}/surveys/${survey.id}/edit`} className="text-slate-600 hover:text-slate-900">{t('dashboard.edit')}</Link>
+                    )}
                   </td>
                 </tr>
               ))}

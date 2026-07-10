@@ -20,8 +20,9 @@ export default function SurveyorLayout() {
   const { t } = useTranslation();
 
   const navigation = [
+    { name: t('nav.dashboard'), href: '/surveyor', icon: LayoutDashboard },
     { name: t('nav.new_survey'), href: '/surveyor/new', icon: PlusCircle },
-    { name: t('nav.survey_list'), href: '/surveyor', icon: FileText },
+    { name: t('nav.survey_list'), href: '/surveyor/surveys', icon: FileText },
   ];
 
   return (

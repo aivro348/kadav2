@@ -12,12 +12,14 @@ export default function SurveyList() {
   const [surveys, setSurveys] = useState([]);
   const [filteredSurveys, setFilteredSurveys] = useState([]);
 
+  const username = localStorage.getItem('rws_username') || 'surveyor';
+  const isAdmin = username === 'admin';
+  const basePath = isAdmin ? '/admin' : '/surveyor';
+
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || '';
-        const username = localStorage.getItem('rws_username') || 'surveyor';
-        
         const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
         
         if (!response.ok) {
@@ -73,10 +75,12 @@ export default function SurveyList() {
             {surveys.length} Completed
           </span>
         </div>
-        <Link to="new" className="mt-4 sm:mt-0 btn-primary flex items-center w-fit">
-          <PlusCircle size={18} className="mr-2" />
-          New Survey
-        </Link>
+        {!isAdmin && (
+          <Link to={`${basePath}/new`} className="mt-4 sm:mt-0 btn-primary flex items-center w-fit">
+            <PlusCircle size={18} className="mr-2" />
+            New Survey
+          </Link>
+        )}
       </div>
 
       <div className="card !p-0">
@@ -125,7 +129,7 @@ export default function SurveyList() {
               {filteredSurveys.map((survey) => (
                 <tr key={survey.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary-600">
-                    <Link to={`${survey.id}`}>{survey.id}</Link>
+                    <Link to={`${basePath}/surveys/${survey.id}`}>{survey.id}</Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-slate-900">{survey.village}</div>
@@ -142,7 +146,7 @@ export default function SurveyList() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">{survey.type}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{survey.date}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
-                    <Link to={`${survey.id}`} className="text-slate-400 hover:text-primary-600 inline-flex" title="View">
+                    <Link to={`${basePath}/surveys/${survey.id}`} className="text-slate-400 hover:text-primary-600 inline-flex" title="View">
                       <Eye size={18} />
                     </Link>
                     {!isSurveyor && (
@@ -174,7 +178,7 @@ export default function SurveyList() {
           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
               <p className="text-sm text-slate-700">
-                Showing <span className="font-medium">1</span> to <span className="font-medium">{filteredSurveys.length}</span> of <span className="font-medium">{allSurveys.length}</span> results
+                Showing <span className="font-medium">1</span> to <span className="font-medium">{filteredSurveys.length}</span> of <span className="font-medium">{surveys.length}</span> results
               </p>
             </div>
             <div>
