@@ -16,7 +16,9 @@ export default function SurveyList() {
     const fetchSurveys = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php`);
+        const username = localStorage.getItem('rws_username') || 'surveyor';
+        
+        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch surveys');
@@ -46,7 +48,7 @@ export default function SurveyList() {
 
     fetchSurveys();
   }, []);
-
+  useEffect(() => {
     // Filter logic
     let filtered = surveys;
     

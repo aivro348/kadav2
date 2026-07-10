@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 borewell_depth, motor_capacity, motor_depth, 
                 delivery_pipe, water_level_fixing, water_struck_depth,
                 tds, ph, hardness, drilled_year, dried_year, dried_months,
-                crop_category, crop_names, dependent_families, dependent_animals, agri_land_area
+                crop_category, crop_names, dependent_families, dependent_animals, agri_land_area, created_by
             ) VALUES (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
         ");
         
@@ -60,7 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $val('crop_names'),
             $val('dependent_families'),
             $val('dependent_animals'),
-            $val('agri_land_area')
+            $val('agri_land_area'),
+            ($data['created_by'] === 'admin' ? 1 : 2) // Map username string to INT
         ]);
         
         $survey_id = $pdo->lastInsertId();
@@ -127,7 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             // Basic GET to fetch all surveys
-            $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
+            $user = isset($_GET['user']) ? $_GET['user'] : 'surveyor';
+            
+            if ($user === 'admin') {
+                $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
+            } else {
+                // If not admin (e.g. surveyor), only show their own surveys (ID 2)
+                $stmt = $pdo->prepare("SELECT * FROM surveys WHERE created_by = 2 ORDER BY created_date DESC LIMIT 100");
+                $stmt->execute();
+            }
+            
             $surveys = $stmt->fetchAll();
             echo json_encode($surveys);
         }

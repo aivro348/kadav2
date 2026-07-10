@@ -88,7 +88,7 @@ export default function NewSurvey() {
             { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
           );
         },
-        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+        { enableHighAccuracy: true, timeout: 2500, maximumAge: 0 }
       );
     } else {
       alert('Geolocation is not supported by your browser');
@@ -157,10 +157,23 @@ export default function NewSurvey() {
 
     // Prepare payload for PHP API
     // Ensure arrays are converted to strings for the database
+    
+    // Map IDs to full exact names
+    const villageObj = locationsData.villages.find(v => v.id === data.village);
+    const panchayatObj = locationsData.panchayats.find(p => p.id === data.panchayat);
+    const mandalObj = locationsData.mandals.find(m => m.id === data.mandal);
+    
+    // Get logged in user
+    const username = localStorage.getItem('rws_username') || 'surveyor';
+
     const payload = {
       ...data,
+      village: villageObj ? villageObj.name : data.village,
+      panchayat: panchayatObj ? panchayatObj.name : data.panchayat,
+      mandal: mandalObj ? mandalObj.name : data.mandal,
       borewell_type: Array.isArray(data.borewell_type) ? data.borewell_type.join(', ') : data.borewell_type,
       supply_nature: Array.isArray(data.supply_nature) ? data.supply_nature.join(', ') : data.supply_nature,
+      created_by: username,
       images: images
     };
 

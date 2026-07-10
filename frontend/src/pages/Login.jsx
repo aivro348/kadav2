@@ -10,6 +10,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (username && password) {
+      localStorage.setItem('rws_username', username);
       if (username === 'admin') {
         navigate('/admin/dashboard');
       } else if (username === 'surveyor') {
