@@ -75,11 +75,11 @@ export default function Landing() {
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight font-serif drop-shadow-lg">
-            Building a <span className="text-amber-400">Stronger</span><br />
-            Kuppam Community
+            Pioneering a <span className="text-emerald-400">NetZero</span><br />
+            Future for Kuppam
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-slate-200 font-medium max-w-2xl mx-auto drop-shadow-md">
-            Kuppam's strength lies in its people. KADA focuses on empowering every citizen through inclusive development initiatives that promote education, healthcare, and economic growth towards a NetZero future.
+          <p className="mt-6 text-lg md:text-xl text-slate-200 font-medium max-w-3xl mx-auto drop-shadow-md leading-relaxed">
+            We are transforming Kuppam into a 100% sustainable, NetZero community. By integrating solar-powered rural water supply, smart borewell monitoring, and zero-emission infrastructure, we are actively restoring our ecological balance for generations to come.
           </p>
           <div className="mt-10">
             <button onClick={scrollToSurvey} className="border-2 border-white text-white hover:bg-white hover:text-primary-900 px-8 py-3 rounded-full font-semibold transition-colors duration-300 shadow-lg">
