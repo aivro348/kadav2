@@ -69,6 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($data['images']) && is_array($data['images'])) {
             $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, file_path) VALUES (?, ?)");
             
+            // Ensure uploads directory exists
+            $uploadDir = '../uploads/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
             foreach ($data['images'] as $base64) {
                 // Determine extension and decode
                 $ext = 'jpg';
@@ -84,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $imgData = base64_decode($encoded);
                 if ($imgData !== false) {
                     $filename = 'survey_' . $survey_id . '_' . uniqid() . '.' . $ext;
-                    $filepath = '../uploads/' . $filename;
+                    $filepath = $uploadDir . $filename;
                     
                     if (file_put_contents($filepath, $imgData)) {
                         $imgStmt->execute([$survey_id, 'uploads/' . $filename]);
@@ -102,11 +108,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(["error" => "Failed to save survey: " . $e->getMessage()]);
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Basic GET to fetch surveys
     try {
-        $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
-        $surveys = $stmt->fetchAll();
-        echo json_encode($surveys);
+        if (isset($_GET['id'])) {
+            // Fetch single survey with images
+            $id = $_GET['id'];
+            $stmt = $pdo->prepare("SELECT * FROM surveys WHERE survey_id = ?");
+            $stmt->execute([$id]);
+            $survey = $stmt->fetch();
+            
+            if ($survey) {
+                $imgStmt = $pdo->prepare("SELECT file_path FROM survey_images WHERE survey_id = ?");
+                $imgStmt->execute([$id]);
+                $survey['images'] = $imgStmt->fetchAll(PDO::FETCH_COLUMN);
+                echo json_encode($survey);
+            } else {
+                http_response_code(404);
+                echo json_encode(["error" => "Survey not found"]);
+            }
+        } else {
+            // Basic GET to fetch all surveys
+            $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
+            $surveys = $stmt->fetchAll();
+            echo json_encode($surveys);
+        }
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode(["error" => "Failed to fetch surveys: " . $e->getMessage()]);
