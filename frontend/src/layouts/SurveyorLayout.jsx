@@ -40,7 +40,7 @@ export default function SurveyorLayout() {
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="flex items-center justify-center h-16 border-b border-slate-100 px-4">
-          <Droplet className="text-primary-600 mr-2" size={24} />
+          <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm mr-3" />
           <span className="text-lg font-bold text-slate-800">{t('nav.app_title')}</span>
           <button 
             className="ml-auto lg:hidden text-slate-500"
@@ -85,7 +85,7 @@ export default function SurveyorLayout() {
         <header className="bg-white shadow-sm lg:hidden">
           <div className="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center">
-              <Droplet className="text-primary-600 mr-2" size={24} />
+              <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm mr-3" />
               <span className="text-lg font-bold text-slate-800">{t('nav.app_title')}</span>
             </div>
             <button

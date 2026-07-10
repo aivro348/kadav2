@@ -27,7 +27,7 @@ export default function Login() {
     <div className="min-h-screen bg-primary-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center text-primary-600">
-          <Droplet size={48} />
+          <img src="/netzero.jpg" alt="Logo" className="h-20 w-20 object-cover rounded-full shadow-md border-2 border-white" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           RWS Borewell Survey
