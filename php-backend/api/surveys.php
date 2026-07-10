@@ -30,32 +30,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             )
         ");
         
+        // Helper function to convert empty strings to null for strict DB mode
+        $val = function($key) use ($data) {
+            return (isset($data[$key]) && $data[$key] !== "") ? $data[$key] : null;
+        };
+        
         $stmt->execute([
-            $data['mandal'] ?? null,
-            $data['panchayat'] ?? null,
-            $data['village'] ?? null,
-            $data['latitude'] ?? null,
-            $data['longitude'] ?? null,
-            $data['status'] ?? null,
-            $data['borewell_type'] ?? null,
-            $data['supply_nature'] ?? null,
-            $data['borewell_depth'] ?? null,
-            $data['motor_capacity'] ?? null,
-            $data['motor_depth'] ?? null,
-            $data['delivery_pipe'] ?? null,
-            $data['water_level_fixing'] ?? null,
-            $data['water_struck_depth'] ?? null,
-            $data['tds'] ?? null,
-            $data['ph'] ?? null,
-            $data['hardness'] ?? null,
-            $data['drilled_year'] ?? null,
-            $data['dried_year'] ?? null,
-            $data['dried_months'] ?? null,
-            $data['crop_category'] ?? null,
-            $data['crop_names'] ?? null,
-            $data['dependent_families'] ?? null,
-            $data['dependent_animals'] ?? null,
-            $data['agri_land_area'] ?? null
+            $val('mandal'),
+            $val('panchayat'),
+            $val('village'),
+            $val('latitude'),
+            $val('longitude'),
+            $val('status'),
+            $val('borewell_type'),
+            $val('supply_nature'),
+            $val('borewell_depth'),
+            $val('motor_capacity'),
+            $val('motor_depth'),
+            $val('delivery_pipe'),
+            $val('water_level_fixing'),
+            $val('water_struck_depth'),
+            $val('tds'),
+            $val('ph'),
+            $val('hardness'),
+            $val('drilled_year'),
+            $val('dried_year'),
+            $val('dried_months'),
+            $val('crop_category'),
+            $val('crop_names'),
+            $val('dependent_families'),
+            $val('dependent_animals'),
+            $val('agri_land_area')
         ]);
         
         $survey_id = $pdo->lastInsertId();

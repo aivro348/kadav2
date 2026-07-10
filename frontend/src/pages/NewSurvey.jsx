@@ -156,8 +156,11 @@ export default function NewSurvey() {
     setIsSubmitted(true); // Show animation early
 
     // Prepare payload for PHP API
+    // Ensure arrays are converted to strings for the database
     const payload = {
       ...data,
+      borewell_type: Array.isArray(data.borewell_type) ? data.borewell_type.join(', ') : data.borewell_type,
+      supply_nature: Array.isArray(data.supply_nature) ? data.supply_nature.join(', ') : data.supply_nature,
       images: images
     };
 
