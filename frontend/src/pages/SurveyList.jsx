@@ -9,24 +9,58 @@ export default function SurveyList() {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
-  const [submittedSurveys, setSubmittedSurveys] = useState([]);
+  const [surveys, setSurveys] = useState([]);
+  const [filteredSurveys, setFilteredSurveys] = useState([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('rws_surveys');
-    if (saved) {
-      setSubmittedSurveys(JSON.parse(saved));
-    }
+    const fetchSurveys = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch surveys');
+        }
+        
+        const data = await response.json();
+        
+        // Map the backend data to match the frontend table format
+        const formattedSurveys = data.map(survey => ({
+          id: survey.survey_id,
+          mandal: survey.mandal,
+          village: survey.village,
+          status: survey.status,
+          type: survey.borewell_type,
+          date: survey.created_date ? survey.created_date.split(' ')[0] : 'Unknown'
+        }));
+        
+        setSurveys(formattedSurveys);
+        setFilteredSurveys(formattedSurveys);
+      } catch (error) {
+        console.error('Error fetching surveys:', error);
+        // Fallback to empty array if error
+        setSurveys([]);
+        setFilteredSurveys([]);
+      }
+    };
+
+    fetchSurveys();
   }, []);
 
-  // Use only submitted surveys (no dummy data)
-  const allSurveys = [...submittedSurveys];
-
-  const filteredSurveys = allSurveys.filter(s => {
-    const matchesSearch = s.village?.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          s.id?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'All' || s.status === statusFilter;
-    return matchesSearch && matchesStatus;
-  });
+    // Filter logic
+    let filtered = surveys;
+    
+    if (searchTerm || statusFilter !== 'All') {
+      filtered = surveys.filter(s => {
+        const matchesSearch = s.village?.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                              s.id?.toString().toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesStatus = statusFilter === 'All' || s.status === statusFilter;
+        return matchesSearch && matchesStatus;
+      });
+    }
+    
+    setFilteredSurveys(filtered);
+  }, [surveys, searchTerm, statusFilter]);
 
   return (
     <div className="space-y-6">
