@@ -65,6 +65,7 @@ export default function NewSurvey() {
   const captureGPS = () => {
     setIsCapturingGPS(true);
     if ('geolocation' in navigator) {
+      // First try with high accuracy (GPS chip)
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setValue('latitude', position.coords.latitude);
@@ -72,9 +73,22 @@ export default function NewSurvey() {
           setIsCapturingGPS(false);
         },
         (error) => {
-          alert('Error capturing GPS: ' + error.message);
-          setIsCapturingGPS(false);
-        }
+          console.warn('High accuracy GPS failed. Trying low accuracy fallback...', error);
+          // If high accuracy fails or times out, try low accuracy (Wi-Fi/Cell towers)
+          navigator.geolocation.getCurrentPosition(
+            (fallbackPosition) => {
+              setValue('latitude', fallbackPosition.coords.latitude);
+              setValue('longitude', fallbackPosition.coords.longitude);
+              setIsCapturingGPS(false);
+            },
+            (fallbackError) => {
+              alert('Error capturing GPS. Please ensure Location services are turned on for your device.');
+              setIsCapturingGPS(false);
+            },
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+          );
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
       );
     } else {
       alert('Geolocation is not supported by your browser');
