@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $host = 'localhost'; // Usually localhost on Hostinger
 $dbname = 'u110415653_iitk'; // The DB name from your screenshot
-$username = 'u110415653_iitk'; // Assuming username is same as dbname
+$username = 'u110415653_admin'; // Correct database username
 $password = 'Charan@2004!'; 
 
 try {
