@@ -10,23 +10,49 @@ import {
   BarChart3
 } from 'lucide-react';
 
+import { useState, useEffect } from 'react';
+
 export default function Dashboard() {
   const { t } = useTranslation();
+  const [surveys, setSurveys] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSurveys = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=admin`);
+        if (response.ok) {
+          const data = await response.json();
+          setSurveys(data);
+        }
+      } catch (error) {
+        console.error('Error fetching surveys:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSurveys();
+  }, []);
+
+  const total = surveys.length;
+  const successful = surveys.filter(s => s.status === 'Successful').length;
+  const seasonal = surveys.filter(s => s.status === 'Seasonal / Summer Dry').length;
+  const dried = surveys.filter(s => s.status === 'Dried').length;
 
   const stats = [
-    { name: t('dashboard.total_surveys'), stat: '1,245', icon: FileText, color: 'text-blue-500', bg: 'bg-blue-100' },
-    { name: t('dashboard.successful'), stat: '842', icon: CheckCircle, color: 'text-success-600', bg: 'bg-success-100' },
-    { name: t('dashboard.seasonal'), stat: '215', icon: CloudRain, color: 'text-yellow-600', bg: 'bg-yellow-100' },
-    { name: t('dashboard.dried'), stat: '188', icon: Droplets, color: 'text-red-500', bg: 'bg-red-100' },
+    { name: t('dashboard.total_surveys'), stat: total.toString(), icon: FileText, color: 'text-blue-500', bg: 'bg-blue-100' },
+    { name: t('dashboard.successful'), stat: successful.toString(), icon: CheckCircle, color: 'text-success-600', bg: 'bg-success-100' },
+    { name: t('dashboard.seasonal'), stat: seasonal.toString(), icon: CloudRain, color: 'text-yellow-600', bg: 'bg-yellow-100' },
+    { name: t('dashboard.dried'), stat: dried.toString(), icon: Droplets, color: 'text-red-500', bg: 'bg-red-100' },
   ];
 
-  const recentSurveys = [
-    { id: 'SRV-1024', village: 'Maddipadu', status: 'Successful', date: '2026-07-10' },
-    { id: 'SRV-1023', village: 'Chimakurthy', status: 'Seasonal / Summer Dry', date: '2026-07-09' },
-    { id: 'SRV-1022', village: 'Podili', status: 'Dried', date: '2026-07-08' },
-    { id: 'SRV-1021', village: 'Kanigiri', status: 'Successful', date: '2026-07-08' },
-    { id: 'SRV-1020', village: 'Markapuram', status: 'Successful', date: '2026-07-07' },
-  ];
+  const recentSurveys = surveys.slice(0, 5).map(s => ({
+    id: s.survey_id,
+    village: s.village,
+    status: s.status,
+    date: s.created_date ? s.created_date.split(' ')[0] : 'Unknown'
+  }));
 
   return (
     <div className="space-y-6">

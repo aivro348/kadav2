@@ -67,7 +67,12 @@ export default function SurveyList() {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Survey List</h1>
+        <div className="flex items-center space-x-3">
+          <h1 className="text-2xl font-bold text-slate-900">Survey List</h1>
+          <span className="bg-primary-100 text-primary-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-primary-200">
+            {surveys.length} Completed
+          </span>
+        </div>
         <Link to="new" className="mt-4 sm:mt-0 btn-primary flex items-center w-fit">
           <PlusCircle size={18} className="mr-2" />
           New Survey
