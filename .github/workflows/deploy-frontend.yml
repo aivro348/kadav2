@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'frontend/**'
+      - 'php-backend/**'
       - '.github/workflows/**'
 
 permissions:
@@ -39,6 +40,9 @@ jobs:
           mkdir hostinger_deploy
           cp -r frontend/dist/* hostinger_deploy/
           cp frontend/vercel.json hostinger_deploy/ 2>/dev/null || :
+          
+          # Copy PHP backend to the deployment artifact
+          cp -r php-backend hostinger_deploy/
           
           # Add .htaccess for React routing on Hostinger Apache servers
           cat << 'EOF' > hostinger_deploy/.htaccess
