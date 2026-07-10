@@ -349,9 +349,9 @@ export default function NewSurvey() {
                   <select className="input-field" {...register('delivery_pipe')}>
                     <option value="">{t('survey.select_pipe')}</option>
                     <option value="1">1</option>
-                    <option value="1.1/2">1 1/2</option>
+                    <option value="1.5">1.5</option>
                     <option value="2">2</option>
-                    <option value="2.1/2">2 1/2</option>
+                    <option value="2.5">2.5</option>
                     <option value="3">3</option>
                   </select>
                 </div>
