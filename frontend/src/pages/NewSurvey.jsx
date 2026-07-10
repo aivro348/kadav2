@@ -136,30 +136,46 @@ export default function NewSurvey() {
     }
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Submitting survey:", data, images);
     
-    // Get location names
-    const villageObj = locationsData.villages.find(v => v.id === data.village);
-    const mandalObj = locationsData.mandals.find(m => m.id === data.mandal);
-    
-    const newSurvey = {
-      id: `SRV-${Math.floor(Math.random() * 9000) + 1000}`,
-      village: villageObj ? villageObj.name : data.village,
-      mandal: mandalObj ? mandalObj.name : data.mandal,
-      status: data.status || 'Successful',
-      type: data.borewell_type ? (Array.isArray(data.borewell_type) ? data.borewell_type[0] : data.borewell_type) : 'Agriculture',
-      date: new Date().toISOString().split('T')[0],
-      fullData: data,
+    setIsSubmitted(true); // Show animation early
+
+    // Prepare payload for PHP API
+    const payload = {
+      ...data,
       images: images
     };
 
-    const saved = localStorage.getItem('rws_surveys');
-    const surveys = saved ? JSON.parse(saved) : [];
-    surveys.unshift(newSurvey); // Add to top
-    localStorage.setItem('rws_surveys', JSON.stringify(surveys));
+    try {
+      // Determine API URL (use relative path for Hostinger)
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      
+      const response = await fetch(`${apiUrl}/php-backend/api/surveys.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
 
-    localStorage.removeItem('surveyDraft');
+      if (!response.ok) {
+        throw new Error('Failed to save survey to database');
+      }
+
+      const result = await response.json();
+      console.log('Survey saved successfully:', result);
+
+      localStorage.removeItem('surveyDraft');
+      
+    } catch (error) {
+      console.error('Error submitting survey:', error);
+      alert('Error connecting to database. Please try again.');
+      setIsSubmitted(false);
+      return;
+    }
+    
+    // Redirect after 2.5 seconds
     
     // Show animation
     setIsSubmitted(true);
