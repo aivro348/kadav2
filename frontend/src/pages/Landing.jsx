@@ -44,8 +44,6 @@ export default function Landing() {
             {/* Center Links */}
             <div className="hidden md:flex space-x-8">
               <a href="#" className="text-slate-800 font-semibold hover:text-primary-600 transition-colors">Home</a>
-              <a href="#" className="text-slate-600 font-medium hover:text-primary-600 transition-colors">Padi Sutralu</a>
-              <a href="#" className="text-slate-600 font-medium hover:text-primary-600 transition-colors">About KADA</a>
             </div>
 
             {/* Right Side */}
