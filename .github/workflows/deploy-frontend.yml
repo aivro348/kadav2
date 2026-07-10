@@ -51,6 +51,18 @@ jobs:
             RewriteRule . /index.html [L]
           </IfModule>
           EOF
+          
+          # Add a dummy package.json to bypass Hostinger's strict framework checks
+          cat << 'EOF' > hostinger_deploy/package.json
+          {
+            "name": "hostinger-static-deploy",
+            "version": "1.0.0",
+            "description": "Dummy package to bypass framework checks",
+            "scripts": {
+              "build": "echo 'Already built!'"
+            }
+          }
+          EOF
 
       - name: Deploy to hostinger-production branch
         uses: peaceiris/actions-gh-pages@v3
