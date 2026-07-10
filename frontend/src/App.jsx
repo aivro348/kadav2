@@ -7,11 +7,13 @@ import SurveyList from './pages/SurveyList';
 import NewSurvey from './pages/NewSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import Reports from './pages/Reports';
+import Landing from './pages/Landing';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         
         {/* Admin Routes */}
