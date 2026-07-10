@@ -10,10 +10,11 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (username && password) {
-      localStorage.setItem('rws_username', username);
-      if (username === 'admin') {
+      const lowerUsername = username.toLowerCase();
+      localStorage.setItem('rws_username', lowerUsername);
+      if (lowerUsername === 'admin') {
         navigate('/admin/dashboard');
-      } else if (username === 'surveyor') {
+      } else if (lowerUsername === 'surveyor') {
         navigate('/surveyor');
       } else {
         // default fallback
