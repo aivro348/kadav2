@@ -18,16 +18,8 @@ export default function SurveyList() {
     }
   }, []);
 
-  // Mock data for UI demonstration
-  const surveys = [
-    { id: 'SRV-1024', village: 'Maddipadu', mandal: 'Maddipadu', status: 'Successful', type: 'Agriculture', date: '2026-07-10' },
-    { id: 'SRV-1023', village: 'Chimakurthy', mandal: 'Chimakurthy', status: 'Seasonal / Summer Dry', type: 'Agriculture', date: '2026-07-09' },
-    { id: 'SRV-1022', village: 'Podili', mandal: 'Podili', status: 'Dried', type: 'Livestock', date: '2026-07-08' },
-    { id: 'SRV-1021', village: 'Kanigiri', mandal: 'Kanigiri', status: 'Successful', type: 'Agriculture', date: '2026-07-08' },
-    { id: 'SRV-1020', village: 'Markapuram', mandal: 'Markapuram', status: 'Successful', type: 'Agriculture', date: '2026-07-07' },
-  ];
-
-  const allSurveys = [...submittedSurveys, ...surveys];
+  // Use only submitted surveys (no dummy data)
+  const allSurveys = [...submittedSurveys];
 
   const filteredSurveys = allSurveys.filter(s => {
     const matchesSearch = s.village?.toLowerCase().includes(searchTerm.toLowerCase()) || 

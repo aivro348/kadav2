@@ -149,7 +149,9 @@ export default function NewSurvey() {
       mandal: mandalObj ? mandalObj.name : data.mandal,
       status: data.status || 'Successful',
       type: data.borewell_type ? (Array.isArray(data.borewell_type) ? data.borewell_type[0] : data.borewell_type) : 'Agriculture',
-      date: new Date().toISOString().split('T')[0]
+      date: new Date().toISOString().split('T')[0],
+      fullData: data,
+      images: images
     };
 
     const saved = localStorage.getItem('rws_surveys');

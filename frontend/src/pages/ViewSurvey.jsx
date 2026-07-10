@@ -1,49 +1,36 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, MapPin, Droplet, Clock, Info, Image as ImageIcon, Printer, Edit, Trash2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function ViewSurvey() {
   const { id } = useParams();
   const location = useLocation();
   const isSurveyor = location.pathname.startsWith('/surveyor');
 
-  // Mock data
-  const survey = {
-    id: id || 'SRV-1024',
-    location: {
-      mandal: 'Maddipadu',
-      panchayat: 'Maddipadu GP',
-      village: 'Maddipadu',
-      latitude: '15.654321',
-      longitude: '79.123456'
-    },
-    statusDetails: {
-      status: 'Successful',
-      type: ['Agriculture / Horticulture', 'Livestock / Animals'],
-      supplyNature: 'Continuous adequate supply during monsoons, reduces in summer.'
-    },
-    borewell: {
-      depth: 250,
-      motorCapacity: 5.0,
-      motorDepth: 200
-    },
-    quality: {
-      tds: 450,
-      ph: 7.2,
-      hardness: 200
-    },
-    history: {
-      drilledYear: 2018,
-      dried: 'No',
-      driedMonths: '-'
-    },
-    utilization: {
-      cropType: 'Paddy, Cotton',
-      other: 'Domestic use',
-      animals: 12
-    },
-    date: '2026-07-10 14:30',
-    surveyor: 'Rajesh Kumar'
-  };
+  const [survey, setSurvey] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('rws_surveys');
+    if (saved) {
+      const surveys = JSON.parse(saved);
+      const found = surveys.find(s => s.id === id);
+      setSurvey(found);
+    }
+    setLoading(false);
+  }, [id]);
+
+  if (loading) return <div className="p-10 text-center text-slate-500">Loading...</div>;
+  
+  if (!survey) return (
+    <div className="max-w-4xl mx-auto py-20 text-center">
+      <h2 className="text-2xl font-bold text-slate-800 mb-4">Survey Not Found</h2>
+      <p className="text-slate-600 mb-6">The survey ID {id} does not exist.</p>
+      <Link to=".." className="btn-primary">Return to List</Link>
+    </div>
+  );
+
+  const fd = survey.fullData || {};
 
   const Section = ({ title, icon: Icon, children }) => (
     <div className="card mb-6">
@@ -74,11 +61,11 @@ export default function ViewSurvey() {
           </div>
           <h1 className="text-2xl font-bold text-slate-900 flex items-center">
             Survey {survey.id}
-            <span className="ml-4 px-3 py-1 text-xs font-semibold rounded-full bg-success-100 text-success-800">
-              {survey.statusDetails.status}
+            <span className={`ml-4 px-3 py-1 text-xs font-semibold rounded-full ${survey.status === 'Successful' ? 'bg-success-100 text-success-800' : survey.status === 'Dried' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'}`}>
+              {survey.status}
             </span>
           </h1>
-          <p className="text-sm text-slate-500 mt-1">Recorded on {survey.date} by {survey.surveyor}</p>
+          <p className="text-sm text-slate-500 mt-1">Recorded on {survey.date}</p>
         </div>
         
         <div className="mt-4 sm:mt-0 flex space-x-3">
@@ -103,28 +90,33 @@ export default function ViewSurvey() {
         <div>
           <Section title="Location Details" icon={MapPin}>
             <dl>
-              <DataRow label="Mandal" value={survey.location.mandal} />
-              <DataRow label="Panchayat" value={survey.location.panchayat} />
-              <DataRow label="Village" value={survey.location.village} />
-              <DataRow label="GPS Coordinates" value={`${survey.location.latitude}, ${survey.location.longitude}`} />
+              <DataRow label="Mandal" value={survey.mandal} />
+              <DataRow label="Panchayat" value={fd.panchayat || '-'} />
+              <DataRow label="Village" value={survey.village} />
+              <DataRow label="GPS Coordinates" value={`${fd.latitude || '-'}, ${fd.longitude || '-'}`} />
             </dl>
           </Section>
 
           <Section title="Borewell Specifics" icon={Info}>
             <dl>
-              <DataRow label="Type" value={survey.statusDetails.type.join(', ')} />
-              <DataRow label="Supply Nature" value={survey.statusDetails.supplyNature} />
-              <DataRow label="Borewell Depth" value={`${survey.borewell.depth} ft`} />
-              <DataRow label="Motor Capacity" value={`${survey.borewell.motorCapacity} HP`} />
-              <DataRow label="Motor Depth" value={`${survey.borewell.motorDepth} ft`} />
+              <DataRow label="Type" value={survey.type} />
+              <DataRow label="Supply Nature" value={Array.isArray(fd.supply_nature) ? fd.supply_nature.join(', ') : fd.supply_nature || '-'} />
+              <DataRow label="Borewell Depth" value={fd.borewell_depth ? `${fd.borewell_depth} ft` : '-'} />
+              <DataRow label="Motor Capacity" value={fd.motor_capacity ? `${fd.motor_capacity} HP` : '-'} />
+              <DataRow label="Motor Depth" value={fd.motor_depth ? `${fd.motor_depth} ft` : '-'} />
+              <DataRow label="Delivery Pipe" value={fd.delivery_pipe ? `${fd.delivery_pipe} inch` : '-'} />
+              <DataRow label="Water Level (Fixing)" value={fd.water_level_fixing ? `${fd.water_level_fixing} ft` : '-'} />
+              <DataRow label="Water Struck Depth" value={fd.water_struck_depth ? `${fd.water_struck_depth} ft` : '-'} />
             </dl>
           </Section>
           
           <Section title="Utilization" icon={Droplet}>
             <dl>
-              <DataRow label="Crop Type" value={survey.utilization.cropType} />
-              <DataRow label="Other Usage" value={survey.utilization.other} />
-              <DataRow label="Animals Dependent" value={survey.utilization.animals} />
+              <DataRow label="Crop Category" value={fd.crop_category || '-'} />
+              <DataRow label="Crop Names" value={fd.crop_names || '-'} />
+              <DataRow label="Agri Land Area" value={fd.agri_land_area ? `${fd.agri_land_area} Acres` : '-'} />
+              <DataRow label="Families Dependent" value={fd.dependent_families || '-'} />
+              <DataRow label="Animals Dependent" value={fd.dependent_animals || '-'} />
             </dl>
           </Section>
         </div>
@@ -133,31 +125,37 @@ export default function ViewSurvey() {
         <div>
           <Section title="Water Quality" icon={Droplet}>
             <dl>
-              <DataRow label="TDS" value={`${survey.quality.tds} mg/L`} />
-              <DataRow label="pH Level" value={survey.quality.ph} />
-              <DataRow label="Hardness" value={survey.quality.hardness} />
+              <DataRow label="TDS" value={fd.tds ? `${fd.tds} mg/L` : '-'} />
+              <DataRow label="pH Level" value={fd.ph || '-'} />
+              <DataRow label="Hardness" value={fd.hardness ? `${fd.hardness} mg/L` : '-'} />
             </dl>
           </Section>
 
           <Section title="History" icon={Clock}>
             <dl>
-              <DataRow label="Drilled Year" value={survey.history.drilledYear} />
-              <DataRow label="Has it dried?" value={survey.history.dried} />
-              <DataRow label="Dried Months" value={survey.history.driedMonths} />
+              <DataRow label="Drilled Year" value={fd.drilled_year || '-'} />
+              <DataRow label="Dried Year" value={fd.dried_year || '-'} />
+              <DataRow label="Dried Months" value={fd.dried_months || '-'} />
             </dl>
           </Section>
 
           <Section title="Images" icon={ImageIcon}>
-            <div className="grid grid-cols-2 gap-3 mt-2">
-              {/* Mock Images */}
-              <div className="aspect-square bg-slate-200 rounded-md overflow-hidden relative group cursor-pointer">
-                <div className="absolute inset-0 bg-slate-400 flex items-center justify-center text-white font-medium">Image 1</div>
+            {survey.images && survey.images.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3 mt-2">
+                {survey.images.map((img, idx) => (
+                  <div key={idx} className="aspect-square bg-slate-200 rounded-md overflow-hidden relative border border-slate-200">
+                    <img src={img} alt="Survey Image" className="object-cover w-full h-full" />
+                  </div>
+                ))}
               </div>
-              <div className="aspect-square bg-slate-200 rounded-md overflow-hidden relative group cursor-pointer">
-                <div className="absolute inset-0 bg-slate-400 flex items-center justify-center text-white font-medium">Image 2</div>
+            ) : (
+              <div className="p-6 text-center text-slate-500 bg-slate-50 rounded-md border border-slate-200 mt-2">
+                No images attached to this survey.
               </div>
-            </div>
-            <p className="text-xs text-slate-500 mt-3 text-center">Click image to enlarge</p>
+            )}
+            {survey.images && survey.images.length > 0 && (
+              <p className="text-xs text-slate-500 mt-3 text-center">Click image to enlarge</p>
+            )}
           </Section>
         </div>
       </div>
