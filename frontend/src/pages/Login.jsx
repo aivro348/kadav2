@@ -5,20 +5,23 @@ import { Droplet, Lock, User } from 'lucide-react';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setError('');
     if (username && password) {
       const lowerUsername = username.toLowerCase();
-      localStorage.setItem('rws_username', lowerUsername);
-      if (lowerUsername === 'admin') {
+      
+      if (lowerUsername === 'admin' && password === 'admin') {
+        localStorage.setItem('rws_username', lowerUsername);
         navigate('/admin/dashboard');
-      } else if (lowerUsername === 'surveyor') {
+      } else if (lowerUsername === 'iitk' && password === 'iitk') {
+        localStorage.setItem('rws_username', lowerUsername);
         navigate('/surveyor');
       } else {
-        // default fallback
-        navigate('/surveyor');
+        setError('Invalid username or password');
       }
     }
   };
@@ -39,6 +42,11 @@ export default function Login() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-soft sm:rounded-lg sm:px-10 border border-slate-100">
+          {error && (
+            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-md text-sm mb-6 font-medium shadow-sm">
+              {error}
+            </div>
+          )}
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label htmlFor="username" className="label-text">

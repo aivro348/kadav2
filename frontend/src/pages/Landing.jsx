@@ -265,7 +265,7 @@ export default function Landing() {
                 <p className="text-slate-600 mb-8 leading-relaxed text-lg">
                   Phase 1 of our NetZero mission begins with securing our water. Authorized surveyors can log in here to map, monitor, and submit real-time data on the constituency's borewell network.
                 </p>
-                <Link to="/surveyor/new" className="inline-flex items-center justify-center bg-primary-700 hover:bg-primary-800 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-md hover:shadow-lg w-fit group">
+                <Link to="/login" className="inline-flex items-center justify-center bg-primary-700 hover:bg-primary-800 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-md hover:shadow-lg w-fit group">
                   Surveyor Login
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
