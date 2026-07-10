@@ -10,15 +10,36 @@ export default function ViewSurvey() {
   const [survey, setSurvey] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const apiUrl = import.meta.env.VITE_API_URL || '';
+
   useEffect(() => {
-    const saved = localStorage.getItem('rws_surveys');
-    if (saved) {
-      const surveys = JSON.parse(saved);
-      const found = surveys.find(s => s.id === id);
-      setSurvey(found);
-    }
-    setLoading(false);
-  }, [id]);
+    const fetchSurvey = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?id=${id}`);
+        if (!response.ok) throw new Error('Not found');
+        
+        const data = await response.json();
+        
+        // Structure the data to match what the UI expects
+        setSurvey({
+          id: data.survey_id,
+          village: data.village,
+          mandal: data.mandal,
+          status: data.status,
+          date: data.created_date ? data.created_date.split(' ')[0] : 'Unknown',
+          fullData: data,
+          images: data.images ? data.images.map(img => `${apiUrl}/php-backend/${img}`) : []
+        });
+      } catch (error) {
+        console.error('Error fetching survey:', error);
+        setSurvey(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSurvey();
+  }, [id, apiUrl]);
 
   if (loading) return <div className="p-10 text-center text-slate-500">Loading...</div>;
   
