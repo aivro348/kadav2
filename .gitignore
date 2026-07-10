@@ -1,0 +1,15 @@
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/.DS_Store
+
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.pytest_cache/
+backend/rws_borewell.db
+
+# OS
+.DS_Store
+*.pdf

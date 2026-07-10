@@ -1,0 +1,3699 @@
+{
+  "mandals": [
+    {
+      "id": "M1",
+      "name": "Ramakuppam"
+    },
+    {
+      "id": "M2",
+      "name": "Santhipuram"
+    },
+    {
+      "id": "M3",
+      "name": "Gudupalle"
+    },
+    {
+      "id": "M4",
+      "name": "Kuppam"
+    }
+  ],
+  "panchayats": [
+    {
+      "id": "P1",
+      "mandal_id": "M1",
+      "name": "89-PEDDURU"
+    },
+    {
+      "id": "P10",
+      "mandal_id": "M1",
+      "name": "KENCHANABALLA"
+    },
+    {
+      "id": "P100",
+      "mandal_id": "M4",
+      "name": "VENDUGAMPALLE"
+    },
+    {
+      "id": "P11",
+      "mandal_id": "M1",
+      "name": "KONGANAPALLE"
+    },
+    {
+      "id": "P12",
+      "mandal_id": "M1",
+      "name": "MANEEMDRAM"
+    },
+    {
+      "id": "P13",
+      "mandal_id": "M1",
+      "name": "MUDDANAPALLE"
+    },
+    {
+      "id": "P14",
+      "mandal_id": "M1",
+      "name": "NANIYALATHANDA"
+    },
+    {
+      "id": "P15",
+      "mandal_id": "M1",
+      "name": "NARAYANAPURAMTHANDA"
+    },
+    {
+      "id": "P16",
+      "mandal_id": "M1",
+      "name": "PANDYALAMADUGU"
+    },
+    {
+      "id": "P17",
+      "mandal_id": "M1",
+      "name": "PMK THANDA"
+    },
+    {
+      "id": "P18",
+      "mandal_id": "M1",
+      "name": "PEDDA THANDA"
+    },
+    {
+      "id": "P19",
+      "mandal_id": "M1",
+      "name": "RAJUPETA"
+    },
+    {
+      "id": "P2",
+      "mandal_id": "M1",
+      "name": "UNISIGANIPALLI"
+    },
+    {
+      "id": "P20",
+      "mandal_id": "M1",
+      "name": "RAMAKUPPAM"
+    },
+    {
+      "id": "P21",
+      "mandal_id": "M1",
+      "name": "SINGASAMUDRAM"
+    },
+    {
+      "id": "P22",
+      "mandal_id": "M1",
+      "name": "VEERNAMALA"
+    },
+    {
+      "id": "P23",
+      "mandal_id": "M1",
+      "name": "VIJILAPURAM"
+    },
+    {
+      "id": "P24",
+      "mandal_id": "M2",
+      "name": "Dandikuppam"
+    },
+    {
+      "id": "P25",
+      "mandal_id": "M2",
+      "name": "121 Pedduru"
+    },
+    {
+      "id": "P26",
+      "mandal_id": "M2",
+      "name": "Nadimpalli"
+    },
+    {
+      "id": "P27",
+      "mandal_id": "M2",
+      "name": "Regadadinnepalli"
+    },
+    {
+      "id": "P28",
+      "mandal_id": "M2",
+      "name": "Karlagatta"
+    },
+    {
+      "id": "P29",
+      "mandal_id": "M2",
+      "name": "C BANDAPALLI"
+    },
+    {
+      "id": "P3",
+      "mandal_id": "M1",
+      "name": "BAIPAREDLAPALLE"
+    },
+    {
+      "id": "P30",
+      "mandal_id": "M2",
+      "name": "Abakaladoddi"
+    },
+    {
+      "id": "P31",
+      "mandal_id": "M2",
+      "name": "Morasanapalle"
+    },
+    {
+      "id": "P32",
+      "mandal_id": "M2",
+      "name": "Kolamadugu"
+    },
+    {
+      "id": "P33",
+      "mandal_id": "M2",
+      "name": "MATTAM"
+    },
+    {
+      "id": "P34",
+      "mandal_id": "M2",
+      "name": "Anikera"
+    },
+    {
+      "id": "P35",
+      "mandal_id": "M2",
+      "name": "Mulluru Krishna Puram"
+    },
+    {
+      "id": "P36",
+      "mandal_id": "M2",
+      "name": "Thummisi"
+    },
+    {
+      "id": "P37",
+      "mandal_id": "M2",
+      "name": "64Pedduru"
+    },
+    {
+      "id": "P38",
+      "mandal_id": "M2",
+      "name": "Gunjarlapalle"
+    },
+    {
+      "id": "P39",
+      "mandal_id": "M2",
+      "name": "Sivaramapuram"
+    },
+    {
+      "id": "P4",
+      "mandal_id": "M1",
+      "name": "BALLA"
+    },
+    {
+      "id": "P40",
+      "mandal_id": "M2",
+      "name": "KADAPALLE"
+    },
+    {
+      "id": "P41",
+      "mandal_id": "M2",
+      "name": "30 Sonneganipalli"
+    },
+    {
+      "id": "P42",
+      "mandal_id": "M2",
+      "name": "Rallabudugur"
+    },
+    {
+      "id": "P43",
+      "mandal_id": "M2",
+      "name": "Kenamakunapalli"
+    },
+    {
+      "id": "P44",
+      "mandal_id": "M2",
+      "name": "Chenguballa"
+    },
+    {
+      "id": "P45",
+      "mandal_id": "M2",
+      "name": "Konerukuppam"
+    },
+    {
+      "id": "P46",
+      "mandal_id": "M2",
+      "name": "CHINNARIDODDI"
+    },
+    {
+      "id": "P47",
+      "mandal_id": "M3",
+      "name": "AGARAM"
+    },
+    {
+      "id": "P48",
+      "mandal_id": "M3",
+      "name": "BEGGILAPALLE"
+    },
+    {
+      "id": "P49",
+      "mandal_id": "M3",
+      "name": "CHEEKATIPALLE"
+    },
+    {
+      "id": "P5",
+      "mandal_id": "M1",
+      "name": "BANDARLAPALLE"
+    },
+    {
+      "id": "P50",
+      "mandal_id": "M3",
+      "name": "CHINNAGOLLAPALLE"
+    },
+    {
+      "id": "P51",
+      "mandal_id": "M3",
+      "name": "DASIMANIPALLE"
+    },
+    {
+      "id": "P52",
+      "mandal_id": "M3",
+      "name": "GUDUPALLE"
+    },
+    {
+      "id": "P53",
+      "mandal_id": "M3",
+      "name": "GUNDLASAGARAM"
+    },
+    {
+      "id": "P54",
+      "mandal_id": "M3",
+      "name": "KANAMANAPALLE"
+    },
+    {
+      "id": "P55",
+      "mandal_id": "M3",
+      "name": "K.B.PALLE"
+    },
+    {
+      "id": "P56",
+      "mandal_id": "M3",
+      "name": "KODATHANAPALLE"
+    },
+    {
+      "id": "P57",
+      "mandal_id": "M3",
+      "name": "KUPPIGANIPALLE"
+    },
+    {
+      "id": "P58",
+      "mandal_id": "M3",
+      "name": "O.N.KOTHUR"
+    },
+    {
+      "id": "P59",
+      "mandal_id": "M3",
+      "name": "PEDDABADANIWADA"
+    },
+    {
+      "id": "P6",
+      "mandal_id": "M1",
+      "name": "CHELDIGANIPALLE"
+    },
+    {
+      "id": "P60",
+      "mandal_id": "M3",
+      "name": "POGURUPALLE"
+    },
+    {
+      "id": "P61",
+      "mandal_id": "M3",
+      "name": "SANGANAPALLE"
+    },
+    {
+      "id": "P62",
+      "mandal_id": "M3",
+      "name": "SETTIPALLE"
+    },
+    {
+      "id": "P63",
+      "mandal_id": "M3",
+      "name": "SODIGANIPALLE"
+    },
+    {
+      "id": "P64",
+      "mandal_id": "M3",
+      "name": "YAMAGANIPALLE"
+    },
+    {
+      "id": "P65",
+      "mandal_id": "M4",
+      "name": "ADAVIBUDUGUR"
+    },
+    {
+      "id": "P66",
+      "mandal_id": "M4",
+      "name": "ANANTHAPURAM"
+    },
+    {
+      "id": "P67",
+      "mandal_id": "M4",
+      "name": "ANIMIGANIPALLI"
+    },
+    {
+      "id": "P68",
+      "mandal_id": "M4",
+      "name": "B S PALLI"
+    },
+    {
+      "id": "P69",
+      "mandal_id": "M4",
+      "name": "CHALAMANGALAM"
+    },
+    {
+      "id": "P7",
+      "mandal_id": "M1",
+      "name": "CHIKKAPALLI THANDA"
+    },
+    {
+      "id": "P70",
+      "mandal_id": "M4",
+      "name": "CHINNAOBANAPALLI"
+    },
+    {
+      "id": "P71",
+      "mandal_id": "M4",
+      "name": "CHOKKANDLAPALLI"
+    },
+    {
+      "id": "P72",
+      "mandal_id": "M4",
+      "name": "CHANDAM"
+    },
+    {
+      "id": "P73",
+      "mandal_id": "M4",
+      "name": "CHEELEPALLE"
+    },
+    {
+      "id": "P74",
+      "mandal_id": "M4",
+      "name": "CHEEMANAYANIPALLE"
+    },
+    {
+      "id": "P75",
+      "mandal_id": "M4",
+      "name": "CHEKKUNATHAM"
+    },
+    {
+      "id": "P76",
+      "mandal_id": "M4",
+      "name": "DALAVAIKOTHAPALLE"
+    },
+    {
+      "id": "P77",
+      "mandal_id": "M4",
+      "name": "DASEGOWNIYUR"
+    },
+    {
+      "id": "P78",
+      "mandal_id": "M4",
+      "name": "GARIGACHINNEPALLE"
+    },
+    {
+      "id": "P79",
+      "mandal_id": "M4",
+      "name": "GONUGUR"
+    },
+    {
+      "id": "P8",
+      "mandal_id": "M1",
+      "name": "GORIVIMAKULAPALLE"
+    },
+    {
+      "id": "P80",
+      "mandal_id": "M4",
+      "name": "GUNDLANAYANIPALLE"
+    },
+    {
+      "id": "P81",
+      "mandal_id": "M4",
+      "name": "JARUGU"
+    },
+    {
+      "id": "P82",
+      "mandal_id": "M4",
+      "name": "KAMATHAMUR"
+    },
+    {
+      "id": "P83",
+      "mandal_id": "M4",
+      "name": "KANGUNDI"
+    },
+    {
+      "id": "P84",
+      "mandal_id": "M4",
+      "name": "KOTALURU"
+    },
+    {
+      "id": "P85",
+      "mandal_id": "M4",
+      "name": "KOTHAPALLE"
+    },
+    {
+      "id": "P86",
+      "mandal_id": "M4",
+      "name": "KRISHNADASANAPALLE"
+    },
+    {
+      "id": "P87",
+      "mandal_id": "M4",
+      "name": "KUPPAM (MAJOR PTS)"
+    },
+    {
+      "id": "P88",
+      "mandal_id": "M4",
+      "name": "MALLANURU"
+    },
+    {
+      "id": "P89",
+      "mandal_id": "M4",
+      "name": "MANKALADODDI"
+    },
+    {
+      "id": "P9",
+      "mandal_id": "M1",
+      "name": "GUTTURU THANDA"
+    },
+    {
+      "id": "P90",
+      "mandal_id": "M4",
+      "name": "MITTAPALLE"
+    },
+    {
+      "id": "P91",
+      "mandal_id": "M4",
+      "name": "NADIMUR"
+    },
+    {
+      "id": "P92",
+      "mandal_id": "M4",
+      "name": "NOOLAKUNTA"
+    },
+    {
+      "id": "P93",
+      "mandal_id": "M4",
+      "name": "PAIPALYAM"
+    },
+    {
+      "id": "P94",
+      "mandal_id": "M4",
+      "name": "PEDDA BANGARUNATHAM"
+    },
+    {
+      "id": "P95",
+      "mandal_id": "M4",
+      "name": "SAMAGUTTAPALLE"
+    },
+    {
+      "id": "P96",
+      "mandal_id": "M4",
+      "name": "THAMBIGANIPALLE"
+    },
+    {
+      "id": "P97",
+      "mandal_id": "M4",
+      "name": "URLAOBANAPALLE"
+    },
+    {
+      "id": "P98",
+      "mandal_id": "M4",
+      "name": "VANAGUTTAPALLE"
+    },
+    {
+      "id": "P99",
+      "mandal_id": "M4",
+      "name": "VASANADU"
+    }
+  ],
+  "villages": [
+    {
+      "id": "H1",
+      "panchayat_id": "P1",
+      "name": "Pedduru"
+    },
+    {
+      "id": "H10",
+      "panchayat_id": "P2",
+      "name": "Maruvuru"
+    },
+    {
+      "id": "H100",
+      "panchayat_id": "P18",
+      "name": "Pedda Thanda"
+    },
+    {
+      "id": "H101",
+      "panchayat_id": "P18",
+      "name": "Thulasinaick Thanda"
+    },
+    {
+      "id": "H102",
+      "panchayat_id": "P18",
+      "name": "Bandakothuru Thanda"
+    },
+    {
+      "id": "H103",
+      "panchayat_id": "P18",
+      "name": "Inderacolony"
+    },
+    {
+      "id": "H104",
+      "panchayat_id": "P18",
+      "name": "Addugattu Thanda"
+    },
+    {
+      "id": "H105",
+      "panchayat_id": "P19",
+      "name": "Rajupeta"
+    },
+    {
+      "id": "H106",
+      "panchayat_id": "P20",
+      "name": "Ramakuppam"
+    },
+    {
+      "id": "H107",
+      "panchayat_id": "P20",
+      "name": "Akandaganipalli"
+    },
+    {
+      "id": "H108",
+      "panchayat_id": "P20",
+      "name": "Chennaredlapalli"
+    },
+    {
+      "id": "H109",
+      "panchayat_id": "P20",
+      "name": "Mittapalli"
+    },
+    {
+      "id": "H11",
+      "panchayat_id": "P2",
+      "name": "Jampuru"
+    },
+    {
+      "id": "H110",
+      "panchayat_id": "P20",
+      "name": "Thimmasamudram"
+    },
+    {
+      "id": "H111",
+      "panchayat_id": "P20",
+      "name": "Kempasamudram"
+    },
+    {
+      "id": "H112",
+      "panchayat_id": "P20",
+      "name": "Kotlaguru"
+    },
+    {
+      "id": "H113",
+      "panchayat_id": "P20",
+      "name": "Harijanakota"
+    },
+    {
+      "id": "H114",
+      "panchayat_id": "P20",
+      "name": "Venkatapuram"
+    },
+    {
+      "id": "H115",
+      "panchayat_id": "P20",
+      "name": "Ayyappaganipalli"
+    },
+    {
+      "id": "H116",
+      "panchayat_id": "P21",
+      "name": "Singasamudram"
+    },
+    {
+      "id": "H117",
+      "panchayat_id": "P21",
+      "name": "Jeedimakula Palli"
+    },
+    {
+      "id": "H118",
+      "panchayat_id": "P21",
+      "name": "Kuppigani Palli"
+    },
+    {
+      "id": "H119",
+      "panchayat_id": "P21",
+      "name": "Reddyvaripalli"
+    },
+    {
+      "id": "H12",
+      "panchayat_id": "P3",
+      "name": "Baiparedlapalle"
+    },
+    {
+      "id": "H120",
+      "panchayat_id": "P21",
+      "name": "Chintamanatham"
+    },
+    {
+      "id": "H121",
+      "panchayat_id": "P22",
+      "name": "Veernamala"
+    },
+    {
+      "id": "H122",
+      "panchayat_id": "P22",
+      "name": "Neelichenu"
+    },
+    {
+      "id": "H123",
+      "panchayat_id": "P22",
+      "name": "Podichenu"
+    },
+    {
+      "id": "H124",
+      "panchayat_id": "P22",
+      "name": "Uribayataindllu"
+    },
+    {
+      "id": "H125",
+      "panchayat_id": "P22",
+      "name": "Nallarallachenu"
+    },
+    {
+      "id": "H126",
+      "panchayat_id": "P22",
+      "name": "Gurukulamadugu"
+    },
+    {
+      "id": "H127",
+      "panchayat_id": "P22",
+      "name": "Sanyasiganivanka"
+    },
+    {
+      "id": "H128",
+      "panchayat_id": "P22",
+      "name": "Vemanapalli"
+    },
+    {
+      "id": "H129",
+      "panchayat_id": "P22",
+      "name": "Kullaganuru"
+    },
+    {
+      "id": "H13",
+      "panchayat_id": "P3",
+      "name": "Jogindlu"
+    },
+    {
+      "id": "H130",
+      "panchayat_id": "P23",
+      "name": "Vijalapuram"
+    },
+    {
+      "id": "H131",
+      "panchayat_id": "P23",
+      "name": "Ankireddipalle"
+    },
+    {
+      "id": "H132",
+      "panchayat_id": "P23",
+      "name": "Balaobanapalle"
+    },
+    {
+      "id": "H133",
+      "panchayat_id": "P23",
+      "name": "Battuvaripalle"
+    },
+    {
+      "id": "H134",
+      "panchayat_id": "P23",
+      "name": "Bokkalam Gadda"
+    },
+    {
+      "id": "H135",
+      "panchayat_id": "P23",
+      "name": "Kadisanakuppam"
+    },
+    {
+      "id": "H136",
+      "panchayat_id": "P23",
+      "name": "Kilakipodu"
+    },
+    {
+      "id": "H137",
+      "panchayat_id": "P24",
+      "name": "Dandikuppam"
+    },
+    {
+      "id": "H138",
+      "panchayat_id": "P24",
+      "name": "Nallarallapalli"
+    },
+    {
+      "id": "H139",
+      "panchayat_id": "P24",
+      "name": "Chowdampalli"
+    },
+    {
+      "id": "H14",
+      "panchayat_id": "P3",
+      "name": "Vardhikuppam"
+    },
+    {
+      "id": "H140",
+      "panchayat_id": "P24",
+      "name": "Siddaredlapalli"
+    },
+    {
+      "id": "H141",
+      "panchayat_id": "P24",
+      "name": "Kondapalli"
+    },
+    {
+      "id": "H142",
+      "panchayat_id": "P24",
+      "name": "Nimmanapalli"
+    },
+    {
+      "id": "H143",
+      "panchayat_id": "P24",
+      "name": "Indiranagar"
+    },
+    {
+      "id": "H144",
+      "panchayat_id": "P24",
+      "name": "Krishnepalli"
+    },
+    {
+      "id": "H145",
+      "panchayat_id": "P25",
+      "name": "pedduru"
+    },
+    {
+      "id": "H146",
+      "panchayat_id": "P25",
+      "name": "J B Kotturu"
+    },
+    {
+      "id": "H147",
+      "panchayat_id": "P25",
+      "name": "bendanakuppam"
+    },
+    {
+      "id": "H148",
+      "panchayat_id": "P26",
+      "name": "Nadimpalli"
+    },
+    {
+      "id": "H149",
+      "panchayat_id": "P26",
+      "name": "rangepalli"
+    },
+    {
+      "id": "H15",
+      "panchayat_id": "P4",
+      "name": "Balla"
+    },
+    {
+      "id": "H150",
+      "panchayat_id": "P27",
+      "name": "Regadadinnepalli"
+    },
+    {
+      "id": "H151",
+      "panchayat_id": "P27",
+      "name": "Nallapareddiyuru"
+    },
+    {
+      "id": "H152",
+      "panchayat_id": "P27",
+      "name": "Chinnagandlapalli"
+    },
+    {
+      "id": "H153",
+      "panchayat_id": "P28",
+      "name": "Karlagatta"
+    },
+    {
+      "id": "H154",
+      "panchayat_id": "P28",
+      "name": "ChinnaKarlagatta"
+    },
+    {
+      "id": "H155",
+      "panchayat_id": "P28",
+      "name": "Thamiganipalli"
+    },
+    {
+      "id": "H156",
+      "panchayat_id": "P28",
+      "name": "Venkatapuram"
+    },
+    {
+      "id": "H157",
+      "panchayat_id": "P28",
+      "name": "Cheemanapalli"
+    },
+    {
+      "id": "H158",
+      "panchayat_id": "P28",
+      "name": "Preethichamunuru"
+    },
+    {
+      "id": "H159",
+      "panchayat_id": "P29",
+      "name": "C bandapalli"
+    },
+    {
+      "id": "H16",
+      "panchayat_id": "P4",
+      "name": "Agraharam Dinne"
+    },
+    {
+      "id": "H160",
+      "panchayat_id": "P29",
+      "name": "chinnuru"
+    },
+    {
+      "id": "H161",
+      "panchayat_id": "P29",
+      "name": "chigrlapalli"
+    },
+    {
+      "id": "H162",
+      "panchayat_id": "P29",
+      "name": "bevanapalli"
+    },
+    {
+      "id": "H163",
+      "panchayat_id": "P29",
+      "name": "rallapalli"
+    },
+    {
+      "id": "H164",
+      "panchayat_id": "P29",
+      "name": "Muddanapalle"
+    },
+    {
+      "id": "H165",
+      "panchayat_id": "P29",
+      "name": "dt palli"
+    },
+    {
+      "id": "H166",
+      "panchayat_id": "P30",
+      "name": "Abakaladoddi"
+    },
+    {
+      "id": "H167",
+      "panchayat_id": "P30",
+      "name": "Jangalapalli"
+    },
+    {
+      "id": "H168",
+      "panchayat_id": "P30",
+      "name": "Kothigutlapalli"
+    },
+    {
+      "id": "H169",
+      "panchayat_id": "P30",
+      "name": "Veduruguttapalli"
+    },
+    {
+      "id": "H17",
+      "panchayat_id": "P4",
+      "name": "Peddakurabalapalli"
+    },
+    {
+      "id": "H170",
+      "panchayat_id": "P30",
+      "name": "kakarlavanka"
+    },
+    {
+      "id": "H171",
+      "panchayat_id": "P30",
+      "name": "Adduvanka"
+    },
+    {
+      "id": "H172",
+      "panchayat_id": "P30",
+      "name": "Venkateshpuram"
+    },
+    {
+      "id": "H173",
+      "panchayat_id": "P30",
+      "name": "Gangapuram"
+    },
+    {
+      "id": "H174",
+      "panchayat_id": "P30",
+      "name": "Abakaladoddi colony"
+    },
+    {
+      "id": "H175",
+      "panchayat_id": "P31",
+      "name": "morasanapalle"
+    },
+    {
+      "id": "H176",
+      "panchayat_id": "P31",
+      "name": "pakkampalle"
+    },
+    {
+      "id": "H177",
+      "panchayat_id": "P31",
+      "name": "kanamaladoddi"
+    },
+    {
+      "id": "H178",
+      "panchayat_id": "P31",
+      "name": "Narasimhapalle"
+    },
+    {
+      "id": "H179",
+      "panchayat_id": "P31",
+      "name": "jalliganipalle"
+    },
+    {
+      "id": "H18",
+      "panchayat_id": "P4",
+      "name": "Lakshminagar"
+    },
+    {
+      "id": "H180",
+      "panchayat_id": "P32",
+      "name": "Kolamadugu"
+    },
+    {
+      "id": "H181",
+      "panchayat_id": "P32",
+      "name": "V kothuru"
+    },
+    {
+      "id": "H182",
+      "panchayat_id": "P32",
+      "name": "Ammavaripeta"
+    },
+    {
+      "id": "H183",
+      "panchayat_id": "P32",
+      "name": "Ramapuram"
+    },
+    {
+      "id": "H184",
+      "panchayat_id": "P32",
+      "name": "Voddumadi"
+    },
+    {
+      "id": "H185",
+      "panchayat_id": "P32",
+      "name": "Kadhirimuthanapalle"
+    },
+    {
+      "id": "H186",
+      "panchayat_id": "P32",
+      "name": "Jeedimanipalle"
+    },
+    {
+      "id": "H187",
+      "panchayat_id": "P32",
+      "name": "Redlapalli"
+    },
+    {
+      "id": "H188",
+      "panchayat_id": "P32",
+      "name": "Chillumanipalli"
+    },
+    {
+      "id": "H189",
+      "panchayat_id": "P33",
+      "name": "MATTAM"
+    },
+    {
+      "id": "H19",
+      "panchayat_id": "P4",
+      "name": "Palarevugadda"
+    },
+    {
+      "id": "H190",
+      "panchayat_id": "P33",
+      "name": "PONNEYPALLI"
+    },
+    {
+      "id": "H191",
+      "panchayat_id": "P33",
+      "name": "GT PALLI"
+    },
+    {
+      "id": "H192",
+      "panchayat_id": "P33",
+      "name": "Santampalli"
+    },
+    {
+      "id": "H193",
+      "panchayat_id": "P33",
+      "name": "KP MITTA"
+    },
+    {
+      "id": "H194",
+      "panchayat_id": "P33",
+      "name": "SANTHURU"
+    },
+    {
+      "id": "H195",
+      "panchayat_id": "P33",
+      "name": "Venkateshpuram"
+    },
+    {
+      "id": "H196",
+      "panchayat_id": "P33",
+      "name": "CHITTEPALLI"
+    },
+    {
+      "id": "H197",
+      "panchayat_id": "P33",
+      "name": "Gollapalle"
+    },
+    {
+      "id": "H198",
+      "panchayat_id": "P34",
+      "name": "Anikera"
+    },
+    {
+      "id": "H199",
+      "panchayat_id": "P34",
+      "name": "jogindlu"
+    },
+    {
+      "id": "H2",
+      "panchayat_id": "P1",
+      "name": "Naniyala"
+    },
+    {
+      "id": "H20",
+      "panchayat_id": "P4",
+      "name": "Singampalli"
+    },
+    {
+      "id": "H200",
+      "panchayat_id": "P34",
+      "name": "Bellakogila"
+    },
+    {
+      "id": "H201",
+      "panchayat_id": "P34",
+      "name": "Vadagandlapalli"
+    },
+    {
+      "id": "H202",
+      "panchayat_id": "P34",
+      "name": "B kotturu"
+    },
+    {
+      "id": "H203",
+      "panchayat_id": "P34",
+      "name": "Settepalli"
+    },
+    {
+      "id": "H204",
+      "panchayat_id": "P35",
+      "name": "Mulluru"
+    },
+    {
+      "id": "H205",
+      "panchayat_id": "P35",
+      "name": "Krishna Puram"
+    },
+    {
+      "id": "H206",
+      "panchayat_id": "P36",
+      "name": "Thummisi"
+    },
+    {
+      "id": "H207",
+      "panchayat_id": "P36",
+      "name": "Donkumanipalle"
+    },
+    {
+      "id": "H208",
+      "panchayat_id": "P36",
+      "name": "Thulasinayanapalle"
+    },
+    {
+      "id": "H209",
+      "panchayat_id": "P36",
+      "name": "Buradasidanapalli"
+    },
+    {
+      "id": "H21",
+      "panchayat_id": "P4",
+      "name": "Krishnapuram Dinne"
+    },
+    {
+      "id": "H210",
+      "panchayat_id": "P37",
+      "name": "64Pedduru"
+    },
+    {
+      "id": "H211",
+      "panchayat_id": "P37",
+      "name": "Somapuram"
+    },
+    {
+      "id": "H212",
+      "panchayat_id": "P37",
+      "name": "Gasikapalle"
+    },
+    {
+      "id": "H213",
+      "panchayat_id": "P37",
+      "name": "Solisettipalle"
+    },
+    {
+      "id": "H214",
+      "panchayat_id": "P37",
+      "name": "Karumutla"
+    },
+    {
+      "id": "H215",
+      "panchayat_id": "P38",
+      "name": "Gunjarlapalle"
+    },
+    {
+      "id": "H216",
+      "panchayat_id": "P38",
+      "name": "Nakkanapalle"
+    },
+    {
+      "id": "H217",
+      "panchayat_id": "P38",
+      "name": "Peddabommanapalli"
+    },
+    {
+      "id": "H218",
+      "panchayat_id": "P38",
+      "name": "Kareganuru"
+    },
+    {
+      "id": "H219",
+      "panchayat_id": "P38",
+      "name": "T Kothuru"
+    },
+    {
+      "id": "H22",
+      "panchayat_id": "P4",
+      "name": "Viplavaram Gadda"
+    },
+    {
+      "id": "H220",
+      "panchayat_id": "P38",
+      "name": "Chinthakampalle"
+    },
+    {
+      "id": "H221",
+      "panchayat_id": "P39",
+      "name": "Sivaramappuram"
+    },
+    {
+      "id": "H222",
+      "panchayat_id": "P39",
+      "name": "Gatturu"
+    },
+    {
+      "id": "H223",
+      "panchayat_id": "P39",
+      "name": "Nanjam Peta"
+    },
+    {
+      "id": "H224",
+      "panchayat_id": "P39",
+      "name": "Kotha Indlu"
+    },
+    {
+      "id": "H225",
+      "panchayat_id": "P39",
+      "name": "Kota Gadda"
+    },
+    {
+      "id": "H226",
+      "panchayat_id": "P39",
+      "name": "Odduvanka"
+    },
+    {
+      "id": "H227",
+      "panchayat_id": "P39",
+      "name": "Anchinayani Kuppam"
+    },
+    {
+      "id": "H228",
+      "panchayat_id": "P39",
+      "name": "Santhampalli"
+    },
+    {
+      "id": "H229",
+      "panchayat_id": "P40",
+      "name": "KADAPALLI"
+    },
+    {
+      "id": "H23",
+      "panchayat_id": "P4",
+      "name": "Kothapalli"
+    },
+    {
+      "id": "H230",
+      "panchayat_id": "P40",
+      "name": "SHYAMARAJAPURAM"
+    },
+    {
+      "id": "H231",
+      "panchayat_id": "P40",
+      "name": "PODURU"
+    },
+    {
+      "id": "H232",
+      "panchayat_id": "P40",
+      "name": "KALIGANURU"
+    },
+    {
+      "id": "H233",
+      "panchayat_id": "P40",
+      "name": "KADIRIOBANA PALLI"
+    },
+    {
+      "id": "H234",
+      "panchayat_id": "P40",
+      "name": "MADANAPALLI"
+    },
+    {
+      "id": "H235",
+      "panchayat_id": "P40",
+      "name": "B M GOLLAPALLI"
+    },
+    {
+      "id": "H236",
+      "panchayat_id": "P40",
+      "name": "BEERANAKUPPAM"
+    },
+    {
+      "id": "H237",
+      "panchayat_id": "P40",
+      "name": "TIMMARAJUPALLI"
+    },
+    {
+      "id": "H238",
+      "panchayat_id": "P40",
+      "name": "SILAMAKULA RAI"
+    },
+    {
+      "id": "H239",
+      "panchayat_id": "P40",
+      "name": "PODUCHENULU"
+    },
+    {
+      "id": "H24",
+      "panchayat_id": "P4",
+      "name": "Nadipichinne Palli"
+    },
+    {
+      "id": "H240",
+      "panchayat_id": "P40",
+      "name": "CHALIMIVANKA"
+    },
+    {
+      "id": "H241",
+      "panchayat_id": "P41",
+      "name": "Sonneganipalli"
+    },
+    {
+      "id": "H242",
+      "panchayat_id": "P41",
+      "name": "Kutheganipalli"
+    },
+    {
+      "id": "H243",
+      "panchayat_id": "P41",
+      "name": "Nayanapalli"
+    },
+    {
+      "id": "H244",
+      "panchayat_id": "P41",
+      "name": "Gundasettipalli"
+    },
+    {
+      "id": "H245",
+      "panchayat_id": "P42",
+      "name": "Rallabudugur"
+    },
+    {
+      "id": "H246",
+      "panchayat_id": "P42",
+      "name": "settigani kuraburu"
+    },
+    {
+      "id": "H247",
+      "panchayat_id": "P42",
+      "name": "Gollapalli"
+    },
+    {
+      "id": "H248",
+      "panchayat_id": "P42",
+      "name": "Rameganipalli"
+    },
+    {
+      "id": "H249",
+      "panchayat_id": "P42",
+      "name": "Banda thippanapalli"
+    },
+    {
+      "id": "H25",
+      "panchayat_id": "P5",
+      "name": "Bandarlapalle"
+    },
+    {
+      "id": "H250",
+      "panchayat_id": "P42",
+      "name": "shesadripuram"
+    },
+    {
+      "id": "H251",
+      "panchayat_id": "P42",
+      "name": "pilliganipalli"
+    },
+    {
+      "id": "H252",
+      "panchayat_id": "P42",
+      "name": "sathu"
+    },
+    {
+      "id": "H253",
+      "panchayat_id": "P42",
+      "name": "Reddivaripalli"
+    },
+    {
+      "id": "H254",
+      "panchayat_id": "P43",
+      "name": "kenamakunapalli"
+    },
+    {
+      "id": "H255",
+      "panchayat_id": "P43",
+      "name": "gadduru"
+    },
+    {
+      "id": "H256",
+      "panchayat_id": "P43",
+      "name": "arimuthanapalli"
+    },
+    {
+      "id": "H257",
+      "panchayat_id": "P43",
+      "name": "santhipuram"
+    },
+    {
+      "id": "H258",
+      "panchayat_id": "P43",
+      "name": "bodumakunapalli"
+    },
+    {
+      "id": "H259",
+      "panchayat_id": "P44",
+      "name": "chenguballa"
+    },
+    {
+      "id": "H26",
+      "panchayat_id": "P5",
+      "name": "Bagalanatham"
+    },
+    {
+      "id": "H260",
+      "panchayat_id": "P44",
+      "name": "SETTIBALLA"
+    },
+    {
+      "id": "H261",
+      "panchayat_id": "P44",
+      "name": "SOGADABALLA"
+    },
+    {
+      "id": "H262",
+      "panchayat_id": "P44",
+      "name": "SIVAKURUBURU"
+    },
+    {
+      "id": "H263",
+      "panchayat_id": "P44",
+      "name": "VADDIVANI KOTTHURU"
+    },
+    {
+      "id": "H264",
+      "panchayat_id": "P45",
+      "name": "konerukuppam"
+    },
+    {
+      "id": "H265",
+      "panchayat_id": "P45",
+      "name": "kolalathinmanapalli"
+    },
+    {
+      "id": "H266",
+      "panchayat_id": "P46",
+      "name": "CHINNARIDODDI"
+    },
+    {
+      "id": "H267",
+      "panchayat_id": "P46",
+      "name": "KOTHA PETA"
+    },
+    {
+      "id": "H268",
+      "panchayat_id": "P46",
+      "name": "K T PALLI"
+    },
+    {
+      "id": "H269",
+      "panchayat_id": "P46",
+      "name": "S GOLLAPALLI"
+    },
+    {
+      "id": "H27",
+      "panchayat_id": "P5",
+      "name": "Gernipalli"
+    },
+    {
+      "id": "H270",
+      "panchayat_id": "P47",
+      "name": "AGARAM"
+    },
+    {
+      "id": "H271",
+      "panchayat_id": "P47",
+      "name": "JABBIGANIPALLE"
+    },
+    {
+      "id": "H272",
+      "panchayat_id": "P47",
+      "name": "KOTHAPALLE"
+    },
+    {
+      "id": "H273",
+      "panchayat_id": "P47",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H274",
+      "panchayat_id": "P47",
+      "name": "THODELUGATTU"
+    },
+    {
+      "id": "H275",
+      "panchayat_id": "P48",
+      "name": "NALAGAMPALLE (PES)"
+    },
+    {
+      "id": "H276",
+      "panchayat_id": "P48",
+      "name": "GOKARLAPALLE"
+    },
+    {
+      "id": "H277",
+      "panchayat_id": "P48",
+      "name": "BEGGILAPALLE"
+    },
+    {
+      "id": "H278",
+      "panchayat_id": "P48",
+      "name": "BANDAKOTHURU"
+    },
+    {
+      "id": "H279",
+      "panchayat_id": "P49",
+      "name": "CHEEKATIPALLE"
+    },
+    {
+      "id": "H28",
+      "panchayat_id": "P5",
+      "name": "Saginekuppam"
+    },
+    {
+      "id": "H280",
+      "panchayat_id": "P49",
+      "name": "KOTAPALLE"
+    },
+    {
+      "id": "H281",
+      "panchayat_id": "P49",
+      "name": "PACHARLAPALLE"
+    },
+    {
+      "id": "H282",
+      "panchayat_id": "P49",
+      "name": "VENKAPURAM"
+    },
+    {
+      "id": "H283",
+      "panchayat_id": "P50",
+      "name": "KODIGANIPALLE"
+    },
+    {
+      "id": "H284",
+      "panchayat_id": "P50",
+      "name": "MALAVANIKOTHURU"
+    },
+    {
+      "id": "H285",
+      "panchayat_id": "P50",
+      "name": "PEDDAGOLLAPLLE"
+    },
+    {
+      "id": "H286",
+      "panchayat_id": "P50",
+      "name": "CHINNAGOLLAPALLE"
+    },
+    {
+      "id": "H287",
+      "panchayat_id": "P50",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H288",
+      "panchayat_id": "P50",
+      "name": "AYYAVARIGOLLAPALLE"
+    },
+    {
+      "id": "H289",
+      "panchayat_id": "P51",
+      "name": "DASIMANIPALLE"
+    },
+    {
+      "id": "H29",
+      "panchayat_id": "P5",
+      "name": "Peruru"
+    },
+    {
+      "id": "H290",
+      "panchayat_id": "P51",
+      "name": "ATHINATHAM"
+    },
+    {
+      "id": "H291",
+      "panchayat_id": "P51",
+      "name": "BISANATHAM"
+    },
+    {
+      "id": "H292",
+      "panchayat_id": "P51",
+      "name": "AVULACHERUVU"
+    },
+    {
+      "id": "H293",
+      "panchayat_id": "P51",
+      "name": "MUTHYALAPALEM"
+    },
+    {
+      "id": "H294",
+      "panchayat_id": "P52",
+      "name": "GUDUPALLE"
+    },
+    {
+      "id": "H295",
+      "panchayat_id": "P52",
+      "name": "IRISIGANIPALLE"
+    },
+    {
+      "id": "H296",
+      "panchayat_id": "P52",
+      "name": "BIJJIGANIPALLE"
+    },
+    {
+      "id": "H297",
+      "panchayat_id": "P52",
+      "name": "VENGEPALLE"
+    },
+    {
+      "id": "H298",
+      "panchayat_id": "P52",
+      "name": "GUDUPALLE H.W"
+    },
+    {
+      "id": "H299",
+      "panchayat_id": "P52",
+      "name": "KADEPALLE"
+    },
+    {
+      "id": "H3",
+      "panchayat_id": "P1",
+      "name": "Arimanipenta"
+    },
+    {
+      "id": "H30",
+      "panchayat_id": "P5",
+      "name": "Errachenulu"
+    },
+    {
+      "id": "H300",
+      "panchayat_id": "P52",
+      "name": "MITTORU"
+    },
+    {
+      "id": "H301",
+      "panchayat_id": "P53",
+      "name": "GUNDLASAGARAM"
+    },
+    {
+      "id": "H302",
+      "panchayat_id": "P53",
+      "name": "GUTTARLAPALLE"
+    },
+    {
+      "id": "H303",
+      "panchayat_id": "P54",
+      "name": "KANAMANAPALLE"
+    },
+    {
+      "id": "H304",
+      "panchayat_id": "P54",
+      "name": "KANAMANAPALLE H.W"
+    },
+    {
+      "id": "H305",
+      "panchayat_id": "P54",
+      "name": "MIDDORU"
+    },
+    {
+      "id": "H306",
+      "panchayat_id": "P55",
+      "name": "KANCHIBANDARLAPALLE"
+    },
+    {
+      "id": "H307",
+      "panchayat_id": "P55",
+      "name": "ELLAPPA KOTTALU"
+    },
+    {
+      "id": "H308",
+      "panchayat_id": "P55",
+      "name": "114 SETTIPALLE@CHINNABA"
+    },
+    {
+      "id": "H309",
+      "panchayat_id": "P56",
+      "name": "AVULATHIMMANAPALLE"
+    },
+    {
+      "id": "H31",
+      "panchayat_id": "P5",
+      "name": "Errachenulu St Colony"
+    },
+    {
+      "id": "H310",
+      "panchayat_id": "P56",
+      "name": "SALACHINTHANAPALLE"
+    },
+    {
+      "id": "H311",
+      "panchayat_id": "P56",
+      "name": "GUDICHEMBAGIRI"
+    },
+    {
+      "id": "H312",
+      "panchayat_id": "P56",
+      "name": "KODATHANAPALLE"
+    },
+    {
+      "id": "H313",
+      "panchayat_id": "P57",
+      "name": "ONTIPALLE"
+    },
+    {
+      "id": "H314",
+      "panchayat_id": "P57",
+      "name": "KOTACHEMBAGIRI"
+    },
+    {
+      "id": "H315",
+      "panchayat_id": "P57",
+      "name": "KUPPIGANIPALLE"
+    },
+    {
+      "id": "H316",
+      "panchayat_id": "P57",
+      "name": "SIRIGIRIPALLE"
+    },
+    {
+      "id": "H317",
+      "panchayat_id": "P57",
+      "name": "ONTIPALLE RAILWAY STATION"
+    },
+    {
+      "id": "H318",
+      "panchayat_id": "P58",
+      "name": "CHINNAKOTAMAKINAPALLE"
+    },
+    {
+      "id": "H319",
+      "panchayat_id": "P58",
+      "name": "THALAI AGRAHARAM"
+    },
+    {
+      "id": "H32",
+      "panchayat_id": "P5",
+      "name": "Kotarigadda"
+    },
+    {
+      "id": "H320",
+      "panchayat_id": "P58",
+      "name": "KOTAMAKINAPALLE"
+    },
+    {
+      "id": "H321",
+      "panchayat_id": "P58",
+      "name": "CHINNA AGRAHARAM"
+    },
+    {
+      "id": "H322",
+      "panchayat_id": "P58",
+      "name": "KRISHNARAJAPURAM"
+    },
+    {
+      "id": "H323",
+      "panchayat_id": "P58",
+      "name": "KONDASAMUDRAM"
+    },
+    {
+      "id": "H324",
+      "panchayat_id": "P58",
+      "name": "SREENIVASAPURAM"
+    },
+    {
+      "id": "H325",
+      "panchayat_id": "P58",
+      "name": "O.N.KOTHURU"
+    },
+    {
+      "id": "H326",
+      "panchayat_id": "P59",
+      "name": "GUDIKOTHURU"
+    },
+    {
+      "id": "H327",
+      "panchayat_id": "P59",
+      "name": "PEDDABADANIVADA"
+    },
+    {
+      "id": "H328",
+      "panchayat_id": "P59",
+      "name": "KAMMAGUTTAPALLE"
+    },
+    {
+      "id": "H329",
+      "panchayat_id": "P59",
+      "name": "JATHIKARTHANAPALLE"
+    },
+    {
+      "id": "H33",
+      "panchayat_id": "P5",
+      "name": "Boyanapalli"
+    },
+    {
+      "id": "H330",
+      "panchayat_id": "P59",
+      "name": "VEPAMANIKOTHURU"
+    },
+    {
+      "id": "H331",
+      "panchayat_id": "P59",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H332",
+      "panchayat_id": "P59",
+      "name": "JANGALAPALLE"
+    },
+    {
+      "id": "H333",
+      "panchayat_id": "P59",
+      "name": "PEDDONI KOTTALU"
+    },
+    {
+      "id": "H334",
+      "panchayat_id": "P59",
+      "name": "SOLAPPAGARI KOTTALU"
+    },
+    {
+      "id": "H335",
+      "panchayat_id": "P59",
+      "name": "SARIGAVARI KOTTALU"
+    },
+    {
+      "id": "H336",
+      "panchayat_id": "P59",
+      "name": "AMMAVARIPETA"
+    },
+    {
+      "id": "H337",
+      "panchayat_id": "P59",
+      "name": "PAPANURU"
+    },
+    {
+      "id": "H338",
+      "panchayat_id": "P60",
+      "name": "ANGANAMALAKOTHURU"
+    },
+    {
+      "id": "H339",
+      "panchayat_id": "P60",
+      "name": "POGURUPALLE"
+    },
+    {
+      "id": "H34",
+      "panchayat_id": "P5",
+      "name": "Jampiredy Cheruvu"
+    },
+    {
+      "id": "H340",
+      "panchayat_id": "P60",
+      "name": "LINGAPURAM DINNE"
+    },
+    {
+      "id": "H341",
+      "panchayat_id": "P60",
+      "name": "CHINTHARAPALEM"
+    },
+    {
+      "id": "H342",
+      "panchayat_id": "P60",
+      "name": "KARAMUTLA GOLLAPALLE"
+    },
+    {
+      "id": "H343",
+      "panchayat_id": "P61",
+      "name": "BURUGULAPALLE"
+    },
+    {
+      "id": "H344",
+      "panchayat_id": "P61",
+      "name": "CHINNAPARTHIKUNTA"
+    },
+    {
+      "id": "H345",
+      "panchayat_id": "P61",
+      "name": "BOYANAPALLE"
+    },
+    {
+      "id": "H346",
+      "panchayat_id": "P61",
+      "name": "SANGANAPALLE"
+    },
+    {
+      "id": "H347",
+      "panchayat_id": "P61",
+      "name": "PEDDAPARTHIKUNTA"
+    },
+    {
+      "id": "H348",
+      "panchayat_id": "P61",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H349",
+      "panchayat_id": "P62",
+      "name": "SETTIPALLE"
+    },
+    {
+      "id": "H35",
+      "panchayat_id": "P5",
+      "name": "Ontigopanapalli"
+    },
+    {
+      "id": "H350",
+      "panchayat_id": "P62",
+      "name": "GOVINDAPALLE"
+    },
+    {
+      "id": "H351",
+      "panchayat_id": "P62",
+      "name": "KAPPALANATHAM"
+    },
+    {
+      "id": "H352",
+      "panchayat_id": "P62",
+      "name": "CHINNASETTIPALLE"
+    },
+    {
+      "id": "H353",
+      "panchayat_id": "P62",
+      "name": "JOGGANURU"
+    },
+    {
+      "id": "H354",
+      "panchayat_id": "P62",
+      "name": "KRISHNEGOWNI KOTTALU"
+    },
+    {
+      "id": "H355",
+      "panchayat_id": "P63",
+      "name": "THOTLIGANIPALLE"
+    },
+    {
+      "id": "H356",
+      "panchayat_id": "P63",
+      "name": "ALUGUMANIPALLE"
+    },
+    {
+      "id": "H357",
+      "panchayat_id": "P63",
+      "name": "SODIGANI PALEM"
+    },
+    {
+      "id": "H358",
+      "panchayat_id": "P63",
+      "name": "SONNARSANAPALLE"
+    },
+    {
+      "id": "H359",
+      "panchayat_id": "P63",
+      "name": "VADDIGOLLAPALLE"
+    },
+    {
+      "id": "H36",
+      "panchayat_id": "P5",
+      "name": "Giddapalli"
+    },
+    {
+      "id": "H360",
+      "panchayat_id": "P63",
+      "name": "ANAGARLAPALLE"
+    },
+    {
+      "id": "H361",
+      "panchayat_id": "P63",
+      "name": "KAKINAYUNICHIGARLAPALLE"
+    },
+    {
+      "id": "H362",
+      "panchayat_id": "P63",
+      "name": "MALDEPALLE"
+    },
+    {
+      "id": "H363",
+      "panchayat_id": "P63",
+      "name": "SODIGANIPALLE"
+    },
+    {
+      "id": "H364",
+      "panchayat_id": "P63",
+      "name": "DIGUVACHIGARLAPALLE"
+    },
+    {
+      "id": "H365",
+      "panchayat_id": "P63",
+      "name": "BURIDIGANIKUNTA"
+    },
+    {
+      "id": "H366",
+      "panchayat_id": "P63",
+      "name": "THIMMINAYUNIPALLE"
+    },
+    {
+      "id": "H367",
+      "panchayat_id": "P63",
+      "name": "MALDEPALLE KOTHURU"
+    },
+    {
+      "id": "H368",
+      "panchayat_id": "P63",
+      "name": "DINNEPALLE"
+    },
+    {
+      "id": "H369",
+      "panchayat_id": "P64",
+      "name": "YAMAGANIPALLE"
+    },
+    {
+      "id": "H37",
+      "panchayat_id": "P5",
+      "name": "Pamanaboyanapalli"
+    },
+    {
+      "id": "H370",
+      "panchayat_id": "P64",
+      "name": "ADAVIBADANIWADA"
+    },
+    {
+      "id": "H371",
+      "panchayat_id": "P65",
+      "name": "Adavibudugur"
+    },
+    {
+      "id": "H372",
+      "panchayat_id": "P65",
+      "name": "Eguvabudugur"
+    },
+    {
+      "id": "H373",
+      "panchayat_id": "P65",
+      "name": "Vasanadu"
+    },
+    {
+      "id": "H374",
+      "panchayat_id": "P65",
+      "name": "V Kothur"
+    },
+    {
+      "id": "H375",
+      "panchayat_id": "P66",
+      "name": "Ananthapuram"
+    },
+    {
+      "id": "H376",
+      "panchayat_id": "P66",
+      "name": "Bandarlapalli"
+    },
+    {
+      "id": "H377",
+      "panchayat_id": "P66",
+      "name": "K Kothur"
+    },
+    {
+      "id": "H378",
+      "panchayat_id": "P66",
+      "name": "Nayanoripalli"
+    },
+    {
+      "id": "H379",
+      "panchayat_id": "P67",
+      "name": "Animiganipalli"
+    },
+    {
+      "id": "H38",
+      "panchayat_id": "P5",
+      "name": "Birugundlapalli"
+    },
+    {
+      "id": "H380",
+      "panchayat_id": "P67",
+      "name": "Boovanapalli"
+    },
+    {
+      "id": "H381",
+      "panchayat_id": "P68",
+      "name": "B S Palli"
+    },
+    {
+      "id": "H382",
+      "panchayat_id": "P68",
+      "name": "K G Vada"
+    },
+    {
+      "id": "H383",
+      "panchayat_id": "P69",
+      "name": "Chalamangalam"
+    },
+    {
+      "id": "H384",
+      "panchayat_id": "P69",
+      "name": "Pathapeta"
+    },
+    {
+      "id": "H385",
+      "panchayat_id": "P69",
+      "name": "Gownivari Palli"
+    },
+    {
+      "id": "H386",
+      "panchayat_id": "P69",
+      "name": "Diguvapalli"
+    },
+    {
+      "id": "H387",
+      "panchayat_id": "P69",
+      "name": "Sanganapalli"
+    },
+    {
+      "id": "H388",
+      "panchayat_id": "P69",
+      "name": "Reddivaripalli"
+    },
+    {
+      "id": "H389",
+      "panchayat_id": "P69",
+      "name": "Krishnadhasanapalli"
+    },
+    {
+      "id": "H39",
+      "panchayat_id": "P5",
+      "name": "Tagalathanda"
+    },
+    {
+      "id": "H390",
+      "panchayat_id": "P70",
+      "name": "Chinnaobanapalli"
+    },
+    {
+      "id": "H391",
+      "panchayat_id": "P70",
+      "name": "Nayanapalli"
+    },
+    {
+      "id": "H392",
+      "panchayat_id": "P70",
+      "name": "Peddaobanapalli"
+    },
+    {
+      "id": "H393",
+      "panchayat_id": "P71",
+      "name": "Chokkandlapalli"
+    },
+    {
+      "id": "H394",
+      "panchayat_id": "P65",
+      "name": "ADAVIBUDUGURU"
+    },
+    {
+      "id": "H395",
+      "panchayat_id": "P65",
+      "name": "ADAVIBUDUGUR H.W"
+    },
+    {
+      "id": "H396",
+      "panchayat_id": "P65",
+      "name": "VINAYAKAPURAM"
+    },
+    {
+      "id": "H397",
+      "panchayat_id": "P65",
+      "name": "MOTURU"
+    },
+    {
+      "id": "H398",
+      "panchayat_id": "P65",
+      "name": "YERRAGUTTA CHENU"
+    },
+    {
+      "id": "H399",
+      "panchayat_id": "P65",
+      "name": "VINAYAKAPURAM S.C.COLON"
+    },
+    {
+      "id": "H4",
+      "panchayat_id": "P2",
+      "name": "Unisiganipalli"
+    },
+    {
+      "id": "H40",
+      "panchayat_id": "P5",
+      "name": "Nakkabalepalli"
+    },
+    {
+      "id": "H400",
+      "panchayat_id": "P67",
+      "name": "ANIMIGANIPALLE"
+    },
+    {
+      "id": "H401",
+      "panchayat_id": "P67",
+      "name": "JAMBUCHERUVU KOTTALU"
+    },
+    {
+      "id": "H402",
+      "panchayat_id": "P72",
+      "name": "EKARLAPALLE"
+    },
+    {
+      "id": "H403",
+      "panchayat_id": "P72",
+      "name": "CHANDAM"
+    },
+    {
+      "id": "H404",
+      "panchayat_id": "P72",
+      "name": "CHANDM H.W"
+    },
+    {
+      "id": "H405",
+      "panchayat_id": "P72",
+      "name": "KOTHAINDLU"
+    },
+    {
+      "id": "H406",
+      "panchayat_id": "P72",
+      "name": "ABBUKUNTA"
+    },
+    {
+      "id": "H407",
+      "panchayat_id": "P73",
+      "name": "PALARLAPALLE"
+    },
+    {
+      "id": "H408",
+      "panchayat_id": "P73",
+      "name": "BEVANAPALLE"
+    },
+    {
+      "id": "H409",
+      "panchayat_id": "P73",
+      "name": "PARAMASAMUDRAM"
+    },
+    {
+      "id": "H41",
+      "panchayat_id": "P5",
+      "name": "Vinayakapuram"
+    },
+    {
+      "id": "H410",
+      "panchayat_id": "P73",
+      "name": "VADDIPALLE"
+    },
+    {
+      "id": "H411",
+      "panchayat_id": "P73",
+      "name": "PARAMASAMUDRAM H.W"
+    },
+    {
+      "id": "H412",
+      "panchayat_id": "P73",
+      "name": "CHEELEPALLE"
+    },
+    {
+      "id": "H413",
+      "panchayat_id": "P73",
+      "name": "VADDIINDULU @ PYURU"
+    },
+    {
+      "id": "H414",
+      "panchayat_id": "P74",
+      "name": "CHEEMANAYANIPALLE @ LAK"
+    },
+    {
+      "id": "H415",
+      "panchayat_id": "P74",
+      "name": "LAKSHMIPURAM COLONY"
+    },
+    {
+      "id": "H416",
+      "panchayat_id": "P74",
+      "name": "VINAYAKAPURAM"
+    },
+    {
+      "id": "H417",
+      "panchayat_id": "P74",
+      "name": "GERISABAVI"
+    },
+    {
+      "id": "H418",
+      "panchayat_id": "P74",
+      "name": "KOTAMURU @ BABU NAGAR"
+    },
+    {
+      "id": "H419",
+      "panchayat_id": "P74",
+      "name": "SURAPPAKOTALU"
+    },
+    {
+      "id": "H42",
+      "panchayat_id": "P5",
+      "name": "Govindarajapuram"
+    },
+    {
+      "id": "H420",
+      "panchayat_id": "P74",
+      "name": "BAIRUGANIPALLE KOTAL"
+    },
+    {
+      "id": "H421",
+      "panchayat_id": "P74",
+      "name": "VINAYAKAPURAM (ANADICOL"
+    },
+    {
+      "id": "H422",
+      "panchayat_id": "P75",
+      "name": "PEDDABOGGUPALLE"
+    },
+    {
+      "id": "H423",
+      "panchayat_id": "P75",
+      "name": "CHEKKUNATHAM"
+    },
+    {
+      "id": "H424",
+      "panchayat_id": "P75",
+      "name": "KANAMAPACHARLAPALLE"
+    },
+    {
+      "id": "H425",
+      "panchayat_id": "P75",
+      "name": "ADAVIMULAKALAPALLE"
+    },
+    {
+      "id": "H426",
+      "panchayat_id": "P75",
+      "name": "S.C.COLONY NORTH"
+    },
+    {
+      "id": "H427",
+      "panchayat_id": "P75",
+      "name": "KUSURU"
+    },
+    {
+      "id": "H428",
+      "panchayat_id": "P75",
+      "name": "THUMMALAPALLE"
+    },
+    {
+      "id": "H429",
+      "panchayat_id": "P75",
+      "name": "PAICHEKKUNATHAM"
+    },
+    {
+      "id": "H43",
+      "panchayat_id": "P5",
+      "name": "Eddulaagattu"
+    },
+    {
+      "id": "H430",
+      "panchayat_id": "P75",
+      "name": "KALANURU"
+    },
+    {
+      "id": "H431",
+      "panchayat_id": "P75",
+      "name": "BALAPPAKOTALU"
+    },
+    {
+      "id": "H432",
+      "panchayat_id": "P75",
+      "name": "S.C.COLONY SOUTH"
+    },
+    {
+      "id": "H433",
+      "panchayat_id": "P75",
+      "name": "DOLLAGUTTA (S.T.COLONY)"
+    },
+    {
+      "id": "H434",
+      "panchayat_id": "P75",
+      "name": "MADDULAVANKA KOTTALU"
+    },
+    {
+      "id": "H435",
+      "panchayat_id": "P75",
+      "name": "ZATARIMADUGU"
+    },
+    {
+      "id": "H436",
+      "panchayat_id": "P75",
+      "name": "BABUNAGARCOLONY"
+    },
+    {
+      "id": "H437",
+      "panchayat_id": "P75",
+      "name": "KOTHURU"
+    },
+    {
+      "id": "H438",
+      "panchayat_id": "P75",
+      "name": "GOWDAPPANURU"
+    },
+    {
+      "id": "H439",
+      "panchayat_id": "P75",
+      "name": "ATHURU"
+    },
+    {
+      "id": "H44",
+      "panchayat_id": "P5",
+      "name": "Krishnamanayanapalli"
+    },
+    {
+      "id": "H440",
+      "panchayat_id": "P75",
+      "name": "KULLAYAPPAKOTTALU"
+    },
+    {
+      "id": "H441",
+      "panchayat_id": "P75",
+      "name": "UPPUKUNTA"
+    },
+    {
+      "id": "H442",
+      "panchayat_id": "P76",
+      "name": "CHINNAKURABALAPALLE (RU"
+    },
+    {
+      "id": "H443",
+      "panchayat_id": "P76",
+      "name": "DALAVOIKOTHAPALLE"
+    },
+    {
+      "id": "H444",
+      "panchayat_id": "P76",
+      "name": "HARIJANA WADA"
+    },
+    {
+      "id": "H445",
+      "panchayat_id": "P76",
+      "name": "SRI LANKA REPARTRITES C"
+    },
+    {
+      "id": "H446",
+      "panchayat_id": "P76",
+      "name": "N.T.R.COLONY"
+    },
+    {
+      "id": "H447",
+      "panchayat_id": "P76",
+      "name": "URBANCOLONY"
+    },
+    {
+      "id": "H448",
+      "panchayat_id": "P76",
+      "name": "MODERN COLONY"
+    },
+    {
+      "id": "H449",
+      "panchayat_id": "P77",
+      "name": "DASEGOWNIYURU"
+    },
+    {
+      "id": "H45",
+      "panchayat_id": "P5",
+      "name": "Krishnanagar Colony"
+    },
+    {
+      "id": "H450",
+      "panchayat_id": "P77",
+      "name": "BOGGUPALLE"
+    },
+    {
+      "id": "H451",
+      "panchayat_id": "P77",
+      "name": "GUTTAPALLE"
+    },
+    {
+      "id": "H452",
+      "panchayat_id": "P77",
+      "name": "BAYYANURU"
+    },
+    {
+      "id": "H453",
+      "panchayat_id": "P77",
+      "name": "VAGARAPPAKOTTALU"
+    },
+    {
+      "id": "H454",
+      "panchayat_id": "P77",
+      "name": "GUTTAPALLE COLONY"
+    },
+    {
+      "id": "H455",
+      "panchayat_id": "P77",
+      "name": "BALAMANDAKOTTAM"
+    },
+    {
+      "id": "H456",
+      "panchayat_id": "P77",
+      "name": "BAIRAPPAKOTTALU"
+    },
+    {
+      "id": "H457",
+      "panchayat_id": "P77",
+      "name": "EGILERAPPAKOTTALU"
+    },
+    {
+      "id": "H458",
+      "panchayat_id": "P77",
+      "name": "RAMNAGAR"
+    },
+    {
+      "id": "H459",
+      "panchayat_id": "P77",
+      "name": "NARAYANAPURAM(PART)"
+    },
+    {
+      "id": "H46",
+      "panchayat_id": "P5",
+      "name": "Nernelli"
+    },
+    {
+      "id": "H460",
+      "panchayat_id": "P78",
+      "name": "KAKIMADUGU"
+    },
+    {
+      "id": "H461",
+      "panchayat_id": "P78",
+      "name": "EGUVAKAKIMADUGU"
+    },
+    {
+      "id": "H462",
+      "panchayat_id": "P78",
+      "name": "GARIGACHINNEPALLE"
+    },
+    {
+      "id": "H463",
+      "panchayat_id": "P78",
+      "name": "DIGUVAKAKIMADUGU"
+    },
+    {
+      "id": "H464",
+      "panchayat_id": "P78",
+      "name": "GARIGACHINNEPALLE S.C.C"
+    },
+    {
+      "id": "H465",
+      "panchayat_id": "P78",
+      "name": "DOMMARAAGRAHARAM"
+    },
+    {
+      "id": "H466",
+      "panchayat_id": "P79",
+      "name": "GONUGURU"
+    },
+    {
+      "id": "H467",
+      "panchayat_id": "P79",
+      "name": "GUTTAPALLE"
+    },
+    {
+      "id": "H468",
+      "panchayat_id": "P80",
+      "name": "URINAYANIPALLE"
+    },
+    {
+      "id": "H469",
+      "panchayat_id": "P80",
+      "name": "URINAYANIKOTHURU"
+    },
+    {
+      "id": "H47",
+      "panchayat_id": "P5",
+      "name": "Lingapuram"
+    },
+    {
+      "id": "H470",
+      "panchayat_id": "P80",
+      "name": "GUDLANAYAANIPALLE"
+    },
+    {
+      "id": "H471",
+      "panchayat_id": "P81",
+      "name": "PORAKUNTLAPALLE"
+    },
+    {
+      "id": "H472",
+      "panchayat_id": "P81",
+      "name": "JARUGU"
+    },
+    {
+      "id": "H473",
+      "panchayat_id": "P81",
+      "name": "BATHALAPALLE"
+    },
+    {
+      "id": "H474",
+      "panchayat_id": "P81",
+      "name": "CHALARLAPALLE"
+    },
+    {
+      "id": "H475",
+      "panchayat_id": "P81",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H476",
+      "panchayat_id": "P81",
+      "name": "YANAMANASANAPALLE"
+    },
+    {
+      "id": "H477",
+      "panchayat_id": "P82",
+      "name": "KAMATHAMURU"
+    },
+    {
+      "id": "H478",
+      "panchayat_id": "P82",
+      "name": "KATHIMANIPALLE"
+    },
+    {
+      "id": "H479",
+      "panchayat_id": "P82",
+      "name": "DOMMARAINDLU"
+    },
+    {
+      "id": "H48",
+      "panchayat_id": "P5",
+      "name": "Kanchidasanapalli"
+    },
+    {
+      "id": "H480",
+      "panchayat_id": "P82",
+      "name": "KATHIMANIPALLE COLONY"
+    },
+    {
+      "id": "H481",
+      "panchayat_id": "P82",
+      "name": "GUNDLAPALLE"
+    },
+    {
+      "id": "H482",
+      "panchayat_id": "P82",
+      "name": "GULLEPALLE"
+    },
+    {
+      "id": "H483",
+      "panchayat_id": "P83",
+      "name": "VENKATESHPURAM"
+    },
+    {
+      "id": "H484",
+      "panchayat_id": "P83",
+      "name": "KANGUNDI R.F"
+    },
+    {
+      "id": "H485",
+      "panchayat_id": "P83",
+      "name": "KANGUNDI"
+    },
+    {
+      "id": "H486",
+      "panchayat_id": "P83",
+      "name": "PEDDAVANKA"
+    },
+    {
+      "id": "H487",
+      "panchayat_id": "P83",
+      "name": "NAYANURU"
+    },
+    {
+      "id": "H488",
+      "panchayat_id": "P83",
+      "name": "MANGAMMAVURU"
+    },
+    {
+      "id": "H489",
+      "panchayat_id": "P83",
+      "name": "BRAMHADEVARACHENULU"
+    },
+    {
+      "id": "H49",
+      "panchayat_id": "P5",
+      "name": "Kodigundlapalli"
+    },
+    {
+      "id": "H490",
+      "panchayat_id": "P83",
+      "name": "OTIKUNTA"
+    },
+    {
+      "id": "H491",
+      "panchayat_id": "P83",
+      "name": "THAGARAMANIMOOLA"
+    },
+    {
+      "id": "H492",
+      "panchayat_id": "P83",
+      "name": "KOWSIGANDLAPALLE"
+    },
+    {
+      "id": "H493",
+      "panchayat_id": "P83",
+      "name": "PARVATHIPURAM"
+    },
+    {
+      "id": "H494",
+      "panchayat_id": "P83",
+      "name": "GIDDEGANIPANETA"
+    },
+    {
+      "id": "H495",
+      "panchayat_id": "P83",
+      "name": "GANESHPURAM"
+    },
+    {
+      "id": "H496",
+      "panchayat_id": "P83",
+      "name": "KRISHNAPURAM"
+    },
+    {
+      "id": "H497",
+      "panchayat_id": "P83",
+      "name": "NAKKALA GUTTA"
+    },
+    {
+      "id": "H498",
+      "panchayat_id": "P83",
+      "name": "SAMADULU"
+    },
+    {
+      "id": "H499",
+      "panchayat_id": "P83",
+      "name": "DEVARAJAPURAM"
+    },
+    {
+      "id": "H5",
+      "panchayat_id": "P2",
+      "name": "Aniganuru"
+    },
+    {
+      "id": "H50",
+      "panchayat_id": "P5",
+      "name": "Lakshmipuram"
+    },
+    {
+      "id": "H500",
+      "panchayat_id": "P83",
+      "name": "SAHIPURAM"
+    },
+    {
+      "id": "H501",
+      "panchayat_id": "P83",
+      "name": "VENKATRAJAPURAM"
+    },
+    {
+      "id": "H502",
+      "panchayat_id": "P83",
+      "name": "AMBAPURAM"
+    },
+    {
+      "id": "H503",
+      "panchayat_id": "P83",
+      "name": "THIRLAVANIBANDA"
+    },
+    {
+      "id": "H504",
+      "panchayat_id": "P83",
+      "name": "RAMALAGUTTA CHENU"
+    },
+    {
+      "id": "H505",
+      "panchayat_id": "P83",
+      "name": "S.C.COLONY"
+    },
+    {
+      "id": "H506",
+      "panchayat_id": "P83",
+      "name": "KADIRIPURAM"
+    },
+    {
+      "id": "H507",
+      "panchayat_id": "P83",
+      "name": "S.T.COLONY"
+    },
+    {
+      "id": "H508",
+      "panchayat_id": "P83",
+      "name": "NARAYANAPURAM (T.N.BORD"
+    },
+    {
+      "id": "H509",
+      "panchayat_id": "P84",
+      "name": "KOTALURU"
+    },
+    {
+      "id": "H51",
+      "panchayat_id": "P5",
+      "name": "Gadduru"
+    },
+    {
+      "id": "H510",
+      "panchayat_id": "P84",
+      "name": "YANADIPURAM"
+    },
+    {
+      "id": "H511",
+      "panchayat_id": "P84",
+      "name": "RALLACHENU"
+    },
+    {
+      "id": "H512",
+      "panchayat_id": "P84",
+      "name": "SIDDAPPANURU"
+    },
+    {
+      "id": "H513",
+      "panchayat_id": "P84",
+      "name": "MESTRINAYANURU"
+    },
+    {
+      "id": "H514",
+      "panchayat_id": "P84",
+      "name": "YERRAMANNUGUNTHALU"
+    },
+    {
+      "id": "H515",
+      "panchayat_id": "P84",
+      "name": "NURAVULAGUNDLACHENU"
+    },
+    {
+      "id": "H516",
+      "panchayat_id": "P84",
+      "name": "GUNDLAMADUGU"
+    },
+    {
+      "id": "H517",
+      "panchayat_id": "P84",
+      "name": "SAMIDAMMA VANKA"
+    },
+    {
+      "id": "H518",
+      "panchayat_id": "P84",
+      "name": "SAPPANIKUNTA"
+    },
+    {
+      "id": "H519",
+      "panchayat_id": "P84",
+      "name": "BALAMKOTTALU"
+    },
+    {
+      "id": "H52",
+      "panchayat_id": "P5",
+      "name": "Yanadi Colony"
+    },
+    {
+      "id": "H520",
+      "panchayat_id": "P84",
+      "name": "VEPPALACHENU SC COLONY"
+    },
+    {
+      "id": "H521",
+      "panchayat_id": "P85",
+      "name": "KOTHAPALLE"
+    },
+    {
+      "id": "H522",
+      "panchayat_id": "P85",
+      "name": "NIMMAKAMPALLE"
+    },
+    {
+      "id": "H523",
+      "panchayat_id": "P85",
+      "name": "SAJJALAPALLE"
+    },
+    {
+      "id": "H524",
+      "panchayat_id": "P85",
+      "name": "KADIRIPURAM"
+    },
+    {
+      "id": "H525",
+      "panchayat_id": "P86",
+      "name": "VARAMANURU"
+    },
+    {
+      "id": "H526",
+      "panchayat_id": "P86",
+      "name": "KRISHNADASANAPALLE"
+    },
+    {
+      "id": "H527",
+      "panchayat_id": "P86",
+      "name": "YANADIPALLE"
+    },
+    {
+      "id": "H528",
+      "panchayat_id": "P86",
+      "name": "RAJANAM"
+    },
+    {
+      "id": "H529",
+      "panchayat_id": "P86",
+      "name": "CHIMPANAGALLU"
+    },
+    {
+      "id": "H53",
+      "panchayat_id": "P24",
+      "name": "Dandikuppam"
+    },
+    {
+      "id": "H530",
+      "panchayat_id": "P86",
+      "name": "MATARLAPALLE"
+    },
+    {
+      "id": "H531",
+      "panchayat_id": "P86",
+      "name": "GANGAPURAM"
+    },
+    {
+      "id": "H532",
+      "panchayat_id": "P86",
+      "name": "PAPANNA KUNTA INDLU"
+    },
+    {
+      "id": "H533",
+      "panchayat_id": "P87",
+      "name": "BAIRUGANIPALLE (RURAL)"
+    },
+    {
+      "id": "H534",
+      "panchayat_id": "P87",
+      "name": "KUPPAM(U)"
+    },
+    {
+      "id": "H535",
+      "panchayat_id": "P88",
+      "name": "MOTTAKADIRINURU"
+    },
+    {
+      "id": "H536",
+      "panchayat_id": "P88",
+      "name": "PONNANGURU"
+    },
+    {
+      "id": "H537",
+      "panchayat_id": "P88",
+      "name": "CHINNAOBBA"
+    },
+    {
+      "id": "H538",
+      "panchayat_id": "P88",
+      "name": "T.SADUMURU"
+    },
+    {
+      "id": "H539",
+      "panchayat_id": "P88",
+      "name": "PARTHICHENU"
+    },
+    {
+      "id": "H54",
+      "panchayat_id": "P24",
+      "name": "Nallarallapalli"
+    },
+    {
+      "id": "H540",
+      "panchayat_id": "P88",
+      "name": "HANUMANNAKOTALU"
+    },
+    {
+      "id": "H541",
+      "panchayat_id": "P88",
+      "name": "MOTLACHENU"
+    },
+    {
+      "id": "H542",
+      "panchayat_id": "P88",
+      "name": "MALLANURU"
+    },
+    {
+      "id": "H543",
+      "panchayat_id": "P88",
+      "name": "KRISHNAPURAM"
+    },
+    {
+      "id": "H544",
+      "panchayat_id": "P88",
+      "name": "SINGARAPURAM KOTTALU"
+    },
+    {
+      "id": "H545",
+      "panchayat_id": "P88",
+      "name": "VALURU"
+    },
+    {
+      "id": "H546",
+      "panchayat_id": "P88",
+      "name": "KODIGANURU"
+    },
+    {
+      "id": "H547",
+      "panchayat_id": "P88",
+      "name": "PAIBODAGUTTA"
+    },
+    {
+      "id": "H548",
+      "panchayat_id": "P88",
+      "name": "PEDDANNAKOTALU"
+    },
+    {
+      "id": "H549",
+      "panchayat_id": "P88",
+      "name": "PONNAGURU COLONY"
+    },
+    {
+      "id": "H55",
+      "panchayat_id": "P24",
+      "name": "Chowdampalli"
+    },
+    {
+      "id": "H550",
+      "panchayat_id": "P88",
+      "name": "JEEDURU"
+    },
+    {
+      "id": "H551",
+      "panchayat_id": "P88",
+      "name": "KOTHACHENU"
+    },
+    {
+      "id": "H552",
+      "panchayat_id": "P88",
+      "name": "DIGUVABODAGUTTA"
+    },
+    {
+      "id": "H553",
+      "panchayat_id": "P88",
+      "name": "BODEPPAKOTALU"
+    },
+    {
+      "id": "H554",
+      "panchayat_id": "P88",
+      "name": "MUTHURU"
+    },
+    {
+      "id": "H555",
+      "panchayat_id": "P88",
+      "name": "MUDDULACHERUVU COLONY"
+    },
+    {
+      "id": "H556",
+      "panchayat_id": "P88",
+      "name": "BIKKILIGATTU"
+    },
+    {
+      "id": "H557",
+      "panchayat_id": "P89",
+      "name": "PEDDAGOPANAPALLE"
+    },
+    {
+      "id": "H558",
+      "panchayat_id": "P89",
+      "name": "MULAKALAPALLE"
+    },
+    {
+      "id": "H559",
+      "panchayat_id": "P89",
+      "name": "CHINNAGOPANAPALLE"
+    },
+    {
+      "id": "H56",
+      "panchayat_id": "P24",
+      "name": "Siddaredlapalli"
+    },
+    {
+      "id": "H560",
+      "panchayat_id": "P89",
+      "name": "THELLACHERUVU KOTTALU"
+    },
+    {
+      "id": "H561",
+      "panchayat_id": "P89",
+      "name": "DIGUVAMANKALADODDI"
+    },
+    {
+      "id": "H562",
+      "panchayat_id": "P89",
+      "name": "SETTIGANIGUTTA"
+    },
+    {
+      "id": "H563",
+      "panchayat_id": "P89",
+      "name": "EGUVAMANKALADODDI"
+    },
+    {
+      "id": "H564",
+      "panchayat_id": "P89",
+      "name": "KONAIAH KUNTA"
+    },
+    {
+      "id": "H565",
+      "panchayat_id": "P90",
+      "name": "MITTAPALLE"
+    },
+    {
+      "id": "H566",
+      "panchayat_id": "P90",
+      "name": "AVULANATHAM"
+    },
+    {
+      "id": "H567",
+      "panchayat_id": "P90",
+      "name": "VEPURU"
+    },
+    {
+      "id": "H568",
+      "panchayat_id": "P90",
+      "name": "THIMMAPURAM"
+    },
+    {
+      "id": "H569",
+      "panchayat_id": "P90",
+      "name": "ADAMANDLA KUPPAM (MITTA"
+    },
+    {
+      "id": "H57",
+      "panchayat_id": "P24",
+      "name": "Kondapalli"
+    },
+    {
+      "id": "H570",
+      "panchayat_id": "P90",
+      "name": "AVULANATHAM GATE"
+    },
+    {
+      "id": "H571",
+      "panchayat_id": "P90",
+      "name": "VEPANAPALLE"
+    },
+    {
+      "id": "H572",
+      "panchayat_id": "P91",
+      "name": "NADIMURU"
+    },
+    {
+      "id": "H573",
+      "panchayat_id": "P91",
+      "name": "GUDLAKADIREPALLE"
+    },
+    {
+      "id": "H574",
+      "panchayat_id": "P91",
+      "name": "VASANADUGOLLAPALLE"
+    },
+    {
+      "id": "H575",
+      "panchayat_id": "P91",
+      "name": "BODAGUTTAPALLE"
+    },
+    {
+      "id": "H576",
+      "panchayat_id": "P91",
+      "name": "RAMABADRANURU (PART) II"
+    },
+    {
+      "id": "H577",
+      "panchayat_id": "P91",
+      "name": "BAPANACHERUVU @ HAMSAPU"
+    },
+    {
+      "id": "H578",
+      "panchayat_id": "P91",
+      "name": "BIRADANAPALLE"
+    },
+    {
+      "id": "H579",
+      "panchayat_id": "P91",
+      "name": "VEERANAGAPURAM"
+    },
+    {
+      "id": "H58",
+      "panchayat_id": "P24",
+      "name": "Nimmanapalli"
+    },
+    {
+      "id": "H580",
+      "panchayat_id": "P91",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H581",
+      "panchayat_id": "P91",
+      "name": "PAINASI"
+    },
+    {
+      "id": "H582",
+      "panchayat_id": "P91",
+      "name": "RAMABADRANURU (PART) I"
+    },
+    {
+      "id": "H583",
+      "panchayat_id": "P91",
+      "name": "VENKATESWARA KOTALU"
+    },
+    {
+      "id": "H584",
+      "panchayat_id": "P91",
+      "name": "THOTLAMMA GUDI"
+    },
+    {
+      "id": "H585",
+      "panchayat_id": "P92",
+      "name": "NOOLAKUNTA"
+    },
+    {
+      "id": "H586",
+      "panchayat_id": "P92",
+      "name": "KUTTIGANIPALLE"
+    },
+    {
+      "id": "H587",
+      "panchayat_id": "P92",
+      "name": "DAYYALAVANKA"
+    },
+    {
+      "id": "H588",
+      "panchayat_id": "P93",
+      "name": "PAIPALEM"
+    },
+    {
+      "id": "H589",
+      "panchayat_id": "P93",
+      "name": "CHINNABOGGUPALLE"
+    },
+    {
+      "id": "H59",
+      "panchayat_id": "P24",
+      "name": "Indiranagar"
+    },
+    {
+      "id": "H590",
+      "panchayat_id": "P93",
+      "name": "THANGEDUKUPPAM"
+    },
+    {
+      "id": "H591",
+      "panchayat_id": "P93",
+      "name": "PEDDONIKOTALU@VINAYAKAP"
+    },
+    {
+      "id": "H592",
+      "panchayat_id": "P93",
+      "name": "PAIPALEM B.C.COLONY"
+    },
+    {
+      "id": "H593",
+      "panchayat_id": "P94",
+      "name": "KUNJEGOWNIYURU"
+    },
+    {
+      "id": "H594",
+      "panchayat_id": "P94",
+      "name": "PEDDABANGARUNATHAM"
+    },
+    {
+      "id": "H595",
+      "panchayat_id": "P94",
+      "name": "CHINNABANGARUNATHAM"
+    },
+    {
+      "id": "H596",
+      "panchayat_id": "P94",
+      "name": "ERRABETAYYANURU"
+    },
+    {
+      "id": "H597",
+      "panchayat_id": "P94",
+      "name": "CHALARLAPALLE MITTA"
+    },
+    {
+      "id": "H598",
+      "panchayat_id": "P94",
+      "name": "MARWADA"
+    },
+    {
+      "id": "H599",
+      "panchayat_id": "P94",
+      "name": "P.B.NATHAM B.C.COLONY"
+    },
+    {
+      "id": "H6",
+      "panchayat_id": "P2",
+      "name": "Govindapalli"
+    },
+    {
+      "id": "H60",
+      "panchayat_id": "P24",
+      "name": "Krishnepalli"
+    },
+    {
+      "id": "H600",
+      "panchayat_id": "P95",
+      "name": "BANDASETTIPALE (RURAL)"
+    },
+    {
+      "id": "H601",
+      "panchayat_id": "P95",
+      "name": "ELAJANURU"
+    },
+    {
+      "id": "H602",
+      "panchayat_id": "P95",
+      "name": "SAMAGUTTAPALLE"
+    },
+    {
+      "id": "H603",
+      "panchayat_id": "P95",
+      "name": "SEEGALAPALLE"
+    },
+    {
+      "id": "H604",
+      "panchayat_id": "P95",
+      "name": "THANJAMMAKOTTAM @ CHAPP"
+    },
+    {
+      "id": "H605",
+      "panchayat_id": "P95",
+      "name": "CHINNA SEEGALPALLE"
+    },
+    {
+      "id": "H606",
+      "panchayat_id": "P95",
+      "name": "PEDDANNAKOTTALU"
+    },
+    {
+      "id": "H607",
+      "panchayat_id": "P95",
+      "name": "JALLAPPAKOTTALU"
+    },
+    {
+      "id": "H608",
+      "panchayat_id": "P95",
+      "name": "NARAYANAPURAM(PART)"
+    },
+    {
+      "id": "H609",
+      "panchayat_id": "P96",
+      "name": "THAMBIGANIPALLE"
+    },
+    {
+      "id": "H61",
+      "panchayat_id": "P47",
+      "name": "AGARAM"
+    },
+    {
+      "id": "H610",
+      "panchayat_id": "P96",
+      "name": "THAMBIGANIPALLE KOTTALU"
+    },
+    {
+      "id": "H611",
+      "panchayat_id": "P96",
+      "name": "THAMBIGANIPALLE ELE.SUB"
+    },
+    {
+      "id": "H612",
+      "panchayat_id": "P96",
+      "name": "THAMBIGANIPALLE S.C.COL"
+    },
+    {
+      "id": "H613",
+      "panchayat_id": "P97",
+      "name": "MARAPALLE"
+    },
+    {
+      "id": "H614",
+      "panchayat_id": "P97",
+      "name": "KURMANIPALLE"
+    },
+    {
+      "id": "H615",
+      "panchayat_id": "P97",
+      "name": "URLAOBANAPALLE"
+    },
+    {
+      "id": "H616",
+      "panchayat_id": "P97",
+      "name": "GATTAPANAYANIPALLE"
+    },
+    {
+      "id": "H617",
+      "panchayat_id": "P97",
+      "name": "MALLAMMA CHERUVU KOTALU"
+    },
+    {
+      "id": "H618",
+      "panchayat_id": "P97",
+      "name": "PAPAIAHCHERUVU KOTTALU"
+    },
+    {
+      "id": "H619",
+      "panchayat_id": "P97",
+      "name": "MALLIKUNTA"
+    },
+    {
+      "id": "H62",
+      "panchayat_id": "P47",
+      "name": "JABBIGANIPALLE"
+    },
+    {
+      "id": "H620",
+      "panchayat_id": "P97",
+      "name": "ADEPPAKOTALU"
+    },
+    {
+      "id": "H621",
+      "panchayat_id": "P97",
+      "name": "ANANDAPPA KOTTALU"
+    },
+    {
+      "id": "H622",
+      "panchayat_id": "P98",
+      "name": "RAGIMANUMITTA"
+    },
+    {
+      "id": "H623",
+      "panchayat_id": "P98",
+      "name": "JAMPANURU"
+    },
+    {
+      "id": "H624",
+      "panchayat_id": "P98",
+      "name": "VANAGUTTAPALLE"
+    },
+    {
+      "id": "H625",
+      "panchayat_id": "P98",
+      "name": "VANAGUTTAPALLE SC COLONY"
+    },
+    {
+      "id": "H626",
+      "panchayat_id": "P99",
+      "name": "VASANADU"
+    },
+    {
+      "id": "H627",
+      "panchayat_id": "P99",
+      "name": "CHINNA VASANADU"
+    },
+    {
+      "id": "H628",
+      "panchayat_id": "P100",
+      "name": "VENDUGAMPALLE"
+    },
+    {
+      "id": "H629",
+      "panchayat_id": "P100",
+      "name": "BAIRAPPA KOTALU"
+    },
+    {
+      "id": "H63",
+      "panchayat_id": "P47",
+      "name": "KOTHAPALLE"
+    },
+    {
+      "id": "H630",
+      "panchayat_id": "P100",
+      "name": "MALLANURU KOTALU"
+    },
+    {
+      "id": "H631",
+      "panchayat_id": "P100",
+      "name": "DHARMARAJU KOTALU"
+    },
+    {
+      "id": "H632",
+      "panchayat_id": "P100",
+      "name": "THANDAVAPPA KOTALU"
+    },
+    {
+      "id": "H633",
+      "panchayat_id": "P100",
+      "name": "JAMBUCHERUVU KOTTALU"
+    },
+    {
+      "id": "H634",
+      "panchayat_id": "P100",
+      "name": "BUJANGAPPAKOTALU"
+    },
+    {
+      "id": "H635",
+      "panchayat_id": "P100",
+      "name": "VENDUGAMPALLE B.C.COLON"
+    },
+    {
+      "id": "H64",
+      "panchayat_id": "P47",
+      "name": "JOGINDLU"
+    },
+    {
+      "id": "H65",
+      "panchayat_id": "P47",
+      "name": "THODELUGATTU"
+    },
+    {
+      "id": "H66",
+      "panchayat_id": "P8",
+      "name": "Chinnabaldar"
+    },
+    {
+      "id": "H67",
+      "panchayat_id": "P9",
+      "name": "Gutturu Thanda"
+    },
+    {
+      "id": "H68",
+      "panchayat_id": "P9",
+      "name": "Uyyalamarrimanu Thanda"
+    },
+    {
+      "id": "H69",
+      "panchayat_id": "P10",
+      "name": "Kenchanaballa"
+    },
+    {
+      "id": "H7",
+      "panchayat_id": "P2",
+      "name": "Peddaganuru"
+    },
+    {
+      "id": "H70",
+      "panchayat_id": "P10",
+      "name": "Bhumandalapuram"
+    },
+    {
+      "id": "H71",
+      "panchayat_id": "P10",
+      "name": "Veeranagapuram"
+    },
+    {
+      "id": "H72",
+      "panchayat_id": "P10",
+      "name": "Gandhinagar"
+    },
+    {
+      "id": "H73",
+      "panchayat_id": "P10",
+      "name": "Jambukunta"
+    },
+    {
+      "id": "H74",
+      "panchayat_id": "P10",
+      "name": "Reddivanipodu"
+    },
+    {
+      "id": "H75",
+      "panchayat_id": "P10",
+      "name": "Kotachenu"
+    },
+    {
+      "id": "H76",
+      "panchayat_id": "P10",
+      "name": "Pacharumakulapalle"
+    },
+    {
+      "id": "H77",
+      "panchayat_id": "P11",
+      "name": "Konganapalle"
+    },
+    {
+      "id": "H78",
+      "panchayat_id": "P11",
+      "name": "Kollupalle"
+    },
+    {
+      "id": "H79",
+      "panchayat_id": "P11",
+      "name": "Venkatapuram"
+    },
+    {
+      "id": "H8",
+      "panchayat_id": "P2",
+      "name": "Goolipalli"
+    },
+    {
+      "id": "H80",
+      "panchayat_id": "P12",
+      "name": "Manendram"
+    },
+    {
+      "id": "H81",
+      "panchayat_id": "P12",
+      "name": "Attikuppam"
+    },
+    {
+      "id": "H82",
+      "panchayat_id": "P12",
+      "name": "Chintakuppam"
+    },
+    {
+      "id": "H83",
+      "panchayat_id": "P12",
+      "name": "Krishnarajapuram"
+    },
+    {
+      "id": "H84",
+      "panchayat_id": "P12",
+      "name": "Moddulavanka"
+    },
+    {
+      "id": "H85",
+      "panchayat_id": "P12",
+      "name": "Vankachenu"
+    },
+    {
+      "id": "H86",
+      "panchayat_id": "P12",
+      "name": "Kambaladevanapalle"
+    },
+    {
+      "id": "H87",
+      "panchayat_id": "P13",
+      "name": "Muddanapalle."
+    },
+    {
+      "id": "H88",
+      "panchayat_id": "P13",
+      "name": "Avulakuppam"
+    },
+    {
+      "id": "H89",
+      "panchayat_id": "P14",
+      "name": "Naniyala Thanda"
+    },
+    {
+      "id": "H9",
+      "panchayat_id": "P2",
+      "name": "Jowkupalli"
+    },
+    {
+      "id": "H90",
+      "panchayat_id": "P14",
+      "name": "Ramapuram Thanda"
+    },
+    {
+      "id": "H91",
+      "panchayat_id": "P15",
+      "name": "Narayanapuram Thanda"
+    },
+    {
+      "id": "H92",
+      "panchayat_id": "P16",
+      "name": "Kavampalli"
+    },
+    {
+      "id": "H93",
+      "panchayat_id": "P16",
+      "name": "Pallikuppam"
+    },
+    {
+      "id": "H94",
+      "panchayat_id": "P16",
+      "name": "Pandyalamadugu"
+    },
+    {
+      "id": "H95",
+      "panchayat_id": "P16",
+      "name": "S Gollapalli"
+    },
+    {
+      "id": "H96",
+      "panchayat_id": "P16",
+      "name": "Kavalimadugu"
+    },
+    {
+      "id": "H97",
+      "panchayat_id": "P16",
+      "name": "Motlavanka"
+    },
+    {
+      "id": "H98",
+      "panchayat_id": "P17",
+      "name": "Pmk Thanda"
+    },
+    {
+      "id": "H99",
+      "panchayat_id": "P17",
+      "name": "Pm Thanda"
+    }
+  ]
+}
