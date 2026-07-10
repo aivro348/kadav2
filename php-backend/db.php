@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $host = 'localhost'; // Usually localhost on Hostinger
 $dbname = 'u110415653_iitk'; // The DB name from your screenshot
-$username = 'YOUR_DB_USERNAME_HERE'; // User needs to update this
-$password = 'YOUR_DB_PASSWORD_HERE'; // User needs to update this
+$username = 'u110415653_iitk'; // Assuming username is same as dbname
+$password = 'Charan@2004!'; 
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

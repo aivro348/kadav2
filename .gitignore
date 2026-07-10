@@ -13,4 +13,3 @@ backend/rws_borewell.db
 # OS
 .DS_Store
 *.pdf
-php-backend/db.php
