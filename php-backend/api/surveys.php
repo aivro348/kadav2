@@ -82,9 +82,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($data['images']) && is_array($data['images'])) {
             $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, file_path) VALUES (?, ?)");
             
+            // Ensure uploads directory exists
+            $uploadDir = '../uploads/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
             foreach ($data['images'] as $base64) {
-                // Store base64 directly to database to avoid Git auto-deploy wiping local files
-                $imgStmt->execute([$survey_id, $base64]);
+                // Determine extension and decode
+                $ext = 'jpg';
+                if (strpos($base64, ',') !== false) {
+                    list($header, $encoded) = explode(',', $base64);
+                    if (preg_match('/data:image\/(.*?);/', $header, $matches)) {
+                        $ext = $matches[1];
+                    }
+                } else {
+                    $encoded = $base64;
+                }
+                
+                $imgData = base64_decode($encoded);
+                if ($imgData !== false) {
+                    $filename = 'survey_' . $survey_id . '_' . uniqid() . '.' . $ext;
+                    $filepath = $uploadDir . $filename;
+                    
+                    if (file_put_contents($filepath, $imgData)) {
+                        $imgStmt->execute([$survey_id, 'uploads/' . $filename]);
+                    }
+                }
             }
         }
         
