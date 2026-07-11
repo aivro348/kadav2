@@ -110,8 +110,8 @@ export default function NewSurvey() {
         
         // Draw watermark background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        const textHeight = Math.max(40, img.height * 0.05); // dynamic height based on image size
-        ctx.fillRect(0, img.height - textHeight * 2.5, img.width, textHeight * 2.5);
+        const textHeight = Math.max(15, img.height * 0.02); // smaller dynamic height based on image size
+        ctx.fillRect(0, img.height - textHeight * 3, img.width, textHeight * 3);
         
         // Draw text
         ctx.fillStyle = '#ffffff';

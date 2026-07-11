@@ -35,7 +35,7 @@ export default function SurveyList() {
           village: survey.village,
           status: survey.status,
           type: survey.borewell_type,
-          date: survey.created_date ? survey.created_date.split(' ')[0] : 'Unknown'
+          date: survey.created_date ? survey.created_date : 'Unknown'
         }));
         
         setSurveys(formattedSurveys);
