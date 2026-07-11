@@ -80,34 +80,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Process images
         if (isset($data['images']) && is_array($data['images'])) {
-            $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, file_path) VALUES (?, ?)");
-            
-            // Ensure uploads directory exists
-            $uploadDir = '../uploads/';
-            if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
-            }
+            $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, image_data) VALUES (?, ?)");
             
             foreach ($data['images'] as $base64) {
-                // Determine extension and decode
-                $ext = 'jpg';
-                if (strpos($base64, ',') !== false) {
-                    list($header, $encoded) = explode(',', $base64);
-                    if (preg_match('/data:image\/(.*?);/', $header, $matches)) {
-                        $ext = $matches[1];
-                    }
-                } else {
-                    $encoded = $base64;
-                }
-                
-                $imgData = base64_decode($encoded);
-                if ($imgData !== false) {
-                    $filename = 'survey_' . $survey_id . '_' . uniqid() . '.' . $ext;
-                    $filepath = $uploadDir . $filename;
-                    
-                    if (file_put_contents($filepath, $imgData)) {
-                        $imgStmt->execute([$survey_id, 'uploads/' . $filename]);
-                    }
+                // Ensure we have a valid string before inserting
+                if (is_string($base64) && !empty($base64)) {
+                    $imgStmt->execute([$survey_id, $base64]);
                 }
             }
         }
@@ -130,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $survey = $stmt->fetch();
             
             if ($survey) {
-                $imgStmt = $pdo->prepare("SELECT file_path FROM survey_images WHERE survey_id = ?");
+                $imgStmt = $pdo->prepare("SELECT image_data FROM survey_images WHERE survey_id = ?");
                 $imgStmt->execute([$id]);
                 $survey['images'] = $imgStmt->fetchAll(PDO::FETCH_COLUMN);
                 echo json_encode($survey);

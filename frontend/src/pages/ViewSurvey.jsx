@@ -28,7 +28,7 @@ export default function ViewSurvey() {
           status: data.status,
           date: data.created_date ? data.created_date.split(' ')[0] : 'Unknown',
           fullData: data,
-          images: data.images ? data.images.map(img => `${apiUrl}/php-backend/${img}`) : []
+          images: data.images || []
         });
       } catch (error) {
         console.error('Error fetching survey:', error);

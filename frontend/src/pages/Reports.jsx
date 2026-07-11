@@ -1,4 +1,4 @@
-import { Download } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +10,7 @@ import {
   ArcElement
 } from 'chart.js';
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
+import { useState, useEffect } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -22,13 +23,45 @@ ChartJS.register(
 );
 
 export default function Reports() {
-  
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '';
+        const response = await fetch(`${apiUrl}/php-backend/api/analytics.php`);
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+        }
+      } catch (error) {
+        console.error('Failed to fetch analytics:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAnalytics();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className="p-8 text-center text-red-500">Failed to load analytics data</div>;
+  }
+
   const statusData = {
     labels: ['Successful', 'Seasonal', 'Dried'],
     datasets: [
       {
         label: 'Number of Borewells',
-        data: [842, 215, 188],
+        data: [data.status.successful, data.status.seasonal, data.status.dried],
         backgroundColor: [
           'rgba(48, 149, 86, 0.8)', // Success Green
           'rgba(234, 179, 8, 0.8)', // Yellow
@@ -45,11 +78,11 @@ export default function Reports() {
   };
 
   const villageData = {
-    labels: ['Maddipadu', 'Chimakurthy', 'Podili', 'Kanigiri', 'Markapuram', 'Darsi'],
+    labels: data.villages.labels.length > 0 ? data.villages.labels : ['No Data'],
     datasets: [
       {
         label: 'Total Surveys',
-        data: [320, 250, 190, 150, 210, 125],
+        data: data.villages.data.length > 0 ? data.villages.data : [0],
         backgroundColor: 'rgba(35, 143, 198, 0.7)',
         borderColor: 'rgb(35, 143, 198)',
         borderWidth: 1,
@@ -61,7 +94,7 @@ export default function Reports() {
     labels: ['Safe', 'Moderate', 'High TDS/Unsafe'],
     datasets: [
       {
-        data: [65, 25, 10],
+        data: [data.water_quality.safe, data.water_quality.moderate, data.water_quality.unsafe],
         backgroundColor: ['#309556', '#f59e0b', '#ef4444'],
       }
     ]
@@ -98,7 +131,7 @@ export default function Reports() {
         
         {/* Status Breakdown */}
         <div className="card">
-          <h3 className="text-lg font-medium text-slate-800 mb-4 border-b border-slate-100 pb-2">Overall Status</h3>
+          <h3 className="text-lg font-medium text-slate-800 mb-4 border-b border-slate-100 pb-2">Overall Status ({data.status.total} Total)</h3>
           <div className="h-72 flex justify-center">
             <Pie data={statusData} options={{ maintainAspectRatio: false }} />
           </div>
@@ -106,7 +139,7 @@ export default function Reports() {
 
         {/* Village wise surveys */}
         <div className="card">
-          <h3 className="text-lg font-medium text-slate-800 mb-4 border-b border-slate-100 pb-2">Village-wise Surveys</h3>
+          <h3 className="text-lg font-medium text-slate-800 mb-4 border-b border-slate-100 pb-2">Village-wise Surveys (Top 6)</h3>
           <div className="h-72">
             <Bar data={villageData} options={barOptions} />
           </div>
@@ -127,28 +160,28 @@ export default function Reports() {
             <div>
               <div className="flex justify-between text-sm mb-1 text-slate-600">
                 <span>Agriculture</span>
-                <span className="font-medium">78%</span>
+                <span className="font-medium">{data.utilization.agriculture}%</span>
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2">
-                <div className="bg-primary-500 h-2 rounded-full" style={{ width: '78%' }}></div>
+                <div className="bg-primary-500 h-2 rounded-full" style={{ width: `${data.utilization.agriculture}%` }}></div>
               </div>
             </div>
             <div>
               <div className="flex justify-between text-sm mb-1 text-slate-600">
                 <span>Livestock</span>
-                <span className="font-medium">15%</span>
+                <span className="font-medium">{data.utilization.livestock}%</span>
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2">
-                <div className="bg-primary-500 h-2 rounded-full" style={{ width: '15%' }}></div>
+                <div className="bg-primary-500 h-2 rounded-full" style={{ width: `${data.utilization.livestock}%` }}></div>
               </div>
             </div>
             <div>
               <div className="flex justify-between text-sm mb-1 text-slate-600">
                 <span>Domestic</span>
-                <span className="font-medium">7%</span>
+                <span className="font-medium">{data.utilization.domestic}%</span>
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2">
-                <div className="bg-primary-500 h-2 rounded-full" style={{ width: '7%' }}></div>
+                <div className="bg-primary-500 h-2 rounded-full" style={{ width: `${data.utilization.domestic}%` }}></div>
               </div>
             </div>
           </div>
