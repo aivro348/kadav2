@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import { 
   ChevronDown, ArrowRight, Droplet, Sun, Wind, 
   Leaf, Recycle, Target, Activity, Users, MapPin, 
-  Mail, Globe, ShieldCheck
+  Mail, Globe, ShieldCheck, Menu, X
 } from 'lucide-react';
 
 export default function Landing() {
   const [scrolled, setScrolled] = useState(false);
   const [visitorCount, setVisitorCount] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,11 +54,12 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logos */}
-            <div className="flex items-center space-x-4">
-              <img src="/netzero.jpg" alt="NetZero Logo" className="h-12 w-12 object-cover rounded-full shadow-sm border border-slate-200" />
-              <div className="hidden sm:block border-l-2 border-slate-300 h-8 mx-4"></div>
-              <div className="flex items-center text-primary-800 hidden sm:flex">
-                <span className="font-bold text-lg tracking-tight">Kuppam Area Development Authority</span>
+            <div className="flex items-center">
+              <img src="/netzero.jpg" alt="NetZero Logo" className="h-10 w-10 sm:h-12 sm:w-12 object-cover rounded-full shadow-sm border border-slate-200" />
+              <div className="border-l-2 border-slate-300 h-6 sm:h-8 mx-3 sm:mx-4"></div>
+              <div className="flex items-center text-primary-800">
+                <span className="font-bold text-base sm:text-lg tracking-tight hidden sm:block">Kuppam Area Development Authority</span>
+                <span className="font-bold text-lg tracking-tight sm:hidden">KADA</span>
               </div>
             </div>
 
@@ -71,13 +73,30 @@ export default function Landing() {
             </div>
 
             {/* Right Side */}
-            <div className="flex items-center space-x-6">
-              <Link to="/login" className="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full font-medium transition-colors shadow-sm">
+            <div className="flex items-center space-x-4">
+              <Link to="/login" className="bg-amber-600 hover:bg-amber-700 text-white px-4 sm:px-6 py-2 rounded-full font-medium transition-colors shadow-sm text-sm sm:text-base">
                 Login
               </Link>
+              <button 
+                className="md:hidden p-2 text-slate-800 focus:outline-none"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-slate-200 shadow-lg absolute top-full left-0 w-full py-4 px-4 flex flex-col space-y-4">
+            <button onClick={() => { scrollToSection('hero-section'); setMobileMenuOpen(false); }} className="text-left text-slate-800 font-semibold text-lg">Home</button>
+            <button onClick={() => { scrollToSection('vision-section'); setMobileMenuOpen(false); }} className="text-left text-slate-800 font-semibold text-lg">Vision</button>
+            <button onClick={() => { scrollToSection('pillars-section'); setMobileMenuOpen(false); }} className="text-left text-slate-800 font-semibold text-lg">Pillars</button>
+            <button onClick={() => { scrollToSection('verticals-section'); setMobileMenuOpen(false); }} className="text-left text-slate-800 font-semibold text-lg">NetZero Verticals</button>
+            <button onClick={() => { scrollToSection('impact-section'); setMobileMenuOpen(false); }} className="text-left text-slate-800 font-semibold text-lg">Impact</button>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
