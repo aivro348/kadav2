@@ -207,7 +207,7 @@ export default function NewSurvey() {
       
     } catch (error) {
       console.error('Error submitting survey:', error);
-      alert('Server Error: ' + error.message);
+      alert('The server is currently very busy. Please wait 1 minute and try clicking Submit again.\n\nTechnical Details: ' + error.message);
       setIsSubmitted(false);
       return;
     }
