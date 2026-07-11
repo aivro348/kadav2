@@ -190,7 +190,14 @@ export default function NewSurvey() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save survey to database');
+        let errorMsg = 'Failed to save survey to database';
+        try {
+          const errData = await response.json();
+          if (errData.error) errorMsg = errData.error;
+        } catch (e) {
+          // ignore JSON parse error
+        }
+        throw new Error(errorMsg);
       }
 
       const result = await response.json();
@@ -200,7 +207,7 @@ export default function NewSurvey() {
       
     } catch (error) {
       console.error('Error submitting survey:', error);
-      alert('Error connecting to database. Please try again.');
+      alert('Server Error: ' + error.message);
       setIsSubmitted(false);
       return;
     }
