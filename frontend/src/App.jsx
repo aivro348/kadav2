@@ -16,10 +16,14 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(username)) {
-    if (username === 'admin') return <Navigate to="/admin/dashboard" replace />;
-    if (username === 'iitk') return <Navigate to="/surveyor" replace />;
-    return <Navigate to="/login" replace />;
+  if (allowedRoles) {
+    const isAllowed = allowedRoles.includes(username) || (allowedRoles.includes('surveyor') && username.startsWith('iitk'));
+    
+    if (!isAllowed) {
+      if (username === 'admin') return <Navigate to="/admin/dashboard" replace />;
+      if (username.startsWith('iitk')) return <Navigate to="/surveyor" replace />;
+      return <Navigate to="/login" replace />;
+    }
   }
 
   return children;
@@ -47,7 +51,7 @@ function App() {
 
         {/* Surveyor Routes */}
         <Route path="/surveyor" element={
-          <ProtectedRoute allowedRoles={['admin', 'iitk']}>
+          <ProtectedRoute allowedRoles={['admin', 'surveyor']}>
             <SurveyorLayout />
           </ProtectedRoute>
         }>

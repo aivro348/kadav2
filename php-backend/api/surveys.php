@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $val('dependent_families'),
             $val('dependent_animals'),
             $val('agri_land_area'),
-            ($data['created_by'] === 'admin' ? 1 : 2) // Map username string to INT
+            $data['created_by'] // Now a string directly from frontend
         ]);
         
         $survey_id = $pdo->lastInsertId();
@@ -145,9 +145,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user === 'admin') {
                 $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
             } else {
-                // If not admin (e.g. surveyor), only show their own surveys (ID 2)
-                $stmt = $pdo->prepare("SELECT * FROM surveys WHERE created_by = 2 ORDER BY created_date DESC LIMIT 100");
-                $stmt->execute();
+                // If not admin, only show their own surveys based on their username string
+                $stmt = $pdo->prepare("SELECT * FROM surveys WHERE created_by = ? ORDER BY created_date DESC LIMIT 100");
+                $stmt->execute([$user]);
             }
             
             $surveys = $stmt->fetchAll();
