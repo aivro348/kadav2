@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [surveys, setSurveys] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const username = localStorage.getItem('rws_username') || 'surveyor';
+  const username = sessionStorage.getItem('rws_username') || 'surveyor';
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
 

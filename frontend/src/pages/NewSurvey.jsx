@@ -164,7 +164,7 @@ export default function NewSurvey() {
     const mandalObj = locationsData.mandals.find(m => m.id === data.mandal);
     
     // Get logged in user
-    const username = localStorage.getItem('rws_username') || 'surveyor';
+    const username = sessionStorage.getItem('rws_username') || 'surveyor';
 
     const payload = {
       ...data,

@@ -10,7 +10,7 @@ import Reports from './pages/Reports';
 import Landing from './pages/Landing';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const username = localStorage.getItem('rws_username');
+  const username = sessionStorage.getItem('rws_username');
   
   if (!username) {
     return <Navigate to="/login" replace />;

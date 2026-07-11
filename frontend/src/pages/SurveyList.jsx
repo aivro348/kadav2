@@ -12,7 +12,7 @@ export default function SurveyList() {
   const [surveys, setSurveys] = useState([]);
   const [filteredSurveys, setFilteredSurveys] = useState([]);
 
-  const username = localStorage.getItem('rws_username') || 'surveyor';
+  const username = sessionStorage.getItem('rws_username') || 'surveyor';
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
 

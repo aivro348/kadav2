@@ -15,10 +15,10 @@ export default function Login() {
       const lowerUsername = username.toLowerCase();
       
       if (lowerUsername === 'admin' && password === 'admin') {
-        localStorage.setItem('rws_username', lowerUsername);
+        sessionStorage.setItem('rws_username', lowerUsername);
         navigate('/admin/dashboard');
       } else if (lowerUsername === 'iitk' && password === 'iitk') {
-        localStorage.setItem('rws_username', lowerUsername);
+        sessionStorage.setItem('rws_username', lowerUsername);
         navigate('/surveyor');
       } else {
         setError('Invalid username or password');
