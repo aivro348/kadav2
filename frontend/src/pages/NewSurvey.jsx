@@ -110,7 +110,7 @@ export default function NewSurvey() {
         
         // Draw watermark background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        const textHeight = Math.max(15, img.height * 0.02); // smaller dynamic height based on image size
+        const textHeight = Math.max(20, img.height * 0.025); // optimized size based on feedback
         ctx.fillRect(0, img.height - textHeight * 3, img.width, textHeight * 3);
         
         // Draw text
@@ -119,10 +119,10 @@ export default function NewSurvey() {
         ctx.textAlign = 'left';
         
         const padding = textHeight * 0.5;
-        const dateStr = new Date().toLocaleString();
+        const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
         
-        ctx.fillText(`Lat: ${latitude}, Lng: ${longitude}`, padding, img.height - textHeight * 1.2);
-        ctx.fillText(`Date: ${dateStr}`, padding, img.height - padding);
+        ctx.fillText(`Lat: ${latitude}, Lng: ${longitude}`, padding, img.height - textHeight * 1.5);
+        ctx.fillText(`Time: ${dateStr}`, padding, img.height - padding);
         
         resolve(canvas.toDataURL('image/jpeg', 0.8));
       };
@@ -561,13 +561,10 @@ export default function NewSurvey() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md bg-slate-50">
                   <div className="space-y-1 text-center w-full">
                     <Camera className="mx-auto h-12 w-12 text-slate-400" />
-                    <div className="flex flex-col sm:flex-row gap-2 text-sm text-slate-600 justify-center mt-2">
-                      <label htmlFor="file-upload" className="btn-secondary relative cursor-pointer flex-1">
-                        <span>{t('survey.upload_files')}</span>
-                        <input id="file-upload" name="file-upload" type="file" multiple accept="image/*" className="sr-only" onChange={handleImageUpload} />
-                      </label>
-                      <label htmlFor="camera-capture" className="btn-primary relative cursor-pointer flex-1 bg-primary-600 text-white hover:bg-primary-700">
-                        <span>Capture Photo</span>
+                    <div className="flex flex-col sm:flex-row gap-2 text-sm text-slate-600 justify-center mt-2 w-full max-w-xs mx-auto">
+                      <label htmlFor="camera-capture" className="btn-primary relative cursor-pointer flex-1 bg-primary-600 text-white hover:bg-primary-700 w-full text-center flex items-center justify-center py-3">
+                        <Camera className="mr-2 h-5 w-5" />
+                        <span>Live Capture</span>
                         <input id="camera-capture" name="camera-capture" type="file" accept="image/*" capture="environment" className="sr-only" onChange={handleImageUpload} />
                       </label>
                     </div>
