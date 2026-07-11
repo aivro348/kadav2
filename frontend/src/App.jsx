@@ -9,6 +9,22 @@ import ViewSurvey from './pages/ViewSurvey';
 import Reports from './pages/Reports';
 import Landing from './pages/Landing';
 
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const username = localStorage.getItem('rws_username');
+  
+  if (!username) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(username)) {
+    if (username === 'admin') return <Navigate to="/admin/dashboard" replace />;
+    if (username === 'iitk') return <Navigate to="/surveyor" replace />;
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +33,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <AdminLayout />
+          </ProtectedRoute>
+        }>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="surveys" element={<SurveyList />} />
@@ -26,7 +46,11 @@ function App() {
         </Route>
 
         {/* Surveyor Routes */}
-        <Route path="/surveyor" element={<SurveyorLayout />}>
+        <Route path="/surveyor" element={
+          <ProtectedRoute allowedRoles={['admin', 'iitk']}>
+            <SurveyorLayout />
+          </ProtectedRoute>
+        }>
           <Route index element={<Dashboard />} />
           <Route path="surveys" element={<SurveyList />} />
           <Route path="new" element={<NewSurvey />} />
