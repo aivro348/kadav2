@@ -173,6 +173,16 @@ export default function NewSurvey() {
       mandal: mandalObj ? mandalObj.name : data.mandal,
       borewell_type: Array.isArray(data.borewell_type) ? data.borewell_type.join(', ') : data.borewell_type,
       supply_nature: Array.isArray(data.supply_nature) ? data.supply_nature.join(', ') : data.supply_nature,
+      crop_category: Array.isArray(data.crop_category) ? data.crop_category.join(', ') : data.crop_category,
+      crop_names: (() => {
+        let crops = Array.isArray(data.crop_names) ? [...data.crop_names] : (data.crop_names ? [data.crop_names] : []);
+        if (crops.includes('others') && data.crop_names_other) {
+          // Replace 'others' with the manual input or just append it
+          crops = crops.filter(c => c !== 'others');
+          crops.push(`Others (${data.crop_names_other})`);
+        }
+        return crops.join(', ');
+      })(),
       created_by: username,
       images: images
     };
@@ -450,11 +460,11 @@ export default function NewSurvey() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="label-text">{t('survey.drilled_year')}</label>
-                  <input type="number" min="1900" max={new Date().getFullYear()} className="input-field" {...register('drilled_year')} />
+                  <input type="text" maxLength="4" pattern="\d{4}" className="input-field" {...register('drilled_year')} onInput={(e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); }} />
                 </div>
                 <div>
                   <label className="label-text">{t('survey.dried_year')}</label>
-                  <input type="number" min="1900" max={new Date().getFullYear()} className="input-field" {...register('dried_year')} />
+                  <input type="text" maxLength="4" pattern="\d{4}" className="input-field" {...register('dried_year')} onInput={(e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); }} />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="label-text text-slate-700">{t('survey.dried_months')}</label>
@@ -471,19 +481,32 @@ export default function NewSurvey() {
               <div>
                 <label className="label-text">{t('survey.crop_category')}</label>
                 <div className="flex space-x-4 mt-2">
-                  <label className="inline-flex items-center">
-                    <input type="radio" value="Agriculture" {...register('crop_category')} className="text-primary-600 focus:ring-primary-500 h-4 w-4" />
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="Agriculture" {...register('crop_category')} className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded" />
                     <span className="ml-2 text-slate-700">Agriculture</span>
                   </label>
-                  <label className="inline-flex items-center">
-                    <input type="radio" value="Horticulture" {...register('crop_category')} className="text-primary-600 focus:ring-primary-500 h-4 w-4" />
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="Horticulture" {...register('crop_category')} className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded" />
                     <span className="ml-2 text-slate-700">Horticulture</span>
                   </label>
                 </div>
               </div>
               <div>
-                <label className="label-text">{t('survey.crop_names')}</label>
-                <input type="text" className="input-field" {...register('crop_names')} />
+                <label className="label-text mb-3 block">{t('survey.crop_names')}</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {['Paddy', 'maize', 'grasses', 'millets', 'groundnuts', 'vegetables', 'fruits', 'flowers', 'mango', 'coconut', 'mulberry', 'no crop', 'others'].map(crop => (
+                    <label key={crop} className="inline-flex items-center cursor-pointer hover:bg-slate-50 p-2 border border-slate-200 rounded-md">
+                      <input type="checkbox" value={crop} {...register('crop_names')} className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-slate-300" />
+                      <span className="ml-2 text-sm text-slate-700 capitalize">{crop}</span>
+                    </label>
+                  ))}
+                </div>
+                {watch('crop_names') && Array.isArray(watch('crop_names')) && watch('crop_names').includes('others') && (
+                  <div className="mt-3 animate-in fade-in slide-in-from-top-2">
+                    <label className="label-text text-sm text-slate-500">Please specify 'others':</label>
+                    <input type="text" placeholder="Enter crop name manually" className="input-field mt-1" {...register('crop_names_other')} />
+                  </div>
+                )}
               </div>
               <div>
                 <label className="label-text">{t('survey.dependent_families')}</label>
