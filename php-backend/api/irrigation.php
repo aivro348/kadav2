@@ -30,8 +30,32 @@ if ($method === 'POST') {
         exit;
     }
     
+    // Helper function to save base64 image to file
+    function saveBase64Image($base64String, $prefix, $surveyType) {
+        if (!$base64String) return null;
+        $uploadDir = '../uploads/' . $surveyType . '/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $parts = explode(',', $base64String);
+        if (count($parts) !== 2) return null;
+        $data = base64_decode($parts[1]);
+        if ($data === false) return null;
+        $fileName = $prefix . '_' . uniqid() . '.jpg';
+        $filePath = $uploadDir . $fileName;
+        if (file_put_contents($filePath, $data)) {
+            return $fileName;
+        }
+        return null;
+    }
+
     try {
         $pdo->beginTransaction();
+
+        $photo_east = saveBase64Image($data['photo_east'] ?? null, 'east', $type);
+        $photo_west = saveBase64Image($data['photo_west'] ?? null, 'west', $type);
+        $photo_north = saveBase64Image($data['photo_north'] ?? null, 'north', $type);
+        $photo_south = saveBase64Image($data['photo_south'] ?? null, 'south', $type);
 
         $stmt = $pdo->prepare("INSERT INTO $mainTable (surveyor_id, village, mandal, panchayat, total_length, total_width, gps_lat, gps_lng, gps_accuracy, photo_east, photo_west, photo_north, photo_south) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
@@ -45,10 +69,10 @@ if ($method === 'POST') {
             $data['gps_lat'] ?? null,
             $data['gps_lng'] ?? null,
             $data['gps_accuracy'] ?? null,
-            $data['photo_east'] ?? null,
-            $data['photo_west'] ?? null,
-            $data['photo_north'] ?? null,
-            $data['photo_south'] ?? null
+            $photo_east,
+            $photo_west,
+            $photo_north,
+            $photo_south
         ]);
         
         $survey_id = $pdo->lastInsertId();
@@ -56,13 +80,15 @@ if ($method === 'POST') {
         if (isset($data['points']) && is_array($data['points'])) {
             $ptStmt = $pdo->prepare("INSERT INTO $pointsTable (survey_id, point_number, latitude, longitude, point_value, photo) VALUES (?, ?, ?, ?, ?, ?)");
             foreach ($data['points'] as $index => $point) {
+                // Points don't have photos anymore, but just in case
+                $ptPhoto = saveBase64Image($point['photo'] ?? null, 'point' . ($index + 1), $type);
                 $ptStmt->execute([
                     $survey_id,
                     $index + 1,
                     $point['latitude'] ?? null,
                     $point['longitude'] ?? null,
                     $point['point_value'] ?? null,
-                    $point['photo'] ?? null
+                    $ptPhoto
                 ]);
             }
         }
