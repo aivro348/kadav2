@@ -220,14 +220,24 @@ export default function NewIrrigationSurvey({ surveyType }) {
         body: JSON.stringify(payload)
       });
       
-      const result = await response.json();
-      if (result.success) {
-        navigate('/surveyor/surveys');
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Server returned non-JSON response:', responseText);
+        throw new Error('Server returned an unexpected error format. Please verify server setup or try again.');
+      }
+
+      if (response.ok && result.success) {
+        // Redirect to appropriate survey list based on role
+        const targetPath = `${basePath}/surveys-${surveyType}`;
+        navigate(targetPath);
       } else {
-        throw new Error(result.error || "Submission failed");
+        throw new Error(result.error || "Submission failed. Please check your data and click Submit to retry.");
       }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "An unexpected error occurred during submission.");
     } finally {
       setLoading(false);
     }
@@ -268,9 +278,21 @@ export default function NewIrrigationSurvey({ surveyType }) {
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-start">
-          <AlertTriangle className="text-red-500 mr-3 mt-0.5" size={20} />
-          <p className="text-red-700">{error}</p>
+        <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
+          <div className="flex items-start">
+            <AlertTriangle className="text-red-500 mr-3 mt-0.5 flex-shrink-0" size={20} />
+            <div>
+              <p className="text-sm font-semibold text-red-800">Submission Error</p>
+              <p className="text-sm text-red-700">{error}</p>
+            </div>
+          </div>
+          <button 
+            type="button" 
+            onClick={() => setError(null)}
+            className="self-end sm:self-center px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-800 rounded text-xs font-semibold transition-colors flex-shrink-0"
+          >
+            Dismiss & Retry
+          </button>
         </div>
       )}
 

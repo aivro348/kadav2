@@ -22,31 +22,32 @@ if ($type !== 'hnss' && $type !== 'palar') {
 $mainTable = $type === 'hnss' ? 'survey_hnss' : 'survey_palar';
 $pointsTable = $type === 'hnss' ? 'survey_hnss_points' : 'survey_palar_points';
 
+// Helper function to save base64 image to file
+function saveBase64Image($base64String, $prefix, $uploadDir, $surveyFolder) {
+    if (!$base64String) return null;
+    $parts = explode(',', $base64String);
+    if (count($parts) !== 2) return null;
+    $data = base64_decode($parts[1]);
+    if ($data === false) return null;
+    
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+    
+    $fileName = $prefix . '_' . uniqid() . '.jpg';
+    $filePath = $uploadDir . $fileName;
+    if (file_put_contents($filePath, $data)) {
+        return $surveyFolder . '/' . $fileName;
+    }
+    return null;
+}
+
 if ($method === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     
     if (!$data) {
         echo json_encode(["error" => "Invalid JSON input"]);
         exit;
-    }
-    
-    // Helper function to save base64 image to file
-    function saveBase64Image($base64String, $prefix, $surveyType) {
-        if (!$base64String) return null;
-        $uploadDir = '../uploads/' . $surveyType . '/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        $parts = explode(',', $base64String);
-        if (count($parts) !== 2) return null;
-        $data = base64_decode($parts[1]);
-        if ($data === false) return null;
-        $fileName = $prefix . '_' . uniqid() . '.jpg';
-        $filePath = $uploadDir . $fileName;
-        if (file_put_contents($filePath, $data)) {
-            return $fileName;
-        }
-        return null;
     }
 
     try {
@@ -72,24 +73,6 @@ if ($method === 'POST') {
         // 2. Create dedicated folder per survey (e.g. uploads/hnss/survey_15/ or uploads/palar/survey_8/)
         $surveyFolder = 'survey_' . $survey_id;
         $uploadDir = '../uploads/' . $type . '/' . $surveyFolder . '/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
-        // Helper function to save base64 image into the dedicated survey folder
-        function saveBase64Image($base64String, $prefix, $uploadDir, $surveyFolder) {
-            if (!$base64String) return null;
-            $parts = explode(',', $base64String);
-            if (count($parts) !== 2) return null;
-            $data = base64_decode($parts[1]);
-            if ($data === false) return null;
-            $fileName = $prefix . '_' . uniqid() . '.jpg';
-            $filePath = $uploadDir . $fileName;
-            if (file_put_contents($filePath, $data)) {
-                return $surveyFolder . '/' . $fileName;
-            }
-            return null;
-        }
 
         $photo_east = saveBase64Image($data['photo_east'] ?? null, 'east', $uploadDir, $surveyFolder);
         $photo_west = saveBase64Image($data['photo_west'] ?? null, 'west', $uploadDir, $surveyFolder);
