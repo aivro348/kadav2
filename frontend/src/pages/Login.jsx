@@ -16,10 +16,10 @@ export default function Login() {
       
       if (lowerUsername === 'admin' && password === 'admin') {
         sessionStorage.setItem('rws_username', lowerUsername);
-        navigate('/admin/dashboard');
+        navigate('/select-survey');
       } else if (lowerUsername.match(/^iitk([1-9]|[1-9][0-9]|100)$/) && password === lowerUsername) {
         sessionStorage.setItem('rws_username', lowerUsername);
-        navigate('/surveyor');
+        navigate('/select-survey');
       } else {
         setError('Invalid username or password');
       }

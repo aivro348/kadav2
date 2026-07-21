@@ -13,6 +13,7 @@ import Landing from './pages/Landing';
 import IrrigationDashboard from './pages/IrrigationDashboard';
 import IrrigationSurveyList from './pages/IrrigationSurveyList';
 import ViewIrrigationSurvey from './pages/ViewIrrigationSurvey';
+import SurveySelection from './pages/SurveySelection';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const username = sessionStorage.getItem('rws_username');
@@ -41,6 +42,12 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         
+        <Route path="/select-survey" element={
+          <ProtectedRoute allowedRoles={['admin', 'surveyor']}>
+            <SurveySelection />
+          </ProtectedRoute>
+        } />
+
         {/* Admin Routes */}
         <Route path="/admin" element={
           <ProtectedRoute allowedRoles={['admin']}>
