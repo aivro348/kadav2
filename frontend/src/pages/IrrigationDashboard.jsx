@@ -19,7 +19,12 @@ export default function IrrigationDashboard({ surveyType }) {
         const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&user=${username}`);
         if (response.ok) {
           const data = await response.json();
-          setSurveys(data);
+          if (Array.isArray(data)) {
+            setSurveys(data);
+          } else {
+            console.error('API returned non-array data:', data);
+            setSurveys([]);
+          }
         }
       } catch (error) {
         console.error('Error fetching surveys:', error);

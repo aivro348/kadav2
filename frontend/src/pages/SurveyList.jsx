@@ -28,6 +28,13 @@ export default function SurveyList() {
         
         const data = await response.json();
         
+        if (!Array.isArray(data)) {
+          console.error('API returned non-array data:', data);
+          setSurveys([]);
+          setFilteredSurveys([]);
+          return;
+        }
+        
         // Map the backend data to match the frontend table format
         const formattedSurveys = data.map(survey => ({
           id: survey.survey_id,

@@ -28,7 +28,11 @@ export default function Dashboard() {
         const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
         if (response.ok) {
           const data = await response.json();
-          setSurveys(data);
+          if (Array.isArray(data)) {
+            setSurveys(data);
+          } else {
+            console.error('API returned non-array data:', data);
+          }
         }
       } catch (error) {
         console.error('Error fetching surveys:', error);

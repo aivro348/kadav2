@@ -27,8 +27,14 @@ export default function IrrigationSurveyList({ surveyType }) {
         }
         
         const data = await response.json();
-        setSurveys(data);
-        setFilteredSurveys(data);
+        if (Array.isArray(data)) {
+          setSurveys(data);
+          setFilteredSurveys(data);
+        } else {
+          console.error('API returned non-array data:', data);
+          setSurveys([]);
+          setFilteredSurveys([]);
+        }
       } catch (error) {
         console.error('Error fetching surveys:', error);
         setSurveys([]);
