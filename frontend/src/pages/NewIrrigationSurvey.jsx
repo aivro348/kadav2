@@ -76,26 +76,65 @@ export default function NewIrrigationSurvey({ surveyType }) {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (e) => {
+  const watermarkImage = (file, latitude, longitude) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        
+        // Draw original image
+        ctx.drawImage(img, 0, 0);
+        
+        // Draw watermark background
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        const textHeight = Math.max(20, img.height * 0.025);
+        ctx.fillRect(0, img.height - textHeight * 3, img.width, textHeight * 3);
+        
+        // Draw text
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `${textHeight}px sans-serif`;
+        ctx.textAlign = 'left';
+        
+        const padding = textHeight * 0.5;
+        const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+        
+        // If GPS isn't captured yet, show a fallback
+        const latText = latitude ? latitude.toFixed(5) : 'Unknown';
+        const lngText = longitude ? longitude.toFixed(5) : 'Unknown';
+        
+        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, img.height - textHeight * 1.5);
+        ctx.fillText(`Time: ${dateStr}`, padding, img.height - padding);
+        
+        resolve(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result;
-      
-      if (activePointId) {
-        setPoints(points.map(p => {
-          if (p.id === activePointId) {
-            return { ...p, photo: base64String };
-          }
-          return p;
-        }));
-      } else if (activePhotoSlot) {
-        setPhotos({ ...photos, [activePhotoSlot]: base64String });
-      }
-    };
-    reader.readAsDataURL(file);
+    // Use location if available
+    const lat = location.lat;
+    const lng = location.lng;
+    
+    // Apply Watermark
+    const base64String = await watermarkImage(file, lat, lng);
+    
+    if (activePointId) {
+      setPoints(points.map(p => {
+        if (p.id === activePointId) {
+          return { ...p, photo: base64String };
+        }
+        return p;
+      }));
+    } else if (activePhotoSlot) {
+      setPhotos({ ...photos, [activePhotoSlot]: base64String });
+    }
   };
 
   const addPoint = () => {
