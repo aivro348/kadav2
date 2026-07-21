@@ -158,5 +158,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(500);
         echo json_encode(["error" => "Failed to fetch surveys: " . $e->getMessage()]);
     }
+} else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    if (!$id) {
+        echo json_encode(["error" => "Survey ID is required for deletion"]);
+        exit;
+    }
+
+    try {
+        // Fetch survey_images to clean up physical image upload files
+        $imgStmt = $pdo->prepare("SELECT file_path FROM survey_images WHERE survey_id = ?");
+        $imgStmt->execute([$id]);
+        $images = $imgStmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($images as $img) {
+            $filePath = '../' . $img['file_path'];
+            if (file_exists($filePath)) {
+                @unlink($filePath);
+            }
+        }
+
+        // Delete survey folder if empty
+        $surveyFolder = '../uploads/borewell/survey_' . $id;
+        if (file_exists($surveyFolder) && is_dir($surveyFolder)) {
+            @rmdir($surveyFolder);
+        }
+
+        // Delete survey from main table in MySQL database
+        $delStmt = $pdo->prepare("DELETE FROM surveys WHERE survey_id = ?");
+        $delStmt->execute([$id]);
+
+        // Clean up survey_images records
+        $delImgStmt = $pdo->prepare("DELETE FROM survey_images WHERE survey_id = ?");
+        $delImgStmt->execute([$id]);
+
+        echo json_encode(["success" => true, "message" => "Borewell survey deleted successfully from phpMyAdmin database"]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["error" => "Failed to delete survey: " . $e->getMessage()]);
+    }
 }
 ?>

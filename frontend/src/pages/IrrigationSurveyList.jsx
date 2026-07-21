@@ -45,6 +45,27 @@ export default function IrrigationSurveyList({ surveyType }) {
     fetchSurveys();
   }, [surveyType, username, apiUrl]);
 
+  const handleDelete = async (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm(`Are you sure you want to delete survey #${id}? This will permanently remove it from the phpMyAdmin database.`)) {
+      return;
+    }
+    try {
+      const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&id=${id}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSurveys(prev => prev.filter(s => s.id !== id));
+      } else {
+        alert(data.error || "Failed to delete survey.");
+      }
+    } catch (err) {
+      alert("Error deleting survey: " + err.message);
+    }
+  };
+
   useEffect(() => {
     let filtered = surveys;
     if (searchTerm) {
@@ -129,6 +150,15 @@ export default function IrrigationSurveyList({ surveyType }) {
                     <Link to={`${basePath}/survey/${survey.id}?type=${surveyType}`} className="text-slate-400 hover:text-primary-600 inline-flex" title="View">
                       <Eye size={18} />
                     </Link>
+                    {isAdmin && (
+                      <button 
+                        onClick={(e) => handleDelete(survey.id, e)} 
+                        className="text-slate-400 hover:text-red-600 inline-flex transition-colors" 
+                        title="Delete Survey"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}

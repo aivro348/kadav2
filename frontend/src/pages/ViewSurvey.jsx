@@ -1,9 +1,10 @@
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, MapPin, Droplet, Clock, Info, Image as ImageIcon, Printer, Edit, Trash2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function ViewSurvey() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
   const isSurveyor = location.pathname.startsWith('/surveyor');
 
@@ -11,6 +12,25 @@ export default function ViewSurvey() {
   const [loading, setLoading] = useState(true);
 
   const apiUrl = import.meta.env.VITE_API_URL || '';
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this Borewell Survey? This will permanently remove it from the phpMyAdmin database.")) {
+      return;
+    }
+    try {
+      const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?id=${id}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      if (data.success) {
+        navigate(isSurveyor ? '/surveyor/surveys' : '/admin/surveys');
+      } else {
+        alert(data.error || "Failed to delete survey.");
+      }
+    } catch (err) {
+      alert("Error deleting survey: " + err.message);
+    }
+  };
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -98,7 +118,10 @@ export default function ViewSurvey() {
               <button className="btn-primary flex items-center bg-blue-600 hover:bg-blue-700 shadow-sm">
                 <Edit size={16} className="mr-2" /> Edit
               </button>
-              <button className="btn-secondary flex items-center text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200 shadow-sm">
+              <button 
+                onClick={handleDelete}
+                className="btn-secondary flex items-center text-red-600 hover:bg-red-50 hover:text-red-700 border-red-200 shadow-sm"
+              >
                 <Trash2 size={16} className="mr-2" /> Delete
               </button>
             </>

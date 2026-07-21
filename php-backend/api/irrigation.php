@@ -131,5 +131,45 @@ if ($method === 'POST') {
     } catch (Exception $e) {
         echo json_encode(["error" => $e->getMessage()]);
     }
+} elseif ($method === 'DELETE') {
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    if (!$id) {
+        echo json_encode(["error" => "Survey ID is required for deletion"]);
+        exit;
+    }
+
+    try {
+        // Fetch survey record to get uploaded photo filenames for file cleanup
+        $stmt = $pdo->prepare("SELECT photo_east, photo_west, photo_north, photo_south FROM $mainTable WHERE id = ?");
+        $stmt->execute([$id]);
+        $survey = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($survey) {
+            $uploadDir = '../uploads/' . $type . '/';
+            $photos = ['photo_east', 'photo_west', 'photo_north', 'photo_south'];
+            foreach ($photos as $p) {
+                if (!empty($survey[$p])) {
+                    $filePath = $uploadDir . $survey[$p];
+                    if (file_exists($filePath)) {
+                        @unlink($filePath);
+                    }
+                }
+            }
+            // Remove per-survey dedicated folder if empty
+            $surveyFolder = $uploadDir . 'survey_' . $id;
+            if (file_exists($surveyFolder) && is_dir($surveyFolder)) {
+                @rmdir($surveyFolder);
+            }
+        }
+
+        // Delete main record from MySQL phpMyAdmin database (points cascade automatically)
+        $delStmt = $pdo->prepare("DELETE FROM $mainTable WHERE id = ?");
+        $delStmt->execute([$id]);
+
+        echo json_encode(["success" => true, "message" => "Survey deleted successfully from phpMyAdmin database"]);
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["error" => "Failed to delete survey: " . $e->getMessage()]);
+    }
 }
 ?>

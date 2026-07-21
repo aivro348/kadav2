@@ -57,6 +57,28 @@ export default function SurveyList() {
 
     fetchSurveys();
   }, []);
+  const handleDelete = async (id, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!window.confirm(`Are you sure you want to delete Borewell Survey #${id}? This will permanently remove it from the phpMyAdmin database.`)) {
+      return;
+    }
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?id=${id}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSurveys(prev => prev.filter(s => s.id !== id));
+      } else {
+        alert(data.error || "Failed to delete survey.");
+      }
+    } catch (err) {
+      alert("Error deleting survey: " + err.message);
+    }
+  };
+
   useEffect(() => {
     // Filter logic
     let filtered = surveys;
@@ -158,10 +180,11 @@ export default function SurveyList() {
                     </Link>
                     {!isSurveyor && (
                       <>
-                        <button className="text-slate-400 hover:text-blue-600 inline-flex" title="Edit">
-                          <Edit size={18} />
-                        </button>
-                        <button className="text-slate-400 hover:text-red-600 inline-flex" title="Delete">
+                        <button 
+                          onClick={(e) => handleDelete(survey.id, e)}
+                          className="text-slate-400 hover:text-red-600 inline-flex transition-colors" 
+                          title="Delete Survey"
+                        >
                           <Trash2 size={18} />
                         </button>
                       </>

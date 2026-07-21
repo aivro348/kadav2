@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, MapPin, Map, Ruler, Camera } from 'lucide-react';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
+import { ArrowLeft, MapPin, Map, Ruler, Camera, Trash2 } from 'lucide-react';
 
 export default function ViewIrrigationSurvey() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const surveyType = searchParams.get('type');
@@ -16,6 +17,25 @@ export default function ViewIrrigationSurvey() {
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
   const apiUrl = import.meta.env.VITE_API_URL || '';
+
+  const handleDelete = async () => {
+    if (!window.confirm(`Are you sure you want to delete this ${surveyTitle}? This will permanently remove it from the phpMyAdmin database.`)) {
+      return;
+    }
+    try {
+      const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&id=${id}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      if (data.success) {
+        navigate(`${basePath}/surveys-${surveyType}`);
+      } else {
+        alert(data.error || "Failed to delete survey.");
+      }
+    } catch (err) {
+      alert("Error deleting survey: " + err.message);
+    }
+  };
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -47,14 +67,25 @@ export default function ViewIrrigationSurvey() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-10">
-      <div className="flex items-center space-x-4 mb-6">
-        <Link to={`${basePath}/surveys-${surveyType}`} className="p-2 rounded-full hover:bg-slate-200 text-slate-600 transition-colors">
-          <ArrowLeft size={20} />
-        </Link>
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">{surveyTitle} #{surveyData.id}</h1>
-          <p className="text-slate-500">Surveyed by {surveyData.surveyor_id} on {new Date(surveyData.created_at).toLocaleString()}</p>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center space-x-4">
+          <Link to={`${basePath}/surveys-${surveyType}`} className="p-2 rounded-full hover:bg-slate-200 text-slate-600 transition-colors">
+            <ArrowLeft size={20} />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">{surveyTitle} #{surveyData.id}</h1>
+            <p className="text-slate-500">Surveyed by {surveyData.surveyor_id} on {new Date(surveyData.created_at).toLocaleString()}</p>
+          </div>
         </div>
+        
+        {isAdmin && (
+          <button 
+            onClick={handleDelete}
+            className="flex items-center px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 rounded-lg text-sm font-semibold transition-colors shadow-sm"
+          >
+            <Trash2 size={16} className="mr-2" /> Delete
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
