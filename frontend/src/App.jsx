@@ -75,6 +75,8 @@ function App() {
         }>
           <Route index element={<SurveyList />} />
           <Route path="surveys" element={<SurveyList />} />
+          <Route path="surveys-hnss" element={<IrrigationSurveyList surveyType="hnss" />} />
+          <Route path="surveys-palar" element={<IrrigationSurveyList surveyType="palar" />} />
           <Route path="new" element={<NewSurvey />} />
           <Route path="new-hnss" element={<NewIrrigationSurvey surveyType="hnss" />} />
           <Route path="new-palar" element={<NewIrrigationSurvey surveyType="palar" />} />

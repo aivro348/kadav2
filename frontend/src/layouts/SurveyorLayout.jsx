@@ -20,11 +20,12 @@ export default function SurveyorLayout() {
   const { t } = useTranslation();
 
   const navigation = [
-    { name: t('nav.dashboard'), href: '/surveyor', icon: LayoutDashboard },
+    { name: 'Borewell Surveys', href: '/surveyor/surveys', icon: FileText },
     { name: 'New Borewell Survey', href: '/surveyor/new', icon: PlusCircle },
+    { name: 'HNSS Surveys', href: '/surveyor/surveys-hnss', icon: FileText },
     { name: 'New HNSS Survey', href: '/surveyor/new-hnss', icon: Droplet },
+    { name: 'Palar Surveys', href: '/surveyor/surveys-palar', icon: FileText },
     { name: 'New Palar Survey', href: '/surveyor/new-palar', icon: Droplet },
-    { name: t('nav.survey_list'), href: '/surveyor/surveys', icon: FileText },
   ];
 
   return (
