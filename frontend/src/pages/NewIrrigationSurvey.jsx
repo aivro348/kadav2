@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, Camera, Save, Plus, X, AlertTriangle, Compass } from 'lucide-react';
+import { MapPin, Camera, Save, Plus, X, AlertTriangle, Compass, CheckCircle } from 'lucide-react';
 
 export default function NewIrrigationSurvey({ surveyType }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [gpsError, setGpsError] = useState(null);
 
@@ -233,9 +234,11 @@ export default function NewIrrigationSurvey({ surveyType }) {
       }
 
       if (response.ok && result.success) {
-        // Redirect to appropriate survey list based on role
-        const targetPath = `${basePath}/surveys-${surveyType}`;
-        navigate(targetPath);
+        setIsSubmitted(true);
+        setTimeout(() => {
+          const targetPath = `${basePath}/surveys-${surveyType}`;
+          navigate(targetPath);
+        }, 2500);
       } else {
         throw new Error(result.error || "Submission failed. Please check your data and click Submit to retry.");
       }
@@ -245,6 +248,25 @@ export default function NewIrrigationSurvey({ surveyType }) {
       setLoading(false);
     }
   };
+
+  if (isSubmitted) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center animate-in fade-in zoom-in duration-500">
+        <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-emerald-200">
+          <CheckCircle className="w-12 h-12 text-emerald-600" />
+        </div>
+        <h2 className="text-3xl font-extrabold text-slate-900 mb-2">Submitted Successfully!</h2>
+        <p className="text-slate-600 text-lg text-center max-w-md">
+          {surveyTitle} data & watermarked photos have been saved to the database.
+        </p>
+        <div className="mt-8 flex space-x-2">
+          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+        </div>
+      </div>
+    );
+  }
 
   const DirectionPhoto = ({ direction, label }) => (
     <div className="flex flex-col items-center">

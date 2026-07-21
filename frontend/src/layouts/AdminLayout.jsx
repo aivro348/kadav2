@@ -11,7 +11,8 @@ import {
   LogOut, 
   Menu, 
   X,
-  Droplet
+  Droplet,
+  Grid
 } from 'lucide-react';
 
 export default function AdminLayout() {
@@ -19,16 +20,26 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const navigation = [
-    { name: 'Borewell Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-    { name: 'Borewell Surveys', href: '/admin/surveys', icon: FileText },
-    { name: 'Borewell Reports', href: '/admin/reports', icon: PieChart },
-    { name: 'HNSS Dashboard', href: '/admin/dashboard-hnss', icon: Droplet },
-    { name: 'HNSS Surveys', href: '/admin/surveys-hnss', icon: FileText },
-    { name: 'Palar Dashboard', href: '/admin/dashboard-palar', icon: Droplet },
-    { name: 'Palar Surveys', href: '/admin/surveys-palar', icon: FileText },
-    { name: t('nav.users'), href: '#', icon: Users },
-  ];
+  const activeModule = sessionStorage.getItem('rws_active_module') || 'borewell';
+
+  let navigation = [];
+  if (activeModule === 'hnss') {
+    navigation = [
+      { name: 'HNSS Dashboard', href: '/admin/dashboard-hnss', icon: LayoutDashboard },
+      { name: 'HNSS Surveys', href: '/admin/surveys-hnss', icon: FileText },
+    ];
+  } else if (activeModule === 'palar') {
+    navigation = [
+      { name: 'Palar Dashboard', href: '/admin/dashboard-palar', icon: LayoutDashboard },
+      { name: 'Palar Surveys', href: '/admin/surveys-palar', icon: FileText },
+    ];
+  } else {
+    navigation = [
+      { name: 'Borewell Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+      { name: 'Borewell Surveys', href: '/admin/surveys', icon: FileText },
+      { name: 'Borewell Reports', href: '/admin/reports', icon: PieChart },
+    ];
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
@@ -57,6 +68,9 @@ export default function AdminLayout() {
         </div>
 
         <nav className="p-4 space-y-1">
+          <div className="px-3 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+            {activeModule.toUpperCase()} Module
+          </div>
           {navigation.map((item) => (
             <NavLink
               key={item.href + item.name}
@@ -64,7 +78,7 @@ export default function AdminLayout() {
               className={({ isActive }) => `
                 flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors
                 ${isActive 
-                  ? 'bg-primary-50 text-primary-700' 
+                  ? 'bg-primary-50 text-primary-700 font-semibold' 
                   : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }
               `}
@@ -73,12 +87,23 @@ export default function AdminLayout() {
               {item.name}
             </NavLink>
           ))}
+
+          <div className="pt-4 border-t border-slate-100 mt-4">
+            <NavLink
+              to="/select-survey"
+              className="flex items-center px-3 py-2 text-sm font-medium text-slate-600 rounded-md hover:bg-slate-100 hover:text-primary-700 transition-colors border border-dashed border-slate-300"
+            >
+              <Grid className="mr-3 h-5 w-5 text-primary-600 flex-shrink-0" />
+              Switch Module
+            </NavLink>
+          </div>
         </nav>
 
         <div className="absolute bottom-0 w-full p-4 border-t border-slate-100 space-y-2">
           <button 
             onClick={() => {
               sessionStorage.removeItem('rws_username');
+              sessionStorage.removeItem('rws_active_module');
               navigate('/login');
             }}
             className="flex items-center w-full px-3 py-2.5 text-sm font-medium text-slate-600 rounded-md hover:bg-slate-50 hover:text-slate-900 transition-colors"

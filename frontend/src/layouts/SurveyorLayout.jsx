@@ -11,7 +11,8 @@ import {
   LogOut, 
   Menu, 
   X,
-  Droplet
+  Droplet,
+  Grid
 } from 'lucide-react';
 
 export default function SurveyorLayout() {
@@ -19,14 +20,25 @@ export default function SurveyorLayout() {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const navigation = [
-    { name: 'Borewell Surveys', href: '/surveyor/surveys', icon: FileText },
-    { name: 'New Borewell Survey', href: '/surveyor/new', icon: PlusCircle },
-    { name: 'HNSS Surveys', href: '/surveyor/surveys-hnss', icon: FileText },
-    { name: 'New HNSS Survey', href: '/surveyor/new-hnss', icon: Droplet },
-    { name: 'Palar Surveys', href: '/surveyor/surveys-palar', icon: FileText },
-    { name: 'New Palar Survey', href: '/surveyor/new-palar', icon: Droplet },
-  ];
+  const activeModule = sessionStorage.getItem('rws_active_module') || 'borewell';
+
+  let navigation = [];
+  if (activeModule === 'hnss') {
+    navigation = [
+      { name: 'HNSS Surveys', href: '/surveyor/surveys-hnss', icon: FileText },
+      { name: 'New HNSS Survey', href: '/surveyor/new-hnss', icon: PlusCircle },
+    ];
+  } else if (activeModule === 'palar') {
+    navigation = [
+      { name: 'Palar Surveys', href: '/surveyor/surveys-palar', icon: FileText },
+      { name: 'New Palar Survey', href: '/surveyor/new-palar', icon: PlusCircle },
+    ];
+  } else {
+    navigation = [
+      { name: 'Borewell Surveys', href: '/surveyor/surveys', icon: FileText },
+      { name: 'New Borewell Survey', href: '/surveyor/new', icon: PlusCircle },
+    ];
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
@@ -55,6 +67,9 @@ export default function SurveyorLayout() {
         </div>
 
         <nav className="p-4 space-y-1">
+          <div className="px-3 py-2 text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+            {activeModule.toUpperCase()} Module
+          </div>
           {navigation.map((item) => (
             <NavLink
               key={item.href + item.name}
@@ -62,7 +77,7 @@ export default function SurveyorLayout() {
               className={({ isActive }) => `
                 flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-colors
                 ${isActive 
-                  ? 'bg-primary-50 text-primary-700' 
+                  ? 'bg-primary-50 text-primary-700 font-semibold' 
                   : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 }
               `}
@@ -71,12 +86,23 @@ export default function SurveyorLayout() {
               {item.name}
             </NavLink>
           ))}
+
+          <div className="pt-4 border-t border-slate-100 mt-4">
+            <NavLink
+              to="/select-survey"
+              className="flex items-center px-3 py-2 text-sm font-medium text-slate-600 rounded-md hover:bg-slate-100 hover:text-primary-700 transition-colors border border-dashed border-slate-300"
+            >
+              <Grid className="mr-3 h-5 w-5 text-primary-600 flex-shrink-0" />
+              Switch Module
+            </NavLink>
+          </div>
         </nav>
 
         <div className="absolute bottom-0 w-full p-4 border-t border-slate-100 space-y-2">
           <button 
             onClick={() => {
               sessionStorage.removeItem('rws_username');
+              sessionStorage.removeItem('rws_active_module');
               navigate('/login');
             }}
             className="flex items-center w-full px-3 py-2.5 text-sm font-medium text-slate-600 rounded-md hover:bg-slate-50 hover:text-slate-900 transition-colors"

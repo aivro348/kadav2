@@ -8,6 +8,7 @@ export default function SurveySelection() {
   const isAdmin = username === 'admin';
 
   const handleSelect = (type) => {
+    sessionStorage.setItem('rws_active_module', type);
     if (isAdmin) {
       if (type === 'borewell') navigate('/admin/dashboard');
       else if (type === 'hnss') navigate('/admin/dashboard-hnss');
