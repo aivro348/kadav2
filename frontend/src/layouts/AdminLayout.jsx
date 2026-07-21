@@ -20,11 +20,14 @@ export default function AdminLayout() {
   const { t } = useTranslation();
 
   const navigation = [
-    { name: t('nav.dashboard'), href: '/admin/dashboard', icon: LayoutDashboard },
-    { name: t('nav.survey_list'), href: '/admin/surveys', icon: FileText },
-    { name: t('nav.reports'), href: '/admin/reports', icon: PieChart },
+    { name: 'Borewell Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { name: 'Borewell Surveys', href: '/admin/surveys', icon: FileText },
+    { name: 'Borewell Reports', href: '/admin/reports', icon: PieChart },
+    { name: 'HNSS Dashboard', href: '/admin/dashboard-hnss', icon: Droplet },
+    { name: 'HNSS Surveys', href: '/admin/surveys-hnss', icon: FileText },
+    { name: 'Palar Dashboard', href: '/admin/dashboard-palar', icon: Droplet },
+    { name: 'Palar Surveys', href: '/admin/surveys-palar', icon: FileText },
     { name: t('nav.users'), href: '#', icon: Users },
-    { name: t('nav.settings'), href: '#', icon: Settings },
   ];
 
   return (

@@ -10,6 +10,10 @@ import ViewSurvey from './pages/ViewSurvey';
 import Reports from './pages/Reports';
 import Landing from './pages/Landing';
 
+import IrrigationDashboard from './pages/IrrigationDashboard';
+import IrrigationSurveyList from './pages/IrrigationSurveyList';
+import ViewIrrigationSurvey from './pages/ViewIrrigationSurvey';
+
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const username = sessionStorage.getItem('rws_username');
   
@@ -48,6 +52,12 @@ function App() {
           <Route path="surveys" element={<SurveyList />} />
           <Route path="surveys/:id" element={<ViewSurvey />} />
           <Route path="reports" element={<Reports />} />
+          
+          <Route path="dashboard-hnss" element={<IrrigationDashboard surveyType="hnss" />} />
+          <Route path="surveys-hnss" element={<IrrigationSurveyList surveyType="hnss" />} />
+          <Route path="dashboard-palar" element={<IrrigationDashboard surveyType="palar" />} />
+          <Route path="surveys-palar" element={<IrrigationSurveyList surveyType="palar" />} />
+          <Route path="survey/:id" element={<ViewIrrigationSurvey />} />
         </Route>
 
         {/* Surveyor Routes */}
@@ -61,7 +71,7 @@ function App() {
           <Route path="new" element={<NewSurvey />} />
           <Route path="new-hnss" element={<NewIrrigationSurvey surveyType="hnss" />} />
           <Route path="new-palar" element={<NewIrrigationSurvey surveyType="palar" />} />
-          <Route path="survey/:id" element={<ViewSurvey />} />
+          <Route path="survey/:id" element={<ViewIrrigationSurvey />} />
         </Route>
 
         {/* Default Fallback */}
