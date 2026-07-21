@@ -82,13 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($data['images']) && is_array($data['images'])) {
             $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, file_path) VALUES (?, ?)");
             
-            // Ensure uploads directory exists
-            $uploadDir = '../uploads/';
+            // Create dedicated per-survey folder under borewell sector
+            $surveyFolder = 'survey_' . $survey_id;
+            $uploadDir = '../uploads/borewell/' . $surveyFolder . '/';
             if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0755, true);
+                mkdir($uploadDir, 0777, true);
             }
             
-            foreach ($data['images'] as $base64) {
+            foreach ($data['images'] as $index => $base64) {
                 // Determine extension and decode
                 $ext = 'jpg';
                 if (strpos($base64, ',') !== false) {
@@ -102,11 +103,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $imgData = base64_decode($encoded);
                 if ($imgData !== false) {
-                    $filename = 'survey_' . $survey_id . '_' . uniqid() . '.' . $ext;
+                    $filename = 'image_' . ($index + 1) . '_' . uniqid() . '.' . $ext;
                     $filepath = $uploadDir . $filename;
                     
                     if (file_put_contents($filepath, $imgData)) {
-                        $imgStmt->execute([$survey_id, 'uploads/' . $filename]);
+                        $imgStmt->execute([$survey_id, 'uploads/borewell/' . $surveyFolder . '/' . $filename]);
                     }
                 }
             }

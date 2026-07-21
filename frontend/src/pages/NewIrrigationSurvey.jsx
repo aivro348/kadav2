@@ -38,34 +38,51 @@ export default function NewIrrigationSurvey({ surveyType }) {
   const [activePhotoSlot, setActivePhotoSlot] = useState(null);
   const [activePointId, setActivePointId] = useState(null);
 
+  const [isCapturingGPS, setIsCapturingGPS] = useState(false);
+
   const surveyTitle = surveyType === 'hnss' ? 'HNSS Survey' : 'Palar River Survey';
   const apiUrl = import.meta.env.VITE_API_URL || '';
 
   // Get Main GPS
   const getLocation = () => {
     setGpsError(null);
-    if (navigator.geolocation) {
+    setIsCapturingGPS(true);
+
+    if ('geolocation' in navigator) {
+      // Step 1: Try high-accuracy GPS first
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const accuracy = position.coords.accuracy;
-          if (accuracy > 5) {
-            setGpsError(`GPS accuracy is ${Math.round(accuracy)}m. It must be less than 5m. Please move to a clear area and recapture.`);
-            setLocation({ lat: null, lng: null, accuracy });
-          } else {
-            setLocation({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              accuracy: accuracy
-            });
-          }
+          setLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            accuracy: position.coords.accuracy
+          });
+          setIsCapturingGPS(false);
         },
         (error) => {
-          setGpsError("Could not access GPS. Please ensure location services are enabled.");
+          console.warn('High accuracy GPS failed or timed out. Attempting network fallback...', error);
+          // Step 2: Low-accuracy fallback (Wi-Fi/Cell towers) if high accuracy fails or times out
+          navigator.geolocation.getCurrentPosition(
+            (fallbackPosition) => {
+              setLocation({
+                lat: fallbackPosition.coords.latitude,
+                lng: fallbackPosition.coords.longitude,
+                accuracy: fallbackPosition.coords.accuracy
+              });
+              setIsCapturingGPS(false);
+            },
+            (fallbackError) => {
+              setGpsError("Could not access GPS. Please ensure Location Services and GPS permissions are enabled on your device.");
+              setIsCapturingGPS(false);
+            },
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+          );
         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        { enableHighAccuracy: true, timeout: 3000, maximumAge: 0 }
       );
     } else {
-      setGpsError("Geolocation is not supported by this browser.");
+      setGpsError("Geolocation is not supported by your browser.");
+      setIsCapturingGPS(false);
     }
   };
 
@@ -80,18 +97,33 @@ export default function NewIrrigationSurvey({ surveyType }) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
+        // Downscale high-resolution mobile photos to max 1280px to save RAM & payload size
+        const MAX_DIM = 1280;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+
         const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
+        canvas.width = width;
+        canvas.height = height;
         const ctx = canvas.getContext('2d');
         
-        // Draw original image
-        ctx.drawImage(img, 0, 0);
+        // Draw resized image
+        ctx.drawImage(img, 0, 0, width, height);
         
         // Draw watermark background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        const textHeight = Math.max(20, img.height * 0.025);
-        ctx.fillRect(0, img.height - textHeight * 3, img.width, textHeight * 3);
+        const textHeight = Math.max(18, height * 0.03);
+        ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
         
         // Draw text
         ctx.fillStyle = '#ffffff';
@@ -101,14 +133,17 @@ export default function NewIrrigationSurvey({ surveyType }) {
         const padding = textHeight * 0.5;
         const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
         
-        // If GPS isn't captured yet, show a fallback
-        const latText = latitude ? latitude.toFixed(5) : 'Unknown';
-        const lngText = longitude ? longitude.toFixed(5) : 'Unknown';
+        const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
+        const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
         
-        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, img.height - textHeight * 1.5);
-        ctx.fillText(`Time: ${dateStr}`, padding, img.height - padding);
+        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
+        ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
         
-        resolve(canvas.toDataURL('image/jpeg', 0.8));
+        // Revoke Object URL to free mobile RAM immediately
+        URL.revokeObjectURL(img.src);
+        
+        // Compress JPEG to 0.7 to reduce payload from ~10MB to ~200KB per photo
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
       };
       img.src = URL.createObjectURL(file);
     });
@@ -154,8 +189,8 @@ export default function NewIrrigationSurvey({ surveyType }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!location.lat || location.accuracy > 5) {
-      setError("Main location must be captured with < 5m accuracy before submitting.");
+    if (!location.lat) {
+      setError("Please capture your Main Location before submitting.");
       return;
     }
     
@@ -267,15 +302,16 @@ export default function NewIrrigationSurvey({ surveyType }) {
               <button 
                 type="button" 
                 onClick={getLocation}
-                className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 px-4 rounded-lg border border-slate-300 transition-colors flex justify-center items-center"
+                disabled={isCapturingGPS}
+                className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 px-4 rounded-lg border border-slate-300 transition-colors flex justify-center items-center disabled:opacity-50"
               >
                 <MapPin className="mr-2 text-primary-600" size={20} />
-                {location.lat ? 'Recapture Location' : 'Capture Main Location'}
+                {isCapturingGPS ? 'Capturing GPS Location...' : location.lat ? 'Recapture Location' : 'Capture Main Location'}
               </button>
             </div>
             
             <div className="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200 w-full">
-              {location.lat && location.accuracy <= 5 ? (
+              {location.lat ? (
                 <div>
                   <p className="text-sm font-semibold text-emerald-600 mb-1 flex items-center">
                     ✓ Valid GPS Lock (Accuracy: {Math.round(location.accuracy)}m)
@@ -290,7 +326,7 @@ export default function NewIrrigationSurvey({ surveyType }) {
                     <span className="text-red-500 flex flex-col gap-2">
                       <AlertTriangle size={16}/> {gpsError}
                     </span>
-                  ) : 'Waiting for high-accuracy GPS (< 5m)'}
+                  ) : 'Click "Capture Main Location" to fetch GPS coordinates.'}
                 </div>
               )}
             </div>
@@ -374,9 +410,9 @@ export default function NewIrrigationSurvey({ surveyType }) {
         <div className="flex justify-end pt-4">
           <button 
             type="submit" 
-            disabled={loading || !location.lat || location.accuracy > 5}
+            disabled={loading || !location.lat}
             className={`flex items-center px-8 py-3 rounded-xl font-bold text-white shadow-lg transition-all ${
-              loading || !location.lat || location.accuracy > 5 
+              loading || !location.lat
                 ? 'bg-slate-400 cursor-not-allowed' 
                 : 'bg-primary-600 hover:bg-primary-700 hover:-translate-y-0.5'
             }`}
