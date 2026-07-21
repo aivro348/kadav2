@@ -345,8 +345,23 @@ export default function NewIrrigationSurvey({ surveyType }) {
         </div>
 
         {/* Directional Photos */}
-        <div className="card">
-          <h2 className="text-lg font-semibold text-slate-800 border-b pb-3 mb-6">Directional Photographs</h2>
+        <div className={`card transition-opacity duration-300 ${!location.lat ? 'opacity-50 pointer-events-none' : ''}`}>
+          <h2 className="text-lg font-semibold text-slate-800 border-b pb-3 mb-4 flex items-center">
+            <Camera className="mr-2 text-primary-500" size={20} /> Directional Photographs
+          </h2>
+          
+          {!location.lat && (
+            <p className="text-sm text-red-500 mb-6 font-medium bg-red-50 p-3 rounded-lg border border-red-200">
+              <AlertTriangle className="inline mr-2" size={16} /> 
+              Please capture your Main Geographic Tag (GPS) above first. Your photos will be automatically watermarked with these coordinates.
+            </p>
+          )}
+          {location.lat && (
+            <p className="text-sm text-emerald-600 mb-6 font-medium bg-emerald-50 p-3 rounded-lg border border-emerald-200">
+              ✓ GPS captured! Directional photos will now be automatically watermarked.
+            </p>
+          )}
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
             <DirectionPhoto direction="north" label="Facing North" />
             <DirectionPhoto direction="east" label="Facing East" />
