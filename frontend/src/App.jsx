@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import SurveyList from './pages/SurveyList';
 import NewSurvey from './pages/NewSurvey';
+import NewIrrigationSurvey from './pages/NewIrrigationSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import Reports from './pages/Reports';
 import Landing from './pages/Landing';
@@ -55,10 +56,12 @@ function App() {
             <SurveyorLayout />
           </ProtectedRoute>
         }>
-          <Route index element={<Dashboard />} />
+          <Route index element={<SurveyList />} />
           <Route path="surveys" element={<SurveyList />} />
           <Route path="new" element={<NewSurvey />} />
-          <Route path="surveys/:id" element={<ViewSurvey />} />
+          <Route path="new-hnss" element={<NewIrrigationSurvey surveyType="hnss" />} />
+          <Route path="new-palar" element={<NewIrrigationSurvey surveyType="palar" />} />
+          <Route path="survey/:id" element={<ViewSurvey />} />
         </Route>
 
         {/* Default Fallback */}

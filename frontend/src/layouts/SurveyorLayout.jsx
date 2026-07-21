@@ -21,7 +21,9 @@ export default function SurveyorLayout() {
 
   const navigation = [
     { name: t('nav.dashboard'), href: '/surveyor', icon: LayoutDashboard },
-    { name: t('nav.new_survey'), href: '/surveyor/new', icon: PlusCircle },
+    { name: 'New Borewell Survey', href: '/surveyor/new', icon: PlusCircle },
+    { name: 'New HNSS Survey', href: '/surveyor/new-hnss', icon: Droplet },
+    { name: 'New Palar Survey', href: '/surveyor/new-palar', icon: Droplet },
     { name: t('nav.survey_list'), href: '/surveyor/surveys', icon: FileText },
   ];
 
