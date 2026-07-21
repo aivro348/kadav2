@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once '../db.php';
+require_once '../db_irrigation.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $type = isset($_GET['type']) ? $_GET['type'] : '';
