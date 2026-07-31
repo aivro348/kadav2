@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { 
   ChevronDown, ArrowRight, Droplet, Sun, Wind, 
   Leaf, Recycle, Target, Activity, Users, MapPin, 
-  Mail, Globe, ShieldCheck, Menu, X
+  Mail, Globe, ShieldCheck, Menu, X, Github
 } from 'lucide-react';
 
 export default function Landing() {
@@ -414,10 +414,10 @@ export default function Landing() {
                 <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                   The circular economy in action. We are achieving zero landfill contribution through advanced local recycling centers, organic composting, and aggressive resource recovery.
                 </p>
-                <button disabled className="inline-flex items-center px-6 py-3 rounded-xl bg-slate-200 text-slate-500 font-bold border border-slate-300 cursor-not-allowed">
-                  <Recycle className="mr-2 w-5 h-5 text-slate-400" />
-                  Portal Coming Soon
-                </button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold transition-all shadow-md hover:shadow-lg w-fit">
+                  <Github className="mr-2 w-5 h-5" />
+                  View on GitHub
+                </a>
               </div>
             </motion.div>
 
