@@ -69,7 +69,7 @@ export default function WaterConservationSurvey() {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
-  // High-Accuracy GPS Capture matching Borewell Survey
+  // High-Accuracy GPS Capture matching Borewell Survey with Accuracy tracking
   const captureGPS = () => {
     setIsCapturingGPS(true);
     if ('geolocation' in navigator) {
@@ -78,6 +78,7 @@ export default function WaterConservationSurvey() {
         (position) => {
           setValue('latitude', position.coords.latitude);
           setValue('longitude', position.coords.longitude);
+          setValue('accuracy', position.coords.accuracy);
           setIsCapturingGPS(false);
         },
         (error) => {
@@ -87,6 +88,7 @@ export default function WaterConservationSurvey() {
             (fallbackPosition) => {
               setValue('latitude', fallbackPosition.coords.latitude);
               setValue('longitude', fallbackPosition.coords.longitude);
+              setValue('accuracy', fallbackPosition.coords.accuracy);
               setIsCapturingGPS(false);
             },
             (fallbackError) => {
@@ -104,8 +106,8 @@ export default function WaterConservationSurvey() {
     }
   };
 
-  // Watermark Image Function matching Borewell Survey
-  const watermarkImage = (file, latitude, longitude) => {
+  // Watermark Image Function matching Borewell Survey with Accuracy Level
+  const watermarkImage = (file, latitude, longitude, accuracy) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -133,9 +135,9 @@ export default function WaterConservationSurvey() {
         ctx.drawImage(img, 0, 0, width, height);
 
         // Draw watermark background
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
         const textHeight = Math.max(18, height * 0.03);
-        ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
+        ctx.fillRect(0, height - textHeight * 3.5, width, textHeight * 3.5);
 
         // Draw text
         ctx.fillStyle = '#ffffff';
@@ -147,9 +149,10 @@ export default function WaterConservationSurvey() {
 
         const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
         const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
+        const accText = accuracy ? (typeof accuracy === 'number' ? `${accuracy.toFixed(1)}m` : `${accuracy}m`) : 'N/A';
 
-        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
-        ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
+        ctx.fillText(`Lat: ${latText}, Lng: ${lngText} | Accuracy: ${accText}`, padding, height - textHeight * 1.8);
+        ctx.fillText(`Water Conservation | Time: ${dateStr}`, padding, height - padding);
 
         // Revoke Object URL to free mobile RAM immediately
         URL.revokeObjectURL(img.src);
@@ -165,12 +168,13 @@ export default function WaterConservationSurvey() {
     if (e.target.files) {
       const lat = getValues('latitude');
       const lng = getValues('longitude');
+      const acc = getValues('accuracy');
 
       const newImages = [];
       for (let i = 0; i < e.target.files.length; i++) {
         const file = e.target.files[i];
         if (lat && lng) {
-          const watermarkedUrl = await watermarkImage(file, lat, lng);
+          const watermarkedUrl = await watermarkImage(file, lat, lng, acc);
           newImages.push(watermarkedUrl);
         } else {
           // Fallback if no GPS
@@ -427,34 +431,55 @@ export default function WaterConservationSurvey() {
             <div className="space-y-8 animate-in fade-in">
               <div>
                 <h2 className="text-lg font-medium text-slate-900 mb-4">{t('survey.gps_location', 'High-Accuracy GPS Location')}</h2>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <div className="flex-1">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
                     <label className="label-text">{t('survey.latitude', 'Latitude')}</label>
-                    <input type="number" step="any" className="input-field" {...register('latitude', { required: true })} readOnly />
+                    <input type="number" step="any" className="input-field font-mono" {...register('latitude', { required: true })} readOnly placeholder="0.000000" />
                   </div>
-                  <div className="flex-1">
+                  <div>
                     <label className="label-text">{t('survey.longitude', 'Longitude')}</label>
-                    <input type="number" step="any" className="input-field" {...register('longitude', { required: true })} readOnly />
+                    <input type="number" step="any" className="input-field font-mono" {...register('longitude', { required: true })} readOnly placeholder="0.000000" />
+                  </div>
+                  <div>
+                    <label className="label-text">GPS Accuracy Level</label>
+                    <div className="flex items-center">
+                      <input 
+                        type="text" 
+                        className={`input-field font-mono font-bold ${watch('accuracy') ? 'text-emerald-700 bg-emerald-50/60 border-emerald-300' : 'text-slate-400'}`} 
+                        value={watch('accuracy') ? `${Number(watch('accuracy')).toFixed(1)} meters (${Number(watch('accuracy')) <= 5 ? 'High' : Number(watch('accuracy')) <= 15 ? 'Moderate' : 'Approximate'})` : 'Not captured'} 
+                        readOnly 
+                      />
+                    </div>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  onClick={captureGPS}
-                  disabled={isCapturingGPS}
-                  className="mt-4 flex items-center justify-center w-full sm:w-auto px-4 py-2 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50"
-                >
-                  <MapPin className="mr-2 h-5 w-5 text-primary-500" />
-                  {isCapturingGPS ? t('survey.capturing', 'Capturing GPS...') : t('survey.capture_gps', 'Capture GPS')}
-                </button>
+                
+                <div className="flex items-center gap-3 mt-4">
+                  <button
+                    type="button"
+                    onClick={captureGPS}
+                    disabled={isCapturingGPS}
+                    className="flex items-center justify-center w-full sm:w-auto px-5 py-2.5 border border-slate-300 rounded-lg shadow-sm text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition-colors"
+                  >
+                    <MapPin className="mr-2 h-5 w-5 text-primary-500" />
+                    {isCapturingGPS ? t('survey.capturing', 'Acquiring GPS Signal...') : t('survey.capture_gps', 'Capture High-Accuracy GPS')}
+                  </button>
+                  {watch('accuracy') && (
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${Number(watch('accuracy')) <= 5 ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}`}>
+                      Accuracy: {Number(watch('accuracy')).toFixed(1)}m
+                    </span>
+                  )}
+                </div>
               </div>
 
               <div className={`transition-opacity duration-300 ${!watch('latitude') ? 'opacity-50 pointer-events-none' : ''}`}>
                 <h2 className="text-lg font-medium text-slate-900 mb-2">{t('survey.image_capture', 'Photographs')}</h2>
                 {!watch('latitude') && (
-                  <p className="text-sm text-red-500 mb-4 font-medium">Please capture GPS location first. Your photos will be watermarked with the coordinates.</p>
+                  <p className="text-sm text-red-500 mb-4 font-medium">Please capture GPS location first. Your photos will be watermarked with the coordinates and accuracy level.</p>
                 )}
                 {watch('latitude') && (
-                  <p className="text-sm text-green-600 mb-4 font-medium">GPS captured! Photos will now be automatically watermarked.</p>
+                  <p className="text-sm text-emerald-700 mb-4 font-medium">
+                    ✓ GPS captured at <span className="font-mono font-bold">{Number(watch('accuracy')).toFixed(1)}m accuracy</span>. Photos will now be automatically watermarked.
+                  </p>
                 )}
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md bg-slate-50">

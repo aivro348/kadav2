@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, Droplet, Sun, Wind, 
   Target, Activity, Users, Leaf, ShieldCheck, Landmark, Recycle,
-  ExternalLink, ChevronDown, CheckCircle2, Database, MapPin, Sparkles, Cpu
+  ExternalLink, ChevronDown, CheckCircle2, Database, MapPin, Sparkles, Cpu, GraduationCap
 } from 'lucide-react';
 
 export default function Landing() {
@@ -147,6 +147,10 @@ export default function Landing() {
             <div className="flex items-center gap-2 text-slate-300">
               <ShieldCheck size={15} className="text-emerald-400" />
               <span className="text-[11px] sm:text-xs">Kuppam Area Development Authority</span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-300">
+              <GraduationCap size={15} className="text-emerald-400" />
+              <span className="text-[11px] sm:text-xs">IIT Kanpur</span>
             </div>
           </div>
         </div>
