@@ -120,32 +120,32 @@ export default function NewIrrigationSurvey({ surveyType }) {
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
-        
+
         // Draw resized image
         ctx.drawImage(img, 0, 0, width, height);
-        
+
         // Draw watermark background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         const textHeight = Math.max(18, height * 0.03);
         ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
-        
+
         // Draw text
         ctx.fillStyle = '#ffffff';
         ctx.font = `${textHeight}px sans-serif`;
         ctx.textAlign = 'left';
-        
+
         const padding = textHeight * 0.5;
         const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-        
+
         const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
         const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
-        
+
         ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
         ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
-        
+
         // Revoke Object URL to free mobile RAM immediately
         URL.revokeObjectURL(img.src);
-        
+
         // Compress JPEG to 0.7 to reduce payload from ~10MB to ~200KB per photo
         resolve(canvas.toDataURL('image/jpeg', 0.7));
       };
@@ -160,10 +160,10 @@ export default function NewIrrigationSurvey({ surveyType }) {
     // Use location if available
     const lat = location.lat;
     const lng = location.lng;
-    
+
     // Apply Watermark
     const base64String = await watermarkImage(file, lat, lng);
-    
+
     if (activePointId) {
       setPoints(points.map(p => {
         if (p.id === activePointId) {
@@ -197,7 +197,7 @@ export default function NewIrrigationSurvey({ surveyType }) {
       setError("Please capture your Main Location before submitting.");
       return;
     }
-    
+
     setLoading(true);
     setError(null);
 
@@ -223,7 +223,7 @@ export default function NewIrrigationSurvey({ surveyType }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      
+
       const responseText = await response.text();
       let result;
       try {
@@ -270,13 +270,13 @@ export default function NewIrrigationSurvey({ surveyType }) {
 
   const DirectionPhoto = ({ direction, label }) => (
     <div className="flex flex-col items-center">
-      <p className="text-sm font-medium text-slate-700 mb-2 flex items-center"><Compass size={16} className="mr-1"/> {label}</p>
+      <p className="text-sm font-medium text-slate-700 mb-2 flex items-center"><Compass size={16} className="mr-1" /> {label}</p>
       {photos[direction] ? (
         <div className="relative w-32 h-32 rounded-lg overflow-hidden border-2 border-primary-500">
           <img src={photos[direction]} alt={direction} className="w-full h-full object-cover" />
-          <button 
-            type="button" 
-            onClick={() => setPhotos({...photos, [direction]: null})}
+          <button
+            type="button"
+            onClick={() => setPhotos({ ...photos, [direction]: null })}
             className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full hover:bg-red-600"
           >
             <X size={14} />
@@ -311,8 +311,8 @@ export default function NewIrrigationSurvey({ surveyType }) {
               <p className="text-sm text-red-700">{error}</p>
             </div>
           </div>
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => setError(null)}
             className="self-end sm:self-center px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-800 rounded text-xs font-semibold transition-colors flex-shrink-0"
           >
@@ -322,7 +322,7 @@ export default function NewIrrigationSurvey({ surveyType }) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        
+
         {/* Core Info */}
         <div className="card">
           <h2 className="text-lg font-semibold text-slate-800 border-b pb-3 mb-4">Dimensions</h2>
@@ -343,11 +343,11 @@ export default function NewIrrigationSurvey({ surveyType }) {
           <h2 className="text-lg font-semibold text-slate-800 border-b pb-3 mb-4 flex items-center">
             <MapPin className="mr-2 text-primary-600" /> Main Geographic Tag
           </h2>
-          
+
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
             <div className="flex-1">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={getLocation}
                 disabled={isCapturingGPS}
                 className="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 px-4 rounded-lg border border-slate-300 transition-colors flex justify-center items-center disabled:opacity-50"
@@ -356,7 +356,7 @@ export default function NewIrrigationSurvey({ surveyType }) {
                 {isCapturingGPS ? 'Capturing GPS Location...' : location.lat ? 'Recapture Location' : 'Capture Main Location'}
               </button>
             </div>
-            
+
             <div className="flex-1 bg-slate-50 p-4 rounded-lg border border-slate-200 w-full">
               {location.lat ? (
                 <div>
@@ -364,14 +364,14 @@ export default function NewIrrigationSurvey({ surveyType }) {
                     ✓ Valid GPS Lock (Accuracy: {Math.round(location.accuracy)}m)
                   </p>
                   <p className="text-xs text-slate-500 font-mono">
-                    Lat: {location.lat.toFixed(6)}<br/>Lng: {location.lng.toFixed(6)}
+                    Lat: {location.lat.toFixed(6)}<br />Lng: {location.lng.toFixed(6)}
                   </p>
                 </div>
               ) : (
                 <div className="text-sm text-slate-500 italic">
                   {gpsError ? (
                     <span className="text-red-500 flex flex-col gap-2">
-                      <AlertTriangle size={16}/> {gpsError}
+                      <AlertTriangle size={16} /> {gpsError}
                     </span>
                   ) : 'Click "Capture Main Location" to fetch GPS coordinates.'}
                 </div>
@@ -393,10 +393,10 @@ export default function NewIrrigationSurvey({ surveyType }) {
           <div className="flex justify-between items-center border-b border-primary-200 pb-3 mb-4">
             <h2 className="text-lg font-semibold text-primary-900">Survey Polygon Points</h2>
             <button type="button" onClick={addPoint} className="text-primary-700 hover:bg-primary-100 px-3 py-1 rounded-md text-sm font-medium flex items-center transition-colors">
-              <Plus size={16} className="mr-1"/> Add Point
+              <Plus size={16} className="mr-1" /> Add Point
             </button>
           </div>
-          
+
           <div className="space-y-6">
             {points.map((point, index) => (
               <div key={point.id} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative">
@@ -405,20 +405,20 @@ export default function NewIrrigationSurvey({ surveyType }) {
                     <X size={18} />
                   </button>
                 )}
-                
+
                 <h3 className="font-bold text-slate-700 mb-4">Point #{index + 1}</h3>
-                
+
                 <div className="grid grid-cols-1 gap-6">
                   {/* Point Value */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Point Value / Description</label>
-                    <input 
-                      type="text" 
-                      required 
-                      value={point.point_value} 
-                      onChange={e => handlePointValueChange(point.id, e.target.value)} 
-                      className="input-field" 
-                      placeholder="e.g. Edge point measurement" 
+                    <input
+                      type="text"
+                      required
+                      value={point.point_value}
+                      onChange={e => handlePointValueChange(point.id, e.target.value)}
+                      className="input-field"
+                      placeholder="e.g. Edge point measurement"
                     />
                   </div>
                 </div>
@@ -432,10 +432,10 @@ export default function NewIrrigationSurvey({ surveyType }) {
           <h2 className="text-lg font-semibold text-slate-800 border-b pb-3 mb-4 flex items-center">
             <Camera className="mr-2 text-primary-500" size={20} /> Directional Photographs
           </h2>
-          
+
           {!location.lat && (
             <p className="text-sm text-red-500 mb-6 font-medium bg-red-50 p-3 rounded-lg border border-red-200">
-              <AlertTriangle className="inline mr-2" size={16} /> 
+              <AlertTriangle className="inline mr-2" size={16} />
               Please capture your Main Geographic Tag (GPS) above first. Your photos will be automatically watermarked with these coordinates.
             </p>
           )}
@@ -455,14 +455,13 @@ export default function NewIrrigationSurvey({ surveyType }) {
 
         {/* Submit */}
         <div className="flex justify-end pt-4">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading || !location.lat}
-            className={`flex items-center px-8 py-3 rounded-xl font-bold text-white shadow-lg transition-all ${
-              loading || !location.lat
-                ? 'bg-slate-400 cursor-not-allowed' 
+            className={`flex items-center px-8 py-3 rounded-xl font-bold text-white shadow-lg transition-all ${loading || !location.lat
+                ? 'bg-slate-400 cursor-not-allowed'
                 : 'bg-primary-600 hover:bg-primary-700 hover:-translate-y-0.5'
-            }`}
+              }`}
           >
             {loading ? 'Submitting...' : (
               <>
@@ -475,13 +474,13 @@ export default function NewIrrigationSurvey({ surveyType }) {
       </form>
 
       {/* Hidden File Input for Camera */}
-      <input 
-        type="file" 
-        accept="image/*" 
-        capture="environment" 
-        ref={fileInputRef} 
-        onChange={handleFileChange} 
-        className="hidden" 
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        className="hidden"
       />
     </div>
   );

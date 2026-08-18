@@ -9,6 +9,11 @@ import NewIrrigationSurvey from './pages/NewIrrigationSurvey';
 import ViewSurvey from './pages/ViewSurvey';
 import Reports from './pages/Reports';
 import Landing from './pages/Landing';
+import Vision from './pages/Vision';
+import Pillars from './pages/Pillars';
+import Verticals from './pages/Verticals';
+import Impact from './pages/Impact';
+import PublicLayout from './layouts/PublicLayout';
 
 import IrrigationDashboard from './pages/IrrigationDashboard';
 import IrrigationSurveyList from './pages/IrrigationSurveyList';
@@ -39,7 +44,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        {/* Public Routes under PublicLayout */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Landing />} />
+          <Route path="/vision" element={<Vision />} />
+          <Route path="/pillars" element={<Pillars />} />
+          <Route path="/verticals" element={<Verticals />} />
+          <Route path="/impact" element={<Impact />} />
+        </Route>
+        
         <Route path="/login" element={<Login />} />
         
         <Route path="/select-survey" element={

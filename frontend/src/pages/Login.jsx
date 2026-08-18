@@ -33,7 +33,7 @@ export default function Login() {
           <img src="/netzero.jpg" alt="Logo" className="h-20 w-20 object-cover rounded-full shadow-md border-2 border-white" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
-          RWS Borewell Survey
+          Towards Net Zero
         </h2>
         <p className="mt-2 text-center text-sm text-slate-600">
           Rural Water Supply Management System

@@ -14,8 +14,8 @@ export default function NewSurvey() {
   const navigate = useNavigate();
 
   const steps = [
-    t('survey.steps.location'), t('survey.steps.status'), t('survey.steps.type'), t('survey.steps.supply_nature'), 
-    t('survey.steps.details'), t('survey.steps.water_quality'), t('survey.steps.history'), t('survey.steps.utilization'), 
+    t('survey.steps.location'), t('survey.steps.status'), t('survey.steps.type'), t('survey.steps.supply_nature'),
+    t('survey.steps.details'), t('survey.steps.water_quality'), t('survey.steps.history'), t('survey.steps.utilization'),
     t('survey.steps.gps'), t('survey.steps.images')
   ];
 
@@ -119,32 +119,32 @@ export default function NewSurvey() {
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
-        
+
         // Draw resized image
         ctx.drawImage(img, 0, 0, width, height);
-        
+
         // Draw watermark background
         ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         const textHeight = Math.max(18, height * 0.03);
         ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
-        
+
         // Draw text
         ctx.fillStyle = '#ffffff';
         ctx.font = `${textHeight}px sans-serif`;
         ctx.textAlign = 'left';
-        
+
         const padding = textHeight * 0.5;
         const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-        
+
         const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
         const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
-        
+
         ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
         ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
-        
+
         // Revoke Object URL to free mobile RAM immediately
         URL.revokeObjectURL(img.src);
-        
+
         // Compress JPEG to 0.7 to reduce payload from ~10MB to ~200KB per photo
         resolve(canvas.toDataURL('image/jpeg', 0.7));
       };
@@ -156,7 +156,7 @@ export default function NewSurvey() {
     if (e.target.files) {
       const lat = getValues('latitude');
       const lng = getValues('longitude');
-      
+
       const newImages = [];
       for (let i = 0; i < e.target.files.length; i++) {
         const file = e.target.files[i];
@@ -174,17 +174,17 @@ export default function NewSurvey() {
 
   const onSubmit = async (data) => {
     console.log("Submitting survey:", data, images);
-    
+
     setIsSubmitted(true); // Show animation early
 
     // Prepare payload for PHP API
     // Ensure arrays are converted to strings for the database
-    
+
     // Map IDs to full exact names
     const villageObj = locationsData.villages.find(v => v.id === data.village);
     const panchayatObj = locationsData.panchayats.find(p => p.id === data.panchayat);
     const mandalObj = locationsData.mandals.find(m => m.id === data.mandal);
-    
+
     // Get logged in user
     const username = sessionStorage.getItem('rws_username') || 'surveyor';
 
@@ -212,7 +212,7 @@ export default function NewSurvey() {
     try {
       // Determine API URL (use relative path for Hostinger)
       const apiUrl = import.meta.env.VITE_API_URL || '';
-      
+
       const response = await fetch(`${apiUrl}/php-backend/api/surveys.php`, {
         method: 'POST',
         headers: {
@@ -236,19 +236,19 @@ export default function NewSurvey() {
       console.log('Survey saved successfully:', result);
 
       localStorage.removeItem('surveyDraft');
-      
+
     } catch (error) {
       console.error('Error submitting survey:', error);
       alert('The server is currently very busy. Please wait 1 minute and try clicking Submit again.\n\nTechnical Details: ' + error.message);
       setIsSubmitted(false);
       return;
     }
-    
+
     // Redirect after 2.5 seconds
-    
+
     // Show animation
     setIsSubmitted(true);
-    
+
     // Redirect after 2.5 seconds
     setTimeout(() => {
       navigate('..');
@@ -276,7 +276,7 @@ export default function NewSurvey() {
     <div className="max-w-3xl mx-auto">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-slate-900">{t('survey.title')}</h1>
-        
+
         {/* Progress Bar */}
         <div className="mt-6">
           <div className="flex items-center justify-between mb-2">
@@ -284,7 +284,7 @@ export default function NewSurvey() {
             <span className="text-sm font-medium text-slate-500">{steps[currentStep]}</span>
           </div>
           <div className="w-full bg-slate-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-primary-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
             ></div>
@@ -294,7 +294,7 @@ export default function NewSurvey() {
 
       <div className="card">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          
+
           {/* STEP 1: Location */}
           {currentStep === 0 && (
             <div className="space-y-4 animate-in fade-in">
@@ -316,7 +316,7 @@ export default function NewSurvey() {
                     .filter(p => p.mandal_id === selectedMandal)
                     .map(p => (
                       <option key={p.id} value={p.id}>{p.name}</option>
-                  ))}
+                    ))}
                 </select>
               </div>
               <div>
@@ -327,7 +327,7 @@ export default function NewSurvey() {
                     .filter(v => v.panchayat_id === selectedPanchayat)
                     .map(v => (
                       <option key={v.id} value={v.id}>{v.name}</option>
-                  ))}
+                    ))}
                 </select>
               </div>
             </div>
@@ -344,10 +344,10 @@ export default function NewSurvey() {
                   { val: 'Dried', label: t('survey.status_dried') }
                 ].map((status) => (
                   <label key={status.val} className="flex items-center p-4 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
-                    <input 
-                      type="radio" 
-                      value={status.val} 
-                      {...register('status')} 
+                    <input
+                      type="radio"
+                      value={status.val}
+                      {...register('status')}
                       className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-slate-300"
                     />
                     <span className="ml-3 font-medium text-slate-700">{status.label}</span>
@@ -560,8 +560,8 @@ export default function NewSurvey() {
                     <input type="number" step="any" className="input-field" {...register('longitude', { required: true })} readOnly />
                   </div>
                 </div>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={captureGPS}
                   disabled={isCapturingGPS}
                   className="mt-4 flex items-center justify-center w-full sm:w-auto px-4 py-2 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50"
@@ -579,7 +579,7 @@ export default function NewSurvey() {
                 {watch('latitude') && (
                   <p className="text-sm text-green-600 mb-4 font-medium">GPS captured! Photos will now be automatically watermarked.</p>
                 )}
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md bg-slate-50">
                   <div className="space-y-1 text-center w-full">
                     <Camera className="mx-auto h-12 w-12 text-slate-400" />
@@ -614,22 +614,21 @@ export default function NewSurvey() {
               type="button"
               onClick={handlePrevious}
               disabled={currentStep === 0}
-              className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${
-                currentStep === 0 
-                  ? 'text-slate-400 cursor-not-allowed' 
+              className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${currentStep === 0
+                  ? 'text-slate-400 cursor-not-allowed'
                   : 'text-slate-700 bg-white border border-slate-300 hover:bg-slate-50'
-              }`}
+                }`}
             >
               <ArrowLeft size={16} className="mr-2" />
               {t('survey.previous')}
             </button>
-            
+
             <div className="flex space-x-3">
               <button type="button" className="hidden sm:flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50">
                 <Save size={16} className="mr-2" />
                 {t('survey.save_draft')}
               </button>
-              
+
               {currentStep < steps.length - 1 ? (
                 <button
                   type="button"
