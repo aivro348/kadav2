@@ -57,22 +57,22 @@ export default function PublicLayout() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center font-display">
             {/* Logos */}
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-3 group bg-white/95 hover:bg-white backdrop-blur-md py-1.5 px-3.5 rounded-2xl border border-slate-200/80 shadow-sm transition-all">
               <div className="relative">
-                <img src="/netzero.jpg" alt="NetZero Logo" className="h-10 w-10 object-cover rounded-full shadow-md border-2 border-emerald-500/20 group-hover:scale-105 transition-transform" />
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white"></div>
+                <img src="/netzero.jpg" alt="NetZero Logo" className="h-9 w-9 object-cover rounded-full shadow-sm border border-emerald-500/30 group-hover:scale-105 transition-transform" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white"></div>
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="font-black text-base text-slate-900 tracking-tight">KADA</span>
-                  <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-200/60 px-1.5 py-0.2 rounded-md">NETZERO</span>
+                  <span className="font-black text-sm text-slate-900 tracking-tight">KADA</span>
+                  <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-100/80 border border-emerald-300/60 px-1.5 py-0.2 rounded-md">NETZERO</span>
                 </div>
-                <span className="text-[10px] text-slate-500 font-medium tracking-wide hidden sm:block">Kuppam Area Development Authority</span>
+                <span className="text-[10px] text-slate-600 font-semibold tracking-wide hidden sm:block">Kuppam Area Development Authority</span>
               </div>
             </Link>
 
             {/* Center Links */}
-            <div className="hidden md:flex items-center space-x-1 bg-slate-100/70 p-1.5 rounded-full border border-slate-200/60 backdrop-blur-md">
+            <div className="hidden md:flex items-center space-x-1 bg-white/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md shadow-sm">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -81,8 +81,8 @@ export default function PublicLayout() {
                     to={link.path}
                     className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
                       isActive 
-                        ? 'bg-white text-emerald-700 shadow-sm border border-slate-200/50' 
-                        : 'text-slate-650 hover:text-emerald-600 hover:bg-white/50'
+                        ? 'bg-emerald-600 text-white shadow-sm' 
+                        : 'text-slate-700 hover:text-emerald-700 hover:bg-slate-100'
                     }`}
                   >
                     {link.name}
