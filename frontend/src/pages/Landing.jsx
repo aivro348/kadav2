@@ -148,14 +148,6 @@ export default function Landing() {
               <ShieldCheck size={16} className="text-emerald-400" />
               <span>Kuppam Area Development Authority</span>
             </div>
-            <div className="flex items-center gap-2 text-slate-300">
-              <Cpu size={16} className="text-cyan-400" />
-              <span>IIT Kanpur Hydrology Collaboration</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-300">
-              <Droplet size={16} className="text-blue-400" />
-              <span>Rural Water Supply (RWS)</span>
-            </div>
           </div>
         </div>
       </section>
