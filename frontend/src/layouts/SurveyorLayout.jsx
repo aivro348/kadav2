@@ -33,6 +33,11 @@ export default function SurveyorLayout() {
       { name: 'Palar Surveys', href: '/surveyor/surveys-palar', icon: FileText },
       { name: 'New Palar Survey', href: '/surveyor/new-palar', icon: PlusCircle },
     ];
+  } else if (activeModule === 'water-conservation') {
+    navigation = [
+      { name: 'Water Conservation Surveys', href: '/surveyor/surveys-water-conservation', icon: FileText },
+      { name: 'New Water Conservation Survey', href: '/surveyor/new-water-conservation', icon: PlusCircle },
+    ];
   } else {
     navigation = [
       { name: 'Borewell Surveys', href: '/surveyor/surveys', icon: FileText },
@@ -55,11 +60,22 @@ export default function SurveyorLayout() {
         fixed inset-y-0 left-0 z-30 w-64 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex items-center justify-center h-16 border-b border-slate-100 px-4">
-          <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm mr-3" />
-          <span className="text-lg font-bold text-slate-800">{t('nav.app_title')}</span>
+        <div className="flex items-center justify-between h-16 border-b border-slate-100 px-4">
+          <div className="flex items-center gap-2">
+            <div className="relative flex-shrink-0">
+              <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm border border-emerald-500/30" />
+              <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"></div>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1">
+                <span className="font-black text-xs text-slate-900 tracking-tight">KADA</span>
+                <span className="text-[8px] font-extrabold text-emerald-700 bg-emerald-100 border border-emerald-300/60 px-1 py-0.2 rounded">NETZERO</span>
+              </div>
+              <span className="text-[8px] text-slate-500 font-semibold tracking-tight">Kuppam Authority</span>
+            </div>
+          </div>
           <button 
-            className="ml-auto lg:hidden text-slate-500"
+            className="lg:hidden text-slate-500 p-1"
             onClick={() => setSidebarOpen(false)}
           >
             <X size={20} />
@@ -115,11 +131,20 @@ export default function SurveyorLayout() {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="bg-white shadow-sm lg:hidden">
+        <header className="bg-white shadow-sm lg:hidden border-b border-slate-100">
           <div className="px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div className="flex items-center">
-              <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm mr-3" />
-              <span className="text-lg font-bold text-slate-800">{t('nav.app_title')}</span>
+            <div className="flex items-center gap-2">
+              <div className="relative flex-shrink-0">
+                <img src="/netzero.jpg" alt="Logo" className="h-8 w-8 object-cover rounded-full shadow-sm border border-emerald-500/30" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"></div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1">
+                  <span className="font-black text-xs text-slate-900 tracking-tight">KADA</span>
+                  <span className="text-[8px] font-extrabold text-emerald-700 bg-emerald-100 border border-emerald-300/60 px-1 py-0.2 rounded">NETZERO</span>
+                </div>
+                <span className="text-[8px] text-slate-500 font-semibold tracking-tight">Kuppam Authority</span>
+              </div>
             </div>
             <button
               onClick={() => setSidebarOpen(true)}

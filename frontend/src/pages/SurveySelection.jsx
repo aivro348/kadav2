@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
 
 export default function SurveySelection() {
@@ -13,10 +13,12 @@ export default function SurveySelection() {
       if (type === 'borewell') navigate('/admin/dashboard');
       else if (type === 'hnss') navigate('/admin/dashboard-hnss');
       else if (type === 'palar') navigate('/admin/dashboard-palar');
+      else if (type === 'water-conservation') navigate('/admin/surveys-water-conservation');
     } else {
       if (type === 'borewell') navigate('/surveyor/surveys');
       else if (type === 'hnss') navigate('/surveyor/surveys-hnss');
       else if (type === 'palar') navigate('/surveyor/surveys-palar');
+      else if (type === 'water-conservation') navigate('/surveyor/surveys-water-conservation');
     }
   };
 
@@ -28,11 +30,20 @@ export default function SurveySelection() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-slate-200 py-4 px-6 sm:px-10 flex justify-between items-center z-10">
-        <div className="flex items-center">
-          <img src="/netzero.jpg" alt="Logo" className="h-10 w-10 object-cover rounded-full shadow-sm mr-3" />
-          <h1 className="text-xl font-bold text-slate-800">RWS & S Department</h1>
-        </div>
+      <header className="bg-white shadow-sm border-b border-slate-200 py-3.5 px-6 sm:px-10 flex justify-between items-center z-10">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group bg-white/95 hover:bg-white py-1 px-2.5 rounded-xl border border-slate-200/80 shadow-sm transition-all flex-shrink-0">
+          <div className="relative flex-shrink-0">
+            <img src="/netzero.jpg" alt="NetZero Logo" className="h-8 w-8 sm:h-9 sm:w-9 object-cover rounded-full shadow-sm border border-emerald-500/30 group-hover:scale-105 transition-transform" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-emerald-500 rounded-full border-2 border-white"></div>
+          </div>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1">
+              <span className="font-black text-xs sm:text-sm text-slate-900 tracking-tight">KADA</span>
+              <span className="text-[8px] sm:text-[9px] font-extrabold text-emerald-700 bg-emerald-100/80 border border-emerald-300/60 px-1 sm:px-1.5 py-0.2 rounded-md">NETZERO</span>
+            </div>
+            <span className="text-[9px] sm:text-[10px] text-slate-600 font-semibold tracking-wide hidden sm:block">Kuppam Area Development Authority</span>
+          </div>
+        </Link>
         <div className="flex items-center space-x-4">
           <span className="text-sm font-medium text-slate-600 hidden sm:inline-block">
             Welcome, <span className="text-primary-700 font-bold">{username}</span>
@@ -57,8 +68,28 @@ export default function SurveySelection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
+          {/* Water Conservation Card */}
+          <button 
+            onClick={() => handleSelect('water-conservation')}
+            className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-left border border-slate-200"
+          >
+            <div className="aspect-[4/3] w-full relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10"></div>
+              <img src="/water_conservation_card.jpg" alt="Water Conservation" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute bottom-4 left-4 z-20">
+                <span className="px-3 py-1 bg-emerald-600 text-white text-xs font-bold rounded-full shadow-sm">NetZero Initiative</span>
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">Water Conservation</h3>
+              <p className="text-sm text-slate-600">
+                Capture high-accuracy GPS and watermarked photography of Check Dams, Trenches, and Ponds.
+              </p>
+            </div>
+          </button>
+
           {/* Borewell Card */}
           <button 
             onClick={() => handleSelect('borewell')}

@@ -15,10 +15,16 @@ import Verticals from './pages/Verticals';
 import Impact from './pages/Impact';
 import PublicLayout from './layouts/PublicLayout';
 
+import WaterDashboard from './pages/dashboards/WaterDashboard';
+import EnergyDashboard from './pages/dashboards/EnergyDashboard';
+import WasteDashboard from './pages/dashboards/WasteDashboard';
+import CarbonDashboard from './pages/dashboards/CarbonDashboard';
 import IrrigationDashboard from './pages/IrrigationDashboard';
 import IrrigationSurveyList from './pages/IrrigationSurveyList';
 import ViewIrrigationSurvey from './pages/ViewIrrigationSurvey';
 import SurveySelection from './pages/SurveySelection';
+import WaterConservationSurvey from './pages/WaterConservationSurvey';
+import WaterConservationSurveyList from './pages/WaterConservationSurveyList';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const username = sessionStorage.getItem('rws_username');
@@ -51,6 +57,10 @@ function App() {
           <Route path="/pillars" element={<Pillars />} />
           <Route path="/verticals" element={<Verticals />} />
           <Route path="/impact" element={<Impact />} />
+          <Route path="/dashboards/water" element={<WaterDashboard />} />
+          <Route path="/dashboards/energy" element={<EnergyDashboard />} />
+          <Route path="/dashboards/waste" element={<WasteDashboard />} />
+          <Route path="/dashboards/carbon" element={<CarbonDashboard />} />
         </Route>
         
         <Route path="/login" element={<Login />} />
@@ -58,6 +68,12 @@ function App() {
         <Route path="/select-survey" element={
           <ProtectedRoute allowedRoles={['admin', 'surveyor']}>
             <SurveySelection />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/survey/water-conservation" element={
+          <ProtectedRoute allowedRoles={['admin', 'surveyor']}>
+            <WaterConservationSurvey />
           </ProtectedRoute>
         } />
 
@@ -77,6 +93,7 @@ function App() {
           <Route path="surveys-hnss" element={<IrrigationSurveyList surveyType="hnss" />} />
           <Route path="dashboard-palar" element={<IrrigationDashboard surveyType="palar" />} />
           <Route path="surveys-palar" element={<IrrigationSurveyList surveyType="palar" />} />
+          <Route path="surveys-water-conservation" element={<WaterConservationSurveyList />} />
           <Route path="survey/:id" element={<ViewIrrigationSurvey />} />
         </Route>
 
@@ -91,9 +108,11 @@ function App() {
           <Route path="surveys/:id" element={<ViewSurvey />} />
           <Route path="surveys-hnss" element={<IrrigationSurveyList surveyType="hnss" />} />
           <Route path="surveys-palar" element={<IrrigationSurveyList surveyType="palar" />} />
+          <Route path="surveys-water-conservation" element={<WaterConservationSurveyList />} />
           <Route path="new" element={<NewSurvey />} />
           <Route path="new-hnss" element={<NewIrrigationSurvey surveyType="hnss" />} />
           <Route path="new-palar" element={<NewIrrigationSurvey surveyType="palar" />} />
+          <Route path="new-water-conservation" element={<WaterConservationSurvey />} />
           <Route path="survey/:id" element={<ViewIrrigationSurvey />} />
         </Route>
 

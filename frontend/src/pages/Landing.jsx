@@ -167,67 +167,72 @@ export default function Landing() {
 
           {/* 4 Sector Cards Grid */}
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12">
-            {/* 1. Water Dashboard - Live */}
-            <div className="bg-gradient-to-br from-white to-cyan-50/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 border-cyan-500/40 shadow-xl shadow-cyan-950/5 relative overflow-hidden flex flex-col justify-between group hover:border-cyan-500 transition-all duration-300">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+            {/* 1. Water Dashboard - Live (BENTO BOX) */}
+            {/* 1. Water Dashboard - Demo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="h-full"
+            >
+              <Link to="/dashboards/water" className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-blue-400 hover:shadow-xl transition-all duration-300 h-full group block">
               <div>
                 <div className="flex justify-between items-start mb-5 sm:mb-6">
-                  <div className="p-3 bg-cyan-50 text-cyan-600 rounded-2xl border border-cyan-100 shadow-sm">
+                  <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl border border-blue-100 shadow-sm">
                     <Droplet size={24} />
                   </div>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200">
                     Live & Operational
                   </span>
                 </div>
 
-                <span className="text-[10px] sm:text-[11px] font-extrabold text-cyan-600 uppercase tracking-wider block mb-1">Sector 01</span>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-blue-600 uppercase tracking-wider block mb-1">Sector 01</span>
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display mb-1">Water</h3>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Smart Water & Groundwater Telemetry</h4>
                 <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
-                  Real-time sub-surface aquifer depth sensors, 440+ telemetry borewells, automated yield tracking, and GIS recharge analytics across Kuppam constituency.
+                  Real-time sub-surface aquifer depth sensors, 440+ telemetry borewells, automated yield tracking, and GIS recharge analytics.
                 </p>
 
-                <div className="space-y-2 mb-6 sm:mb-8 bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-cyan-100/80">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Live Telemetry Features:</div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-light">
+                <div className="space-y-2 mb-6 sm:mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Live Infrastructure:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 font-light">
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
                       <span>Aquifer Depth Sensors</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
-                      <span>GIS Spatial Basin Map</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                      <span>Telemetry Borewells</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
-                      <span>Seasonal Recharge Logs</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                      <span>Automated Yield Tracking</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
-                      <span>Hourly Data Ingestion</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                      <span>GIS Recharge Analytics</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <a 
-                href="https://kada3.vercel.app/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-2 group-hover:scale-[1.01]"
-              >
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-blue-500 shadow-md group-hover:scale-[1.02] transition-transform">
                 <Activity size={16} className="animate-pulse" />
-                <span>Launch Live Water Dashboard</span>
-                <ExternalLink size={14} />
-              </a>
-            </div>
+                <span>Launch Demo Dashboard</span>
+              </div>
+              </Link>
+            </motion.div>
 
-            {/* 2. Energy Dashboard - Coming Soon */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-amber-300 transition-all duration-300">
+            {/* 2. Energy Dashboard - Demo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="h-full"
+            >
+              <Link to="/dashboards/energy" className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-amber-400 hover:shadow-xl transition-all duration-300 h-full group block">
               <div>
                 <div className="flex justify-between items-start mb-5 sm:mb-6">
                   <div className="p-3 bg-amber-50 text-amber-600 rounded-2xl border border-amber-100 shadow-sm">
@@ -268,13 +273,22 @@ export default function Landing() {
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
-                <span>Dashboard Under Engineering</span>
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-amber-400 shadow-md group-hover:scale-[1.02] transition-transform">
+                <Activity size={16} className="animate-pulse" />
+                <span>Launch Demo Dashboard</span>
               </div>
-            </div>
+              </Link>
+            </motion.div>
 
-            {/* 3. Waste Dashboard - Coming Soon */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-purple-300 transition-all duration-300">
+            {/* 3. Waste Dashboard - Demo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="h-full"
+            >
+              <Link to="/dashboards/waste" className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-purple-400 hover:shadow-xl transition-all duration-300 h-full group block">
               <div>
                 <div className="flex justify-between items-start mb-5 sm:mb-6">
                   <div className="p-3 bg-purple-50 text-purple-600 rounded-2xl border border-purple-100 shadow-sm">
@@ -315,13 +329,22 @@ export default function Landing() {
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
-                <span>Dashboard Under Engineering</span>
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-purple-500 shadow-md group-hover:scale-[1.02] transition-transform">
+                <Activity size={16} className="animate-pulse" />
+                <span>Launch Demo Dashboard</span>
               </div>
-            </div>
+              </Link>
+            </motion.div>
 
-            {/* 4. Carbon Accounting Dashboard - Coming Soon */}
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-emerald-300 transition-all duration-300">
+            {/* 4. Carbon Accounting Dashboard - Demo */}
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="h-full"
+            >
+              <Link to="/dashboards/carbon" className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-blue-400 hover:shadow-xl transition-all duration-300 h-full group block">
               <div>
                 <div className="flex justify-between items-start mb-5 sm:mb-6">
                   <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl border border-emerald-100 shadow-sm">
@@ -362,10 +385,12 @@ export default function Landing() {
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
-                <span>Dashboard Under Engineering</span>
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-blue-500 shadow-md group-hover:scale-[1.02] transition-transform">
+                <Activity size={16} className="animate-pulse" />
+                <span>Launch Demo Dashboard</span>
               </div>
-            </div>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -432,9 +457,10 @@ export default function Landing() {
               { icon: Leaf, title: 'Afforestation', desc: 'Planting 1,000,000+ native saplings to establish permanent regional carbon sinks.', tag: '1M+ Trees', color: 'emerald' },
               { icon: Recycle, title: 'Zero Waste', desc: 'Driving closed-loop segregation logistics and bio-composting agricultural loops.', tag: 'Closed Loop', color: 'purple' }
             ].map((pillar, i) => (
-              <div 
+              <Link 
+                to={`/pillars`}
                 key={i} 
-                className="bg-slate-50/70 hover:bg-white p-6 rounded-3xl border border-slate-200/70 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-300 text-left flex flex-col justify-between"
+                className="bg-slate-50/70 hover:bg-white p-6 rounded-3xl border border-slate-200/70 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-900/5 transition-all duration-300 text-left flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex justify-between items-center mb-4">
@@ -448,9 +474,9 @@ export default function Landing() {
                 </div>
                 <div className="mt-6 pt-3 border-t border-slate-200/50 flex items-center text-xs font-bold text-emerald-600 gap-1">
                   <span>Learn more</span>
-                  <ArrowRight size={12} />
+                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           

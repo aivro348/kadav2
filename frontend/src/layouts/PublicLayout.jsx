@@ -10,6 +10,7 @@ export default function PublicLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const location = useLocation();
+  const isDashboard = location.pathname.startsWith('/dashboards');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +54,8 @@ export default function PublicLayout() {
   return (
     <div className="min-h-screen bg-slate-50/50 font-sans text-slate-800 flex flex-col justify-between selection:bg-emerald-500 selection:text-white relative">
       {/* Navbar */}
-      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-slate-900/5 border-b border-slate-200/60 py-2.5 sm:py-3' : 'bg-transparent py-3.5 sm:py-5'}`}>
+      {!isDashboard && (
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-500 ${scrolled ? 'bg-white/70 backdrop-blur-2xl shadow-xl shadow-slate-900/5 border-b border-white/60 saturate-[1.1]' : 'bg-transparent py-4 sm:py-6'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center font-display gap-2">
             {/* Logos */}
@@ -72,17 +74,17 @@ export default function PublicLayout() {
             </Link>
 
             {/* Center Links (Desktop) */}
-            <div className="hidden md:flex items-center space-x-1 bg-white/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md shadow-sm">
+            <div className="hidden md:flex items-center space-x-1.5 bg-white/60 p-1.5 rounded-full border border-white/80 backdrop-blur-xl shadow-sm">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
                   <Link
                     key={link.name}
                     to={link.path}
-                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-200 ${
+                    className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 ${
                       isActive 
-                        ? 'bg-emerald-600 text-white shadow-sm' 
-                        : 'text-slate-700 hover:text-emerald-700 hover:bg-slate-100'
+                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20' 
+                        : 'text-slate-800 hover:text-emerald-700 hover:bg-white/80'
                     }`}
                   >
                     {link.name}
@@ -93,14 +95,34 @@ export default function PublicLayout() {
 
             {/* Right Side Buttons */}
             <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
-              <Link 
-                to="/login" 
-                className="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 sm:px-5 py-2 rounded-full font-bold transition-all shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 text-xs tracking-wide flex items-center gap-1.5 whitespace-nowrap"
-              >
-                <ShieldCheck size={14} />
-                <span className="hidden sm:inline">Surveyor Portal</span>
-                <span className="sm:hidden text-[11px]">Portal</span>
-              </Link>
+              {location.pathname !== '/' && (
+                <>
+                  {/* i18n Toggle */}
+                  <div className="flex bg-slate-100/80 backdrop-blur-sm p-0.5 rounded-full border border-slate-200/60 shadow-inner hidden sm:flex">
+                    <button 
+                      onClick={() => toggleLanguage('en')}
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all duration-300 ${i18n.language === 'en' ? 'bg-white text-emerald-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    >
+                      EN
+                    </button>
+                    <button 
+                      onClick={() => toggleLanguage('te')}
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold transition-all duration-300 ${i18n.language === 'te' ? 'bg-white text-emerald-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                    >
+                      తెలుగు
+                    </button>
+                  </div>
+
+                  <Link 
+                    to="/login" 
+                    className="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 sm:px-5 py-2 rounded-full font-bold transition-all shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 text-xs tracking-wide flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    <ShieldCheck size={14} />
+                    <span className="hidden sm:inline">Surveyor Portal</span>
+                    <span className="sm:hidden text-[11px]">Portal</span>
+                  </Link>
+                </>
+              )}
               
               <button 
                 className="md:hidden p-2 text-slate-800 rounded-xl bg-white/90 border border-slate-200 shadow-sm hover:bg-slate-100 transition-colors focus:outline-none"
@@ -146,6 +168,7 @@ export default function PublicLayout() {
           </div>
         )}
       </nav>
+      )}
 
       {/* Main Content Page Container */}
       <div className="flex-grow">
@@ -153,6 +176,7 @@ export default function PublicLayout() {
       </div>
 
       {/* Shared Footer */}
+      {!isDashboard && (
       <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-slate-800/80 mt-auto relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
@@ -226,6 +250,7 @@ export default function PublicLayout() {
           </div>
         </div>
       </footer>
+      )}
 
       {/* Floating Back to Top Button */}
       {showBackToTop && (
