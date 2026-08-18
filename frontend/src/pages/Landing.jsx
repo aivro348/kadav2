@@ -76,7 +76,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.12] font-display tracking-tight drop-shadow-2xl max-w-5xl"
+            className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-[1.18] sm:leading-[1.12] font-display tracking-tight drop-shadow-2xl max-w-5xl"
           >
             Pioneering a <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">NetZero</span><br />
             Future for Kuppam
@@ -86,7 +86,7 @@ export default function Landing() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-6 text-base sm:text-lg text-slate-200/90 font-light max-w-2xl mx-auto drop-shadow-md leading-relaxed"
+            className="mt-4 sm:mt-6 text-sm sm:text-lg text-slate-200/90 font-light max-w-2xl mx-auto drop-shadow-md leading-relaxed px-2"
           >
             Empowering Kuppam with next-generation sustainable infrastructure to secure a resilient, zero-emission ecosystem.
           </motion.p>
@@ -95,14 +95,14 @@ export default function Landing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md sm:max-w-none"
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-none"
           >
-            <Link to="/vision" className="px-8 py-3.5 rounded-full font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 transition-all duration-300 text-center flex items-center justify-center gap-2 group">
+            <Link to="/vision" className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-500 hover:shadow-xl hover:shadow-emerald-600/30 hover:-translate-y-0.5 transition-all duration-300 text-center flex items-center justify-center gap-2 group">
               <span>Explore Our Vision</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            <Link to="/login" className="px-8 py-3.5 rounded-full font-bold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 transition-all backdrop-blur-md text-center flex items-center justify-center gap-2">
+            <Link to="/login" className="w-full sm:w-auto px-7 py-3.5 rounded-full font-bold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/40 transition-all backdrop-blur-md text-center flex items-center justify-center gap-2">
               <ShieldCheck size={16} className="text-emerald-400" />
               <span>Surveyor Portal</span>
             </Link>
@@ -113,7 +113,7 @@ export default function Landing() {
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-5 w-full max-w-4xl mx-auto border-t border-white/15 pt-8"
+            className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 w-full max-w-4xl mx-auto border-t border-white/15 pt-6 sm:pt-8"
           >
             {[
               { label: 'Sustainability Target', value: '100%', sub: 'NetZero Mandate' },
@@ -124,11 +124,11 @@ export default function Landing() {
               <motion.div 
                 key={i} 
                 variants={fadeInUp} 
-                className="bg-slate-900/50 backdrop-blur-md p-4 rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all text-center"
+                className="bg-slate-900/50 backdrop-blur-md p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all text-center"
               >
-                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-display tracking-tight">{stat.value}</div>
-                <div className="text-slate-200 text-xs font-semibold mt-1">{stat.label}</div>
-                <div className="text-[10px] text-slate-400 mt-0.5">{stat.sub}</div>
+                <div className="text-xl sm:text-3xl font-extrabold text-emerald-400 font-display tracking-tight">{stat.value}</div>
+                <div className="text-slate-200 text-[11px] sm:text-xs font-semibold mt-1">{stat.label}</div>
+                <div className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5">{stat.sub}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -136,44 +136,44 @@ export default function Landing() {
       </section>
 
       {/* Stakeholders & Institutional Partners Banner */}
-      <section className="py-6 bg-slate-900 border-b border-slate-800 text-slate-400">
+      <section className="py-5 sm:py-6 bg-slate-900 border-b border-slate-800 text-slate-400">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            <span className="text-[11px] text-slate-500 tracking-widest font-extrabold">Institutional Alliance:</span>
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-[10px] sm:text-[11px] text-slate-500 tracking-widest font-extrabold">Institutional Alliance:</span>
             <div className="flex items-center gap-2 text-slate-300">
-              <Landmark size={16} className="text-emerald-400" />
-              <span>Govt. of Andhra Pradesh</span>
+              <Landmark size={15} className="text-emerald-400" />
+              <span className="text-[11px] sm:text-xs">Govt. of Andhra Pradesh</span>
             </div>
             <div className="flex items-center gap-2 text-slate-300">
-              <ShieldCheck size={16} className="text-emerald-400" />
-              <span>Kuppam Area Development Authority</span>
+              <ShieldCheck size={15} className="text-emerald-400" />
+              <span className="text-[11px] sm:text-xs">Kuppam Area Development Authority</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Dedicated Constituency Sector Dashboards Hub */}
-      <section id="sector-dashboards" className="py-24 bg-white border-b border-slate-200/60">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section id="sector-dashboards" className="py-16 sm:py-24 bg-white border-b border-slate-200/60">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <span className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-cyan-500/10 text-cyan-700 border border-cyan-500/20 text-xs font-bold uppercase tracking-wider mb-3">
               <Database size={13} className="text-cyan-600" /> Regional Data Infrastructure
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display">Constituency Sector Dashboards</h2>
-            <p className="text-slate-500 text-sm sm:text-base mt-2 font-light leading-relaxed">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display">Constituency Sector Dashboards</h2>
+            <p className="text-slate-500 text-xs sm:text-base mt-2 font-light leading-relaxed">
               Dedicated real-time analytics portals across Kuppam's four core sustainability sectors. The Groundwater Telemetry system is actively deployed, with additional sector dashboards currently in pipeline development.
             </p>
           </div>
 
           {/* 4 Sector Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-12">
             {/* 1. Water Dashboard - Live */}
-            <div className="bg-gradient-to-br from-white to-cyan-50/40 rounded-3xl p-8 border-2 border-cyan-500/40 shadow-xl shadow-cyan-950/5 relative overflow-hidden flex flex-col justify-between group hover:border-cyan-500 transition-all duration-300">
+            <div className="bg-gradient-to-br from-white to-cyan-50/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 border-cyan-500/40 shadow-xl shadow-cyan-950/5 relative overflow-hidden flex flex-col justify-between group hover:border-cyan-500 transition-all duration-300">
               <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
               <div>
-                <div className="flex justify-between items-start mb-6">
-                  <div className="p-3.5 bg-cyan-50 text-cyan-600 rounded-2xl border border-cyan-100 shadow-sm">
-                    <Droplet size={26} />
+                <div className="flex justify-between items-start mb-5 sm:mb-6">
+                  <div className="p-3 bg-cyan-50 text-cyan-600 rounded-2xl border border-cyan-100 shadow-sm">
+                    <Droplet size={24} />
                   </div>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">
                     <span className="relative flex h-2 w-2">
@@ -184,16 +184,16 @@ export default function Landing() {
                   </span>
                 </div>
 
-                <span className="text-[11px] font-extrabold text-cyan-600 uppercase tracking-wider block mb-1">Sector 01</span>
-                <h3 className="text-3xl font-black text-slate-900 font-display mb-1">Water</h3>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-cyan-600 uppercase tracking-wider block mb-1">Sector 01</span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display mb-1">Water</h3>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Smart Water & Groundwater Telemetry</h4>
-                <p className="text-slate-600 text-sm font-light leading-relaxed mb-6">
+                <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
                   Real-time sub-surface aquifer depth sensors, 440+ telemetry borewells, automated yield tracking, and GIS recharge analytics across Kuppam constituency.
                 </p>
 
-                <div className="space-y-2 mb-8 bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-cyan-100/80">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Live Telemetry Features:</div>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-700 font-light">
+                <div className="space-y-2 mb-6 sm:mb-8 bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-cyan-100/80">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Live Telemetry Features:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-light">
                     <div className="flex items-center gap-2">
                       <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
                       <span>Aquifer Depth Sensors</span>
@@ -218,151 +218,151 @@ export default function Landing() {
                 href="https://kada3.vercel.app/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-full py-3.5 px-6 rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-sm transition-all shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-2 group-hover:scale-[1.01]"
+                className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm transition-all shadow-lg shadow-cyan-600/25 flex items-center justify-center gap-2 group-hover:scale-[1.01]"
               >
-                <Activity size={17} className="animate-pulse" />
+                <Activity size={16} className="animate-pulse" />
                 <span>Launch Live Water Dashboard</span>
-                <ExternalLink size={15} />
+                <ExternalLink size={14} />
               </a>
             </div>
 
             {/* 2. Energy Dashboard - Coming Soon */}
-            <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-amber-300 transition-all duration-300">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-amber-300 transition-all duration-300">
               <div>
-                <div className="flex justify-between items-start mb-6">
-                  <div className="p-3.5 bg-amber-50 text-amber-600 rounded-2xl border border-amber-100 shadow-sm">
-                    <Sun size={26} />
+                <div className="flex justify-between items-start mb-5 sm:mb-6">
+                  <div className="p-3 bg-amber-50 text-amber-600 rounded-2xl border border-amber-100 shadow-sm">
+                    <Sun size={24} />
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-amber-50 text-amber-700 border border-amber-200">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-amber-50 text-amber-700 border border-amber-200">
                     Phase 2 Pipeline • Q3-Q4 2026
                   </span>
                 </div>
 
-                <span className="text-[11px] font-extrabold text-amber-600 uppercase tracking-wider block mb-1">Sector 02</span>
-                <h3 className="text-3xl font-black text-slate-900 font-display mb-1">Energy</h3>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-amber-600 uppercase tracking-wider block mb-1">Sector 02</span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display mb-1">Energy</h3>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Renewable Energy & Solar Pumps</h4>
-                <p className="text-slate-600 text-sm font-light leading-relaxed mb-6">
+                <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
                   Centralized telemetry dashboard for tracking agricultural solar pump conversions, micro-grid generation efficiency, and battery storage reserve status.
                 </p>
 
-                <div className="space-y-2 mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 font-light">
+                <div className="space-y-2 mb-6 sm:mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 font-light">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
                       <span>Solar PV Generation Logs</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
                       <span>Pump Uptime Tracking</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
                       <span>Grid Peak Offset Feeds</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
                       <span>Decentralized Storage</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-2xl bg-slate-100 text-slate-500 font-bold text-sm flex items-center justify-center gap-2 border border-slate-200">
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
                 <span>Dashboard Under Engineering</span>
               </div>
             </div>
 
             {/* 3. Waste Dashboard - Coming Soon */}
-            <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-purple-300 transition-all duration-300">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-purple-300 transition-all duration-300">
               <div>
-                <div className="flex justify-between items-start mb-6">
-                  <div className="p-3.5 bg-purple-50 text-purple-600 rounded-2xl border border-purple-100 shadow-sm">
-                    <Recycle size={26} />
+                <div className="flex justify-between items-start mb-5 sm:mb-6">
+                  <div className="p-3 bg-purple-50 text-purple-600 rounded-2xl border border-purple-100 shadow-sm">
+                    <Recycle size={24} />
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 text-purple-700 border border-purple-200">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-purple-50 text-purple-700 border border-purple-200">
                     Phase 3 Pipeline • 2027
                   </span>
                 </div>
 
-                <span className="text-[11px] font-extrabold text-purple-600 uppercase tracking-wider block mb-1">Sector 03</span>
-                <h3 className="text-3xl font-black text-slate-900 font-display mb-1">Waste</h3>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-purple-600 uppercase tracking-wider block mb-1">Sector 03</span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display mb-1">Waste</h3>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Zero-Waste & Bio-Composting Flow</h4>
-                <p className="text-slate-600 text-sm font-light leading-relaxed mb-6">
+                <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
                   Panchayat-level organic waste segregation tracking, bio-fertilizer conversion analytics, and distribution ledgers to local agricultural collectives.
                 </p>
 
-                <div className="space-y-2 mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 font-light">
+                <div className="space-y-2 mb-6 sm:mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 font-light">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
                       <span>Source Segregation Logs</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
                       <span>Bio-Compost Batches</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
                       <span>Farmer Allocation Ledger</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
                       <span>Landfill Divergence Rate</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-2xl bg-slate-100 text-slate-500 font-bold text-sm flex items-center justify-center gap-2 border border-slate-200">
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
                 <span>Dashboard Under Engineering</span>
               </div>
             </div>
 
             {/* 4. Carbon Accounting Dashboard - Coming Soon */}
-            <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-emerald-300 transition-all duration-300">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-soft relative overflow-hidden flex flex-col justify-between hover:border-emerald-300 transition-all duration-300">
               <div>
-                <div className="flex justify-between items-start mb-6">
-                  <div className="p-3.5 bg-emerald-50 text-emerald-600 rounded-2xl border border-emerald-100 shadow-sm">
-                    <Leaf size={26} />
+                <div className="flex justify-between items-start mb-5 sm:mb-6">
+                  <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl border border-emerald-100 shadow-sm">
+                    <Leaf size={24} />
                   </div>
-                  <span className="px-3 py-1 rounded-full text-xs font-extrabold bg-blue-50 text-blue-700 border border-blue-200">
+                  <span className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-extrabold bg-blue-50 text-blue-700 border border-blue-200">
                     Phase 3 Pipeline • 2027
                   </span>
                 </div>
 
-                <span className="text-[11px] font-extrabold text-emerald-600 uppercase tracking-wider block mb-1">Sector 04</span>
-                <h3 className="text-3xl font-black text-slate-900 font-display mb-1">Carbon Accounting</h3>
+                <span className="text-[10px] sm:text-[11px] font-extrabold text-emerald-600 uppercase tracking-wider block mb-1">Sector 04</span>
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display mb-1">Carbon Accounting</h3>
                 <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Afforestation & Carbon Sinks Monitor</h4>
-                <p className="text-slate-600 text-sm font-light leading-relaxed mb-6">
+                <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
                   Multi-spectral satellite canopy index (NDVI), native sapling survivability registries, and sub-surface moisture retention mapping across watersheds.
                 </p>
 
-                <div className="space-y-2 mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
-                  <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 font-light">
+                <div className="space-y-2 mb-6 sm:mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Planned Architecture:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-600 font-light">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
                       <span>Satellite NDVI Imagery</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
                       <span>1M+ Sapling Registry</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
                       <span>Soil Moisture Contours</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
                       <span>Carbon Sequestration Log</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full py-3.5 px-6 rounded-2xl bg-slate-100 text-slate-500 font-bold text-sm flex items-center justify-center gap-2 border border-slate-200">
+              <div className="w-full py-3.5 px-6 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-500 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200">
                 <span>Dashboard Under Engineering</span>
               </div>
             </div>

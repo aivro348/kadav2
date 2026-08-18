@@ -53,25 +53,25 @@ export default function PublicLayout() {
   return (
     <div className="min-h-screen bg-slate-50/50 font-sans text-slate-800 flex flex-col justify-between selection:bg-emerald-500 selection:text-white relative">
       {/* Navbar */}
-      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white/85 backdrop-blur-xl shadow-lg shadow-slate-900/5 border-b border-slate-200/60 py-3' : 'bg-transparent py-5'}`}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex justify-between items-center font-display">
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-slate-900/5 border-b border-slate-200/60 py-2.5 sm:py-3' : 'bg-transparent py-3.5 sm:py-5'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center font-display gap-2">
             {/* Logos */}
-            <Link to="/" className="flex items-center gap-3 group bg-white/95 hover:bg-white backdrop-blur-md py-1.5 px-3.5 rounded-2xl border border-slate-200/80 shadow-sm transition-all">
-              <div className="relative">
-                <img src="/netzero.jpg" alt="NetZero Logo" className="h-9 w-9 object-cover rounded-full shadow-sm border border-emerald-500/30 group-hover:scale-105 transition-transform" />
-                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white"></div>
+            <Link to="/" className="flex items-center gap-2 sm:gap-3 group bg-white/95 hover:bg-white backdrop-blur-md py-1 sm:py-1.5 px-2.5 sm:px-3.5 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm transition-all flex-shrink-0">
+              <div className="relative flex-shrink-0">
+                <img src="/netzero.jpg" alt="NetZero Logo" className="h-8 w-8 sm:h-9 sm:w-9 object-cover rounded-full shadow-sm border border-emerald-500/30 group-hover:scale-105 transition-transform" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-emerald-500 rounded-full border-2 border-white"></div>
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-black text-sm text-slate-900 tracking-tight">KADA</span>
-                  <span className="text-[9px] font-extrabold text-emerald-700 bg-emerald-100/80 border border-emerald-300/60 px-1.5 py-0.2 rounded-md">NETZERO</span>
+                <div className="flex items-center gap-1">
+                  <span className="font-black text-xs sm:text-sm text-slate-900 tracking-tight">KADA</span>
+                  <span className="text-[8px] sm:text-[9px] font-extrabold text-emerald-700 bg-emerald-100/80 border border-emerald-300/60 px-1 sm:px-1.5 py-0.2 rounded-md">NETZERO</span>
                 </div>
-                <span className="text-[10px] text-slate-600 font-semibold tracking-wide hidden sm:block">Kuppam Area Development Authority</span>
+                <span className="text-[9px] sm:text-[10px] text-slate-600 font-semibold tracking-wide hidden sm:block">Kuppam Area Development Authority</span>
               </div>
             </Link>
 
-            {/* Center Links */}
+            {/* Center Links (Desktop) */}
             <div className="hidden md:flex items-center space-x-1 bg-white/90 p-1.5 rounded-full border border-slate-200/80 backdrop-blur-md shadow-sm">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
@@ -92,21 +92,22 @@ export default function PublicLayout() {
             </div>
 
             {/* Right Side Buttons */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
               <Link 
                 to="/login" 
-                className="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-full font-bold transition-all shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 text-xs tracking-wide flex items-center gap-1.5"
+                className="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 sm:px-5 py-2 rounded-full font-bold transition-all shadow-md shadow-emerald-600/20 hover:shadow-emerald-600/30 text-xs tracking-wide flex items-center gap-1.5 whitespace-nowrap"
               >
                 <ShieldCheck size={14} />
-                <span>Surveyor Portal</span>
+                <span className="hidden sm:inline">Surveyor Portal</span>
+                <span className="sm:hidden text-[11px]">Portal</span>
               </Link>
               
               <button 
-                className="md:hidden p-2 text-slate-800 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="md:hidden p-2 text-slate-800 rounded-xl bg-white/90 border border-slate-200 shadow-sm hover:bg-slate-100 transition-colors focus:outline-none"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle Navigation Menu"
               >
-                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
@@ -114,16 +115,34 @@ export default function PublicLayout() {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-2xl absolute top-full left-0 w-full py-6 px-6 flex flex-col space-y-3 font-display animate-in slide-in-from-top-2 duration-200">
+          <div className="md:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 shadow-2xl absolute top-full left-0 w-full py-5 px-5 flex flex-col space-y-2 font-display animate-in slide-in-from-top-2 duration-200">
+            <div className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 pb-1">
+              Menu Navigation
+            </div>
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className={`py-2 px-3 rounded-xl font-bold text-base transition-colors ${location.pathname === link.path ? 'bg-emerald-50 text-emerald-600' : 'text-slate-800 hover:bg-slate-50'}`}
+                className={`py-2.5 px-4 rounded-xl font-bold text-sm transition-colors flex items-center justify-between ${
+                  location.pathname === link.path 
+                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' 
+                    : 'text-slate-800 hover:bg-slate-50'
+                }`}
               >
-                {link.name}
+                <span>{link.name}</span>
+                {location.pathname === link.path && <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />}
               </Link>
             ))}
+            
+            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+              <Link
+                to="/login"
+                className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
+              >
+                <ShieldCheck size={14} />
+                <span>Surveyor Authentication</span>
+              </Link>
+            </div>
           </div>
         )}
       </nav>
