@@ -1,0 +1,8 @@
+{
+  "name": "hostinger-static-deploy",
+  "version": "1.0.0",
+  "description": "Dummy package to bypass framework checks",
+  "scripts": {
+    "build": "echo 'Already built!'"
+  }
+}
