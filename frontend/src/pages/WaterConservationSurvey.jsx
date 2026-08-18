@@ -10,7 +10,6 @@ export default function WaterConservationSurvey() {
   const [currentStep, setCurrentStep] = useState(0);
   const [images, setImages] = useState([]);
   const [isCapturingGPS, setIsCapturingGPS] = useState(false);
-  const [gpsMessage, setGpsMessage] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
@@ -31,7 +30,6 @@ export default function WaterConservationSurvey() {
   const selectedPanchayat = watch('panchayat');
   const structureType = watch('structureType');
   const latitude = watch('latitude');
-  const accuracy = watch('accuracy');
 
   // Clear dependent location fields
   useEffect(() => {
@@ -71,84 +69,43 @@ export default function WaterConservationSurvey() {
     setCurrentStep((prev) => Math.max(prev - 1, 0));
   };
 
-  // High-Resolution GPS Capture (< 5m resolution strict enforcement)
+  // Exact GPS Capture logic matching Borewell Survey (NewSurvey.jsx)
   const captureGPS = () => {
     setIsCapturingGPS(true);
-    setGpsMessage({ type: 'info', text: 'Connecting to GNSS satellites for high-resolution lock (≤ 5 meters)...' });
-
     if ('geolocation' in navigator) {
-      let bestAccuracy = 999999;
-      
-      const watchId = navigator.geolocation.watchPosition(
+      // First try with high accuracy (GPS chip)
+      navigator.geolocation.getCurrentPosition(
         (position) => {
-          const acc = position.coords.accuracy;
-          if (acc < bestAccuracy) {
-            bestAccuracy = acc;
-          }
-
-          // Strict resolution check: <= 5 meters
-          if (acc <= 5) {
-            setValue('latitude', position.coords.latitude);
-            setValue('longitude', position.coords.longitude);
-            setValue('accuracy', acc);
-            setIsCapturingGPS(false);
-            setGpsMessage({ 
-              type: 'success', 
-              text: `✓ High accuracy lock: ${acc.toFixed(1)}m resolution (< 5m target achieved)` 
-            });
-            navigator.geolocation.clearWatch(watchId);
-          } else {
-            // If browser/device returned low resolution (e.g. 400m from Wi-Fi), do not accept as high-accuracy lock
-            setValue('latitude', position.coords.latitude);
-            setValue('longitude', position.coords.longitude);
-            setValue('accuracy', acc);
-            setGpsMessage({ 
-              type: 'warning', 
-              text: `Current signal resolution is ${acc.toFixed(1)}m. Target must be ≤ 5 meters. Calibrate or move to open sky.` 
-            });
-          }
+          setValue('latitude', position.coords.latitude);
+          setValue('longitude', position.coords.longitude);
+          setIsCapturingGPS(false);
         },
         (error) => {
-          console.warn('GPS watch error:', error);
-          setGpsMessage({ 
-            type: 'error', 
-            text: `GPS error: ${error.message}. Please enable high-accuracy location services.` 
-          });
-          setIsCapturingGPS(false);
-          navigator.geolocation.clearWatch(watchId);
+          console.warn('High accuracy GPS failed. Trying low accuracy fallback...', error);
+          // If high accuracy fails or times out, try low accuracy (Wi-Fi/Cell towers)
+          navigator.geolocation.getCurrentPosition(
+            (fallbackPosition) => {
+              setValue('latitude', fallbackPosition.coords.latitude);
+              setValue('longitude', fallbackPosition.coords.longitude);
+              setIsCapturingGPS(false);
+            },
+            (fallbackError) => {
+              alert('Error capturing GPS. Please ensure Location services are turned on for your device.');
+              setIsCapturingGPS(false);
+            },
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+          );
         },
-        { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+        { enableHighAccuracy: true, timeout: 2500, maximumAge: 0 }
       );
-
-      // After 12 seconds, if not yet locked <= 5m, stop watching and offer calibrated fix
-      setTimeout(() => {
-        setIsCapturingGPS(false);
-        navigator.geolocation.clearWatch(watchId);
-      }, 12000);
-
     } else {
       alert('Geolocation is not supported by your browser');
       setIsCapturingGPS(false);
     }
   };
 
-  // High-Resolution Calibration Fix (< 5m resolution guarantee)
-  const calibratePrecisionFix = () => {
-    // Retain captured coordinates if available, else use regional centroid
-    const curLat = getValues('latitude') || 12.748342;
-    const curLng = getValues('longitude') || 78.361518;
-    setValue('latitude', curLat);
-    setValue('longitude', curLng);
-    setValue('accuracy', 3.2);
-    setGpsMessage({ 
-      type: 'success', 
-      text: '✓ High precision resolution calibrated: 3.2 meters (< 5m lock)' 
-    });
-    setIsCapturingGPS(false);
-  };
-
-  // Watermark Image Function matching Borewell Survey with Accuracy Level
-  const watermarkImage = (file, latitude, longitude, accuracy) => {
+  // Exact Watermark Image function matching Borewell Survey (NewSurvey.jsx)
+  const watermarkImage = (file, latitude, longitude) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -176,9 +133,9 @@ export default function WaterConservationSurvey() {
         ctx.drawImage(img, 0, 0, width, height);
 
         // Draw watermark background
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
         const textHeight = Math.max(18, height * 0.03);
-        ctx.fillRect(0, height - textHeight * 3.5, width, textHeight * 3.5);
+        ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
 
         // Draw text
         ctx.fillStyle = '#ffffff';
@@ -190,10 +147,9 @@ export default function WaterConservationSurvey() {
 
         const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
         const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
-        const accText = accuracy ? (typeof accuracy === 'number' ? `${accuracy.toFixed(1)}m` : `${accuracy}m`) : 'N/A';
 
-        ctx.fillText(`Lat: ${latText}, Lng: ${lngText} | Accuracy: ${accText}`, padding, height - textHeight * 1.8);
-        ctx.fillText(`Water Conservation / నీటి సంరక్షణ | ${dateStr}`, padding, height - padding);
+        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
+        ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
 
         // Revoke Object URL to free mobile RAM immediately
         URL.revokeObjectURL(img.src);
@@ -209,13 +165,12 @@ export default function WaterConservationSurvey() {
     if (e.target.files) {
       const lat = getValues('latitude');
       const lng = getValues('longitude');
-      const acc = getValues('accuracy');
 
       const newImages = [];
       for (let i = 0; i < e.target.files.length; i++) {
         const file = e.target.files[i];
         if (lat && lng) {
-          const watermarkedUrl = await watermarkImage(file, lat, lng, acc);
+          const watermarkedUrl = await watermarkImage(file, lat, lng);
           newImages.push(watermarkedUrl);
         } else {
           // Fallback if no GPS
@@ -516,130 +471,63 @@ export default function WaterConservationSurvey() {
             </div>
           )}
 
-          {/* STEP 4: Location & Photos */}
+          {/* STEP 4: Location & Photos (Exact Borewell Survey Design & Logic) */}
           {currentStep === 3 && (
             <div className="space-y-8 animate-in fade-in">
               <div>
                 <h2 className="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                  High-Accuracy GPS Location <span className="text-emerald-700 font-medium text-base">/ ఖచ్చితమైన GPS ప్రదేశం (&lt; 5m Resolution)</span>
+                  {t('survey.gps_location', 'GPS Location')} <span className="text-emerald-700 font-medium text-base">/ GPS ప్రదేశం</span>
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label className="label-text font-semibold">
-                      Latitude <span className="text-slate-600 font-normal">/ అక్షాంశం</span>
-                    </label>
-                    <input type="number" step="any" className="input-field font-mono" {...register('latitude', { required: true })} readOnly placeholder="0.000000" />
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex-1">
+                    <label className="label-text font-semibold">{t('survey.latitude', 'Latitude')} <span className="text-slate-600 font-normal">/ అక్షాంశం</span></label>
+                    <input type="number" step="any" className="input-field font-mono" {...register('latitude', { required: true })} readOnly />
                   </div>
-                  <div>
-                    <label className="label-text font-semibold">
-                      Longitude <span className="text-slate-600 font-normal">/ రేఖాంశం</span>
-                    </label>
-                    <input type="number" step="any" className="input-field font-mono" {...register('longitude', { required: true })} readOnly placeholder="0.000000" />
-                  </div>
-                  <div>
-                    <label className="label-text font-semibold">
-                      GPS Accuracy <span className="text-slate-600 font-normal">/ ఖచ్చితత్వం (&le; 5m)</span>
-                    </label>
-                    <input 
-                      type="text" 
-                      className={`input-field font-mono font-bold ${
-                        !watch('accuracy') ? 'text-slate-400' : 
-                        Number(watch('accuracy')) <= 5 ? 'text-emerald-700 bg-emerald-50/70 border-emerald-300' : 
-                        'text-amber-700 bg-amber-50 border-amber-300'
-                      }`} 
-                      value={
-                        watch('accuracy') 
-                          ? `${Number(watch('accuracy')).toFixed(1)}m (${Number(watch('accuracy')) <= 5 ? '✓ Valid < 5m' : '⚠️ Resolution > 5m'})` 
-                          : 'Not captured / తీసుకోలేదు'
-                      } 
-                      readOnly 
-                    />
+                  <div className="flex-1">
+                    <label className="label-text font-semibold">{t('survey.longitude', 'Longitude')} <span className="text-slate-600 font-normal">/ రేఖాంశం</span></label>
+                    <input type="number" step="any" className="input-field font-mono" {...register('longitude', { required: true })} readOnly />
                   </div>
                 </div>
-
-                {/* GPS Status Message & Calibration Banner */}
-                {gpsMessage && (
-                  <div className={`mt-3 p-3 rounded-lg text-xs flex items-center justify-between gap-2 border ${
-                    gpsMessage.type === 'success' ? 'bg-emerald-50 text-emerald-900 border-emerald-300' :
-                    gpsMessage.type === 'warning' ? 'bg-amber-50 text-amber-900 border-amber-300' :
-                    'bg-slate-100 text-slate-800 border-slate-300'
-                  }`}>
-                    <span>{gpsMessage.text}</span>
-                  </div>
-                )}
-
-                {watch('accuracy') && Number(watch('accuracy')) > 5 && (
-                  <div className="mt-3 p-3.5 bg-amber-50 border border-amber-300 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-900 animate-in fade-in">
-                    <div>
-                      <p className="font-bold">⚠️ GPS Accuracy is {Number(watch('accuracy')).toFixed(1)}m (Exceeds 5m Target)</p>
-                      <p className="text-slate-600 mt-0.5">Device returned Wi-Fi/IP location. Tap below to calibrate to high-precision &lt; 5m fix for this site.</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={calibratePrecisionFix}
-                      className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm whitespace-nowrap transition-colors"
-                    >
-                      Calibrate &lt; 5m (3.2m Fix)
-                    </button>
-                  </div>
-                )}
-                
-                <div className="flex items-center gap-3 mt-4 flex-wrap">
-                  <button
-                    type="button"
-                    onClick={captureGPS}
-                    disabled={isCapturingGPS}
-                    className="flex items-center justify-center w-full sm:w-auto px-5 py-2.5 border border-slate-300 rounded-lg shadow-sm text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 transition-colors"
-                  >
-                    <MapPin className="mr-2 h-5 w-5 text-primary-500" />
-                    {isCapturingGPS ? 'Acquiring Satellite Lock... / శోధిస్తోంది...' : 'Capture GPS / GPS స్థానాన్ని తీసుకోండి'}
-                  </button>
-                  
-                  <button
-                    type="button"
-                    onClick={calibratePrecisionFix}
-                    className="text-xs text-emerald-700 hover:text-emerald-900 font-semibold underline px-2 py-1"
-                  >
-                    Lock High-Precision (&lt; 5m Fix)
-                  </button>
-                  
-                  {watch('accuracy') && (
-                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${Number(watch('accuracy')) <= 5 ? 'bg-emerald-100 text-emerald-800 border border-emerald-300' : 'bg-amber-100 text-amber-800 border border-amber-300'}`}>
-                      Resolution: {Number(watch('accuracy')).toFixed(1)}m {Number(watch('accuracy')) <= 5 ? '(Valid < 5m)' : '(Needs < 5m fix)'}
-                    </span>
-                  )}
-                </div>
+                <button
+                  type="button"
+                  onClick={captureGPS}
+                  disabled={isCapturingGPS}
+                  className="mt-4 flex items-center justify-center w-full sm:w-auto px-4 py-2 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors"
+                >
+                  <MapPin className="mr-2 h-5 w-5 text-primary-500" />
+                  {isCapturingGPS ? `${t('survey.capturing', 'Capturing...')} / లొకేషన్ తీస్తోంది...` : `${t('survey.capture_gps', 'Capture GPS')} / GPS స్థానాన్ని తీసుకోండి`}
+                </button>
               </div>
 
               <div className={`transition-opacity duration-300 ${!watch('latitude') ? 'opacity-50 pointer-events-none' : ''}`}>
                 <h2 className="text-lg font-bold text-slate-900 mb-2">
-                  Photographs <span className="text-emerald-700 font-medium text-base">/ ఛాయాచిత్రాలు (ఫోటోలు)</span>
+                  {t('survey.image_capture', 'Photographs')} <span className="text-emerald-700 font-medium text-base">/ ఛాయాచిత్రాలు (ఫోటోలు)</span>
                 </h2>
                 {!watch('latitude') && (
                   <p className="text-sm text-red-500 mb-4 font-medium">
-                    Please capture GPS location first. Your photos will be watermarked with the coordinates and accuracy level.<br/>
-                    <span className="text-xs">దయచేసి మొదట GPS స్థానాన్ని తీసుకోండి. మీ ఫోటోలపై అక్షాంశం, రేఖాంశం మరియు ఖచ్చితత్వ స్థాయి ముద్రించబడతాయి.</span>
+                    Please capture GPS location first. Your photos will be watermarked with the coordinates.<br/>
+                    <span className="text-xs">దయచేసి మొదట GPS స్థానాన్ని తీసుకోండి. మీ ఫోటోలపై అక్షాంశం, రేఖాంశం ముద్రించబడతాయి.</span>
                   </p>
                 )}
                 {watch('latitude') && (
-                  <p className="text-sm text-emerald-700 mb-4 font-medium">
-                    ✓ GPS captured at <span className="font-mono font-bold">{Number(watch('accuracy') || 3.2).toFixed(1)}m accuracy</span>. Photos will now be automatically watermarked.<br/>
+                  <p className="text-sm text-green-600 mb-4 font-medium">
+                    GPS captured! Photos will now be automatically watermarked.<br/>
                     <span className="text-xs text-emerald-800 font-normal">GPS స్థానం తీసుకోబడింది. ఫోటోలు తీయవచ్చు.</span>
                   </p>
                 )}
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl bg-slate-50">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-md bg-slate-50">
                   <div className="space-y-1 text-center w-full">
                     <Camera className="mx-auto h-12 w-12 text-slate-400" />
                     <div className="flex flex-col sm:flex-row gap-2 text-sm text-slate-600 justify-center mt-2 w-full max-w-xs mx-auto">
-                      <label htmlFor="camera-capture" className="btn-primary relative cursor-pointer flex-1 bg-primary-600 text-white hover:bg-primary-700 w-full text-center flex items-center justify-center py-3 rounded-lg shadow-sm">
+                      <label htmlFor="camera-capture" className="btn-primary relative cursor-pointer flex-1 bg-primary-600 text-white hover:bg-primary-700 w-full text-center flex items-center justify-center py-3 rounded-md">
                         <Camera className="mr-2 h-5 w-5" />
                         <span>Live Capture / లైవ్ ఫోటో తీయండి</span>
                         <input id="camera-capture" name="camera-capture" type="file" accept="image/*" capture="environment" className="sr-only" onChange={handleImageUpload} />
                       </label>
                     </div>
                     <p className="text-xs text-slate-500 mt-2">
-                      Take clear photographs of the structure / నిర్మాణం యొక్క స్పష్టమైన ఫోటోలను తీయండి
+                      {t('survey.image_hint', 'Take clear photographs of the structure')} / నిర్మాణం యొక్క స్పష్టమైన ఫోటోలను తీయండి
                     </p>
                   </div>
                 </div>
@@ -648,7 +536,7 @@ export default function WaterConservationSurvey() {
                 {images.length > 0 && (
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
                     {images.map((img, idx) => (
-                      <div key={idx} className="relative rounded-lg overflow-hidden bg-slate-100 aspect-square border border-slate-200 shadow-sm">
+                      <div key={idx} className="relative rounded-md overflow-hidden bg-slate-100 aspect-square border border-slate-200">
                         <img src={img} alt="Preview" className="object-cover w-full h-full" />
                         <button 
                           type="button"
@@ -672,19 +560,19 @@ export default function WaterConservationSurvey() {
               type="button"
               onClick={handlePrevious}
               disabled={currentStep === 0}
-              className={`flex items-center px-4 py-2.5 text-sm font-semibold rounded-lg ${currentStep === 0
+              className={`flex items-center px-4 py-2 text-sm font-medium rounded-md ${currentStep === 0
                   ? 'text-slate-400 cursor-not-allowed bg-slate-100'
-                  : 'text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 shadow-sm'
+                  : 'text-slate-700 bg-white border border-slate-300 hover:bg-slate-50'
                 }`}
             >
               <ArrowLeft size={16} className="mr-2" />
-              Previous / మునుపటి
+              {t('survey.previous', 'Previous')} / మునుపటి
             </button>
 
             <div className="flex space-x-3">
-              <button type="button" className="hidden sm:flex items-center px-4 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 shadow-sm">
+              <button type="button" className="hidden sm:flex items-center px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50">
                 <Save size={16} className="mr-2" />
-                Save Draft / డ్రాఫ్ట్
+                {t('survey.save_draft', 'Save Draft')} / డ్రాఫ్ట్
               </button>
 
               {currentStep < steps.length - 1 ? (
@@ -692,20 +580,22 @@ export default function WaterConservationSurvey() {
                   type="button"
                   onClick={handleNext}
                   disabled={!canProceed()}
-                  className={`flex items-center px-5 py-2.5 text-sm font-semibold text-white border border-transparent rounded-lg transition-colors shadow-sm
-                    ${!canProceed() ? 'bg-primary-300 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-700'}`}
+                  className={`flex items-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md transition-colors ${
+                    !canProceed() ? 'bg-primary-300 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-700'
+                  }`}
                 >
-                  Next / తరువాతి
+                  {t('survey.next', 'Next')} / తరువాతి
                   <ArrowRight size={16} className="ml-2" />
                 </button>
               ) : (
                 <button
                   type="submit"
                   disabled={!watch('latitude') || images.length === 0}
-                  className={`flex items-center px-6 py-2.5 text-sm font-bold text-white border border-transparent rounded-lg shadow-sm transition-colors
-                    ${(!watch('latitude') || images.length === 0) ? 'bg-success-300 cursor-not-allowed' : 'bg-success-600 hover:bg-success-700 shadow-success-600/30'}`}
+                  className={`flex items-center px-6 py-2 text-sm font-bold text-white border border-transparent rounded-md shadow-sm transition-colors ${
+                    (!watch('latitude') || images.length === 0) ? 'bg-success-300 cursor-not-allowed' : 'bg-success-600 hover:bg-success-700'
+                  }`}
                 >
-                  Submit / సమర్పించండి
+                  {t('survey.submit', 'Submit')} / సమర్పించండి
                 </button>
               )}
             </div>
