@@ -128,21 +128,23 @@ export default function WaterConservationSurveyList() {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl">
+          <div className="p-2.5 bg-emerald-100 text-emerald-700 rounded-xl shadow-sm">
             <Droplets size={24} />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Water Conservation Surveys</h1>
-            <p className="text-xs text-slate-500">Track check dams, ponds, trenches, and conservation structures</p>
+            <h1 className="text-2xl font-bold text-slate-900">
+              Water Conservation Surveys <span className="text-emerald-700 font-semibold text-lg">/ నీటి సంరక్షణ సర్వేలు</span>
+            </h1>
+            <p className="text-xs text-slate-500">Track check dams, ponds, trenches, and conservation structures / చెక్ డ్యామ్‌లు, కుంటలు, కందకాలు</p>
           </div>
           <span className="bg-emerald-100 text-emerald-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-200 ml-2">
-            {surveys.length} Completed
+            {surveys.length} Completed / పూర్తయినవి
           </span>
         </div>
         <div className="mt-4 sm:mt-0 flex gap-3 flex-wrap">
           <Link to={`${basePath}/new-water-conservation`} className="btn-primary bg-emerald-600 hover:bg-emerald-700 text-white flex items-center w-fit shadow-sm shadow-emerald-600/20">
             <PlusCircle size={18} className="mr-2" />
-            New Water Survey
+            New Water Survey / కొత్త సర్వే
           </Link>
         </div>
       </div>
@@ -157,7 +159,7 @@ export default function WaterConservationSurveyList() {
             <input
               type="text"
               className="input-field pl-10"
-              placeholder="Search by Village, Structure, or ID..."
+              placeholder="Search by Village, Structure, or ID / శోధించండి..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -168,19 +170,19 @@ export default function WaterConservationSurveyList() {
           <table className="min-w-full divide-y divide-slate-200">
             <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Survey ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Location</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Structure</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Capacity</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Survey ID / సర్వే ID</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Location / ప్రదేశం</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Structure / నిర్మాణం</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Capacity / సామర్థ్యం</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date / తేదీ</th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">Actions / చర్యలు</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-slate-200">
               {filteredSurveys.map((survey) => (
                 <tr key={survey.id} className="hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-emerald-600">
-                    <button onClick={() => setSelectedSurvey(survey)} className="hover:underline font-mono">
+                    <button onClick={() => setSelectedSurvey(survey)} className="hover:underline font-mono font-bold">
                       #{survey.id}
                     </button>
                   </td>
@@ -203,7 +205,7 @@ export default function WaterConservationSurveyList() {
                     <button 
                       onClick={() => setSelectedSurvey(survey)} 
                       className="text-slate-400 hover:text-emerald-600 inline-flex transition-colors" 
-                      title="View Survey"
+                      title="View Survey / వివరాలు చూడండి"
                     >
                       <Eye size={18} />
                     </button>
@@ -211,7 +213,7 @@ export default function WaterConservationSurveyList() {
                       <button 
                         onClick={(e) => handleDelete(survey.id, e)} 
                         className="text-slate-400 hover:text-red-600 inline-flex transition-colors" 
-                        title="Delete Survey"
+                        title="Delete Survey / తొలగించండి"
                       >
                         <Trash2 size={18} />
                       </button>
@@ -222,7 +224,7 @@ export default function WaterConservationSurveyList() {
               {filteredSurveys.length === 0 && (
                 <tr>
                   <td colSpan="6" className="px-6 py-10 text-center text-slate-500">
-                    No water conservation surveys found matching your criteria.
+                    No water conservation surveys found matching your criteria. / ఎలాంటి సర్వేలు కనుగొనబడలేదు.
                   </td>
                 </tr>
               )}
