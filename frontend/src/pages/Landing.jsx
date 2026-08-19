@@ -108,30 +108,7 @@ export default function Landing() {
             </Link>
           </motion.div>
 
-          {/* Quick Stats Overlay */}
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 w-full max-w-4xl mx-auto border-t border-white/15 pt-6 sm:pt-8"
-          >
-            {[
-              { label: 'Sustainability Target', value: '100%', sub: 'NetZero Mandate' },
-              { label: 'Carbon Reduction', value: 'Net Zero', sub: 'Regional Goal' },
-              { label: 'Hydrological Telemetry', value: '24/7 Smart', sub: 'Live Sensor Array' },
-              { label: 'Afforestation Goal', value: '1M+ Trees', sub: 'Indigenous Species' }
-            ].map((stat, i) => (
-              <motion.div 
-                key={i} 
-                variants={fadeInUp} 
-                className="bg-slate-900/50 backdrop-blur-md p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10 hover:border-emerald-500/30 transition-all text-center"
-              >
-                <div className="text-xl sm:text-3xl font-extrabold text-emerald-400 font-display tracking-tight">{stat.value}</div>
-                <div className="text-slate-200 text-[11px] sm:text-xs font-semibold mt-1">{stat.label}</div>
-                <div className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5">{stat.sub}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+
         </div>
       </section>
 
