@@ -137,8 +137,8 @@ export default function PublicLayout() {
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 shadow-2xl absolute top-full left-0 w-full py-5 px-5 flex flex-col space-y-2 font-display animate-in slide-in-from-top-2 duration-200">
-            <div className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 pb-1">
+          <div className="md:hidden bg-emerald-900 border-b border-emerald-800 shadow-2xl absolute top-full left-0 w-full py-5 px-5 flex flex-col space-y-2 font-display animate-in slide-in-from-top-2 duration-200 z-50 isolate transform-gpu">
+            <div className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400 pb-1">
               Menu Navigation
             </div>
             {navLinks.map((link) => (
@@ -147,8 +147,8 @@ export default function PublicLayout() {
                 to={link.path}
                 className={`py-2.5 px-4 rounded-xl font-bold text-sm transition-colors flex items-center justify-between ${
                   location.pathname === link.path 
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60' 
-                    : 'text-slate-800 hover:bg-slate-50'
+                    ? 'bg-emerald-800 text-white border border-emerald-700/60' 
+                    : 'text-emerald-100 hover:bg-emerald-800/50'
                 }`}
               >
                 <span>{link.name}</span>
@@ -156,10 +156,10 @@ export default function PublicLayout() {
               </Link>
             ))}
             
-            <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+            <div className="pt-2 border-t border-emerald-800/50 flex flex-col gap-2">
               <Link
                 to="/login"
-                className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
+                className="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
               >
                 <ShieldCheck size={14} />
                 <span>Surveyor Authentication</span>
