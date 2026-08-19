@@ -205,7 +205,9 @@ const WaterDashboard = () => {
               <div className="text-xs text-emerald-200/60 mt-2 font-light">Pumping operations fully decarbonized today</div>
             </div>
           </div>
-            {/* Dense Analytics Charts */}
+        </div>
+        
+        {/* Dense Analytics Charts */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
           
           <div className="lg:col-span-2 bg-white border border-slate-200 rounded-3xl shadow-sm p-6 relative overflow-hidden">
@@ -218,7 +220,7 @@ const WaterDashboard = () => {
             
             <div className="h-[250px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={data} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+                <AreaChart data={data} margin={{ top: 10, right: 30, left: -20, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorDepth" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.2}/>
@@ -232,7 +234,7 @@ const WaterDashboard = () => {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                   <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b' }} dy={10} />
                   <YAxis yAxisId="left" domain={['dataMin - 5', 'dataMax + 5']} axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b', fontFamily: 'monospace' }} />
-                  <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b', fontFamily: 'monospace' }} />
+                  <YAxis yAxisId="right" orientation="right" domain={['auto', 'auto']} axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b', fontFamily: 'monospace' }} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '12px' }}
                     itemStyle={{ fontFamily: 'monospace', fontSize: '11px', fontWeight: 'bold' }}
@@ -271,12 +273,12 @@ const WaterDashboard = () => {
             </div>
             <div className="h-[200px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data} margin={{ top: 0, right: 0, left: -25, bottom: 0 }}>
+                <LineChart data={data} margin={{ top: 0, right: 20, left: -25, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                   <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 8, fill: '#64748b' }} interval={3} />
-                  <YAxis yAxisId="right" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b', fontFamily: 'monospace' }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: '#64748b', fontFamily: 'monospace' }} />
                   <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px' }} itemStyle={{ fontFamily: 'monospace', fontSize: '10px' }} />
-                  <Line yAxisId="right" type="monotone" dataKey="emissionsAvoided" stroke="#0ea5e9" strokeWidth={2} dot={false} name="Eff. Rating" />
+                  <Line type="monotone" dataKey="emissionsAvoided" stroke="#0ea5e9" strokeWidth={2} dot={false} name="Eff. Rating" />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -315,7 +317,7 @@ const WaterDashboard = () => {
               </div>
             </div>
           </div>
-        </div>      </div>
+        </div>
       </div>
     </div>
   );
