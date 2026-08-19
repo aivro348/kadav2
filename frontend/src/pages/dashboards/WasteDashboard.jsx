@@ -92,7 +92,7 @@ const ParameterCard = ({ title, value, unit, icon: Icon, colorClass, trend, dela
 
 const WasteDashboard = () => {
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-700 pt-20 pb-12 font-sans selection:bg-purple-500/30">
+    <div className="min-h-screen bg-slate-50/50 text-slate-700 pb-12 font-sans selection:bg-purple-500/30">
       
       {/* Top Navigation & Status */}
       <div className="border-b border-slate-200 bg-white/80 border-b border-slate-200/60 shadow-sm saturate-[1.1] backdrop-blur-xl sticky top-0 z-50 mb-6">
