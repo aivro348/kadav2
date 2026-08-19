@@ -70,6 +70,7 @@ export default function NewSurvey() {
         (position) => {
           setValue('latitude', position.coords.latitude);
           setValue('longitude', position.coords.longitude);
+          setValue('gps_accuracy', position.coords.accuracy);
           setIsCapturingGPS(false);
         },
         (error) => {
@@ -79,6 +80,7 @@ export default function NewSurvey() {
             (fallbackPosition) => {
               setValue('latitude', fallbackPosition.coords.latitude);
               setValue('longitude', fallbackPosition.coords.longitude);
+              setValue('gps_accuracy', fallbackPosition.coords.accuracy);
               setIsCapturingGPS(false);
             },
             (fallbackError) => {
@@ -558,6 +560,10 @@ export default function NewSurvey() {
                   <div className="flex-1">
                     <label className="label-text">{t('survey.longitude')}</label>
                     <input type="number" step="any" className="input-field" {...register('longitude', { required: true })} readOnly />
+                  </div>
+                  <div className="flex-1">
+                    <label className="label-text">Accuracy (m)</label>
+                    <input type="number" step="any" className="input-field" {...register('gps_accuracy')} readOnly />
                   </div>
                 </div>
                 <button

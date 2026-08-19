@@ -78,6 +78,7 @@ export default function WaterConservationSurvey() {
         (position) => {
           setValue('latitude', position.coords.latitude);
           setValue('longitude', position.coords.longitude);
+          setValue('gps_accuracy', position.coords.accuracy);
           setIsCapturingGPS(false);
         },
         (error) => {
@@ -87,6 +88,7 @@ export default function WaterConservationSurvey() {
             (fallbackPosition) => {
               setValue('latitude', fallbackPosition.coords.latitude);
               setValue('longitude', fallbackPosition.coords.longitude);
+              setValue('gps_accuracy', fallbackPosition.coords.accuracy);
               setIsCapturingGPS(false);
             },
             (fallbackError) => {
@@ -486,6 +488,10 @@ export default function WaterConservationSurvey() {
                   <div className="flex-1">
                     <label className="label-text font-semibold">{t('survey.longitude', 'Longitude')} <span className="text-slate-600 font-normal">/ రేఖాంశం</span></label>
                     <input type="number" step="any" className="input-field font-mono" {...register('longitude', { required: true })} readOnly />
+                  </div>
+                  <div className="flex-1">
+                    <label className="label-text font-semibold">Accuracy (m) <span className="text-slate-600 font-normal">/ కచ్చితత్వం</span></label>
+                    <input type="number" step="any" className="input-field font-mono" {...register('gps_accuracy')} readOnly />
                   </div>
                 </div>
                 <button
