@@ -40,9 +40,7 @@ export default function ViewIrrigationSurvey() {
   useEffect(() => {
     const fetchSurvey = async () => {
       try {
-        const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&user=${username}&id=${id}`);
-        if (response.ok) {
-          const data = await response.json();
+        const data = await api.get(`/irrigation.php?type=${surveyType}&user=${username}&id=${id}`);
           setSurveyData(data.survey);
           setPoints(data.points || []);
         }

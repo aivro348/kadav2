@@ -35,10 +35,7 @@ export default function ViewSurvey() {
   useEffect(() => {
     const fetchSurvey = async () => {
       try {
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?id=${id}`);
-        if (!response.ok) throw new Error('Not found');
-        
-        const data = await response.json();
+        const data = await api.get(`/surveys.php?id=${id}`);
         
         // Structure the data to match what the UI expects
         setSurvey({

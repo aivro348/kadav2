@@ -32,9 +32,7 @@ export default function WaterConservationSurveyList() {
 
       // 2. Fetch from backend API
       try {
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?type=water_conservation&user=${username}`);
-        if (response.ok) {
-          const apiData = await response.json();
+        const apiData = await api.get(`/surveys.php?type=water_conservation&user=${username}`);
           if (Array.isArray(apiData)) {
             // Filter only water conservation if backend returns mixed
             const waterApiSurveys = apiData.filter(s => s.survey_type === 'Water Conservation' || s.structure_type || s.structureType);

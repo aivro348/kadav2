@@ -16,9 +16,7 @@ export default function IrrigationDashboard({ surveyType }) {
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
-        const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&user=${username}`);
-        if (response.ok) {
-          const data = await response.json();
+        const data = await api.get(`/irrigation.php?type=${surveyType}&user=${username}`);
           if (Array.isArray(data)) {
             setSurveys(data);
           } else {

@@ -132,14 +132,7 @@ export default function WaterConservationSurvey() {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || '';
       
-      const response = await fetch(`${apiUrl}/php-backend/api/water_conservation.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (response.ok) {
-        const result = await response.json();
+      const result = await api.post('/water_conservation.php', payload);
         console.log('Survey saved to API successfully:', result);
       }
       localStorage.removeItem('waterSurveyDraft');

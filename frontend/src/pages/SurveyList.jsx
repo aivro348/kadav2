@@ -20,13 +20,7 @@ export default function SurveyList() {
     const fetchSurveys = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch surveys');
-        }
-        
-        const data = await response.json();
+        const data = await api.get(`/surveys.php?user=${username}`);
         
         if (!Array.isArray(data)) {
           console.error('API returned non-array data:', data);

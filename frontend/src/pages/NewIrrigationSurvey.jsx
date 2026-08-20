@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { api } from '../lib/api';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Camera, Save, Plus, X, AlertTriangle, Compass, CheckCircle } from 'lucide-react';
 import useGPS from '../hooks/useGPS';

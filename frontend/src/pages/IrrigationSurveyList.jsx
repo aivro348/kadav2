@@ -20,13 +20,7 @@ export default function IrrigationSurveyList({ surveyType }) {
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
-        const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}&user=${username}`);
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch surveys');
-        }
-        
-        const data = await response.json();
+        const data = await api.get(`/irrigation.php?type=${surveyType}&user=${username}`);
         if (Array.isArray(data)) {
           setSurveys(data);
           setFilteredSurveys(data);

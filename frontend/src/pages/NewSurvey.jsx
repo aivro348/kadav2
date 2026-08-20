@@ -132,26 +132,7 @@ export default function NewSurvey() {
       // Determine API URL (use relative path for Hostinger)
       const apiUrl = import.meta.env.VITE_API_URL || '';
 
-      const response = await fetch(`${apiUrl}/php-backend/api/surveys.php`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        let errorMsg = 'Failed to save survey to database';
-        try {
-          const errData = await response.json();
-          if (errData.error) errorMsg = errData.error;
-        } catch (e) {
-          // ignore JSON parse error
-        }
-        throw new Error(errorMsg);
-      }
-
-      const result = await response.json();
+      const result = await api.post('/surveys.php', payload);
       console.log('Survey saved successfully:', result);
 
       localStorage.removeItem('surveyDraft');
