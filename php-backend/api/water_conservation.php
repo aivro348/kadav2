@@ -36,15 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Prepare SQL insert
         $stmt = $pdo->prepare("
-            INSERT INTO surveys (
-                mandal, panchayat, village, latitude, longitude, gps_accuracy,
-                status, borewell_type, supply_nature, 
-                borewell_depth, motor_capacity, motor_depth, 
-                delivery_pipe, water_level_fixing, water_struck_depth,
-                tds, ph, hardness, drilled_year, dried_year, dried_months,
-                crop_category, crop_names, dependent_families, dependent_animals, agri_land_area, created_by
+            INSERT INTO water_conservation_surveys (
+                mandal, panchayat, village, 
+                structure_type, structure_subtype, 
+                length, breadth, height, depth, capacity, capacity_unit, fillings,
+                latitude, longitude, gps_accuracy, 
+                created_by
             ) VALUES (
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
             )
         ");
         
@@ -57,41 +56,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $val('mandal'),
             $val('panchayat'),
             $val('village'),
+            $val('structureType'),
+            $val('structureSubtype'),
+            $val('length'),
+            $val('breadth'),
+            $val('height'),
+            $val('depth'),
+            $val('capacity'),
+            $val('capacityUnit'),
+            $val('fillings'),
             $val('latitude'),
             $val('longitude'),
             $val('gps_accuracy'),
-            $val('status'),
-            $val('borewell_type'),
-            $val('supply_nature'),
-            $val('borewell_depth'),
-            $val('motor_capacity'),
-            $val('motor_depth'),
-            $val('delivery_pipe'),
-            $val('water_level_fixing'),
-            $val('water_struck_depth'),
-            $val('tds'),
-            $val('ph'),
-            $val('hardness'),
-            $val('drilled_year'),
-            $val('dried_year'),
-            $val('dried_months'),
-            $val('crop_category'),
-            $val('crop_names'),
-            $val('dependent_families'),
-            $val('dependent_animals'),
-            $val('agri_land_area'),
-            $data['created_by'] // Now a string directly from frontend
+            $val('created_by')
         ]);
         
         $survey_id = $pdo->lastInsertId();
         
         // Process images
         if (isset($data['images']) && is_array($data['images'])) {
-            $imgStmt = $pdo->prepare("INSERT INTO survey_images (survey_id, file_path) VALUES (?, ?)");
+            $imgStmt = $pdo->prepare("INSERT INTO water_conservation_images (survey_id, file_path) VALUES (?, ?)");
             
-            // Create dedicated per-survey folder under borewell sector
+            // Create dedicated per-survey folder under water_conservation sector
             $surveyFolder = 'survey_' . $survey_id;
-            $uploadDir = '../uploads/borewell/' . $surveyFolder . '/';
+            $uploadDir = '../uploads/water_conservation/' . $surveyFolder . '/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
@@ -118,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $filepath = $uploadDir . $filename;
                     
                     if (file_put_contents($filepath, $imgData)) {
-                        $imgStmt->execute([$survey_id, 'uploads/borewell/' . $surveyFolder . '/' . $filename]);
+                        $imgStmt->execute([$survey_id, 'uploads/water_conservation/' . $surveyFolder . '/' . $filename]);
                     }
                 }
             }
@@ -129,21 +117,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     } catch (Exception $e) {
         $pdo->rollBack();
-        error_log("Failed to save survey: " . $e->getMessage());
+        error_log("Failed to save water conservation survey: " . $e->getMessage());
         http_response_code(500);
-        echo json_encode(["error" => "Failed to save survey due to an internal server error."]);
+        echo json_encode(["error" => "Failed to save water conservation survey due to an internal server error."]);
     }
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
         if (isset($_GET['id'])) {
             // Fetch single survey with images
             $id = $_GET['id'];
-            $stmt = $pdo->prepare("SELECT * FROM surveys WHERE survey_id = ?");
+            $stmt = $pdo->prepare("SELECT * FROM water_conservation_surveys WHERE survey_id = ?");
             $stmt->execute([$id]);
             $survey = $stmt->fetch();
             
             if ($survey) {
-                $imgStmt = $pdo->prepare("SELECT file_path FROM survey_images WHERE survey_id = ?");
+                $imgStmt = $pdo->prepare("SELECT file_path FROM water_conservation_images WHERE survey_id = ?");
                 $imgStmt->execute([$id]);
                 $survey['images'] = $imgStmt->fetchAll(PDO::FETCH_COLUMN);
                 echo json_encode($survey);
@@ -155,10 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Basic GET to fetch all surveys
             // Use authenticated user role/username instead of query parameter
             if ($role === 'admin') {
-                $stmt = $pdo->query("SELECT * FROM surveys ORDER BY created_date DESC LIMIT 100");
+                $stmt = $pdo->query("SELECT * FROM water_conservation_surveys ORDER BY created_at DESC LIMIT 100");
             } else {
                 // If not admin, only show their own surveys
-                $stmt = $pdo->prepare("SELECT * FROM surveys WHERE created_by = ? ORDER BY created_date DESC LIMIT 100");
+                $stmt = $pdo->prepare("SELECT * FROM water_conservation_surveys WHERE created_by = ? ORDER BY created_at DESC LIMIT 100");
                 $stmt->execute([$username]);
             }
             
@@ -186,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Fetch survey_images to clean up physical image upload files
-        $imgStmt = $pdo->prepare("SELECT file_path FROM survey_images WHERE survey_id = ?");
+        $imgStmt = $pdo->prepare("SELECT file_path FROM water_conservation_images WHERE survey_id = ?");
         $imgStmt->execute([$id]);
         $images = $imgStmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -198,20 +186,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Delete survey folder if empty
-        $surveyFolder = '../uploads/borewell/survey_' . $id;
+        $surveyFolder = '../uploads/water_conservation/survey_' . $id;
         if (file_exists($surveyFolder) && is_dir($surveyFolder)) {
             @rmdir($surveyFolder);
         }
 
         // Delete survey from main table in MySQL database
-        $delStmt = $pdo->prepare("DELETE FROM surveys WHERE survey_id = ?");
+        $delStmt = $pdo->prepare("DELETE FROM water_conservation_surveys WHERE survey_id = ?");
         $delStmt->execute([$id]);
 
         // Clean up survey_images records
-        $delImgStmt = $pdo->prepare("DELETE FROM survey_images WHERE survey_id = ?");
+        $delImgStmt = $pdo->prepare("DELETE FROM water_conservation_images WHERE survey_id = ?");
         $delImgStmt->execute([$id]);
 
-        echo json_encode(["success" => true, "message" => "Borewell survey deleted successfully from phpMyAdmin database"]);
+        echo json_encode(["success" => true, "message" => "Water Conservation survey deleted successfully"]);
     } catch (Exception $e) {
         error_log("Failed to delete survey: " . $e->getMessage());
         http_response_code(500);

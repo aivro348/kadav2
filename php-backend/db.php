@@ -20,8 +20,11 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch(PDOException $e) {
+    // Log the real error to the server's error log securely
+    error_log("Database connection failed: " . $e->getMessage());
     http_response_code(500);
-    echo json_encode(["error" => "Database connection failed: " . $e->getMessage()]);
+    // Return a generic error to the frontend to prevent SQL/Path exposure
+    echo json_encode(["error" => "Database connection failed. Please contact support."]);
     exit();
 }
 ?>

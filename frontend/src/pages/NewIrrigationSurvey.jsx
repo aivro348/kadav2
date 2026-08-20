@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Camera, Save, Plus, X, AlertTriangle, Compass, CheckCircle } from 'lucide-react';
+import useGPS from '../hooks/useGPS';
+import { watermarkImage } from '../lib/watermark';
 
 export default function NewIrrigationSurvey({ surveyType }) {
   const navigate = useNavigate();
@@ -39,8 +41,6 @@ export default function NewIrrigationSurvey({ surveyType }) {
   const [activePhotoSlot, setActivePhotoSlot] = useState(null);
   const [activePointId, setActivePointId] = useState(null);
 
-  const [isCapturingGPS, setIsCapturingGPS] = useState(false);
-
   const surveyTitle = surveyType === 'hnss' ? 'HNSS Survey' : 'Palar River Survey';
   const apiUrl = import.meta.env.VITE_API_URL || '';
   const username = sessionStorage.getItem('rws_username') || 'surveyor';
@@ -48,109 +48,20 @@ export default function NewIrrigationSurvey({ surveyType }) {
   const basePath = isAdmin ? '/admin' : '/surveyor';
 
   // Get Main GPS
-  const getLocation = () => {
-    setGpsError(null);
-    setIsCapturingGPS(true);
-
-    if ('geolocation' in navigator) {
-      // Step 1: Try high-accuracy GPS first
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            accuracy: position.coords.accuracy
-          });
-          setIsCapturingGPS(false);
-        },
-        (error) => {
-          console.warn('High accuracy GPS failed or timed out. Attempting network fallback...', error);
-          // Step 2: Low-accuracy fallback (Wi-Fi/Cell towers) if high accuracy fails or times out
-          navigator.geolocation.getCurrentPosition(
-            (fallbackPosition) => {
-              setLocation({
-                lat: fallbackPosition.coords.latitude,
-                lng: fallbackPosition.coords.longitude,
-                accuracy: fallbackPosition.coords.accuracy
-              });
-              setIsCapturingGPS(false);
-            },
-            (fallbackError) => {
-              setGpsError("Could not access GPS. Please ensure Location Services and GPS permissions are enabled on your device.");
-              setIsCapturingGPS(false);
-            },
-            { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
-          );
-        },
-        { enableHighAccuracy: true, timeout: 3000, maximumAge: 0 }
-      );
-    } else {
-      setGpsError("Geolocation is not supported by your browser.");
-      setIsCapturingGPS(false);
+  const { captureGPS: getLocation, isCapturingGPS } = useGPS(
+    (lat, lng, accuracy) => {
+      setLocation({ lat, lng, accuracy });
+    },
+    (errStr) => {
+      setGpsError(errStr);
     }
-  };
+  );
 
   // Handle Photo Capture (Directional)
   const handlePhotoCapture = (slot, pointId = null) => {
     setActivePhotoSlot(slot);
     setActivePointId(pointId);
     fileInputRef.current.click();
-  };
-
-  const watermarkImage = (file, latitude, longitude) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        // Downscale high-resolution mobile photos to max 1280px to save RAM & payload size
-        const MAX_DIM = 1280;
-        let width = img.width;
-        let height = img.height;
-
-        if (width > MAX_DIM || height > MAX_DIM) {
-          if (width > height) {
-            height = Math.round((height * MAX_DIM) / width);
-            width = MAX_DIM;
-          } else {
-            width = Math.round((width * MAX_DIM) / height);
-            height = MAX_DIM;
-          }
-        }
-
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-
-        // Draw resized image
-        ctx.drawImage(img, 0, 0, width, height);
-
-        // Draw watermark background
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
-        const textHeight = Math.max(18, height * 0.03);
-        ctx.fillRect(0, height - textHeight * 3, width, textHeight * 3);
-
-        // Draw text
-        ctx.fillStyle = '#ffffff';
-        ctx.font = `${textHeight}px sans-serif`;
-        ctx.textAlign = 'left';
-
-        const padding = textHeight * 0.5;
-        const dateStr = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-
-        const latText = latitude ? (typeof latitude === 'number' ? latitude.toFixed(5) : latitude) : 'Unknown';
-        const lngText = longitude ? (typeof longitude === 'number' ? longitude.toFixed(5) : longitude) : 'Unknown';
-
-        ctx.fillText(`Lat: ${latText}, Lng: ${lngText}`, padding, height - textHeight * 1.5);
-        ctx.fillText(`Time: ${dateStr}`, padding, height - padding);
-
-        // Revoke Object URL to free mobile RAM immediately
-        URL.revokeObjectURL(img.src);
-
-        // Compress JPEG to 0.7 to reduce payload from ~10MB to ~200KB per photo
-        resolve(canvas.toDataURL('image/jpeg', 0.7));
-      };
-      img.src = URL.createObjectURL(file);
-    });
   };
 
   const handleFileChange = async (e) => {

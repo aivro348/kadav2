@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Droplet, Lock, User } from 'lucide-react';
+import { api } from '../lib/api';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -8,20 +9,21 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     if (username && password) {
-      const lowerUsername = username.toLowerCase();
-      
-      if (lowerUsername === 'admin' && password === 'admin') {
-        sessionStorage.setItem('rws_username', lowerUsername);
-        navigate('/select-survey');
-      } else if (lowerUsername.match(/^iitk([1-9]|[1-9][0-9]|100)$/) && password === lowerUsername) {
-        sessionStorage.setItem('rws_username', lowerUsername);
-        navigate('/select-survey');
-      } else {
-        setError('Invalid username or password');
+      try {
+        const data = await api.post('/login.php', { username, password });
+        
+        if (data.success && data.token) {
+          sessionStorage.setItem('rws_token', data.token);
+          sessionStorage.setItem('rws_username', data.user.username);
+          sessionStorage.setItem('rws_role', data.user.role);
+          navigate('/select-survey');
+        }
+      } catch (err) {
+        setError(err.message || 'Invalid username or password');
       }
     }
   };

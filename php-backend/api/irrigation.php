@@ -10,6 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once '../db_irrigation.php';
+require_once '../jwt.php';
+
+// This will block requests without a valid Bearer token
+$userPayload = JWT::authenticate();
+$username = $userPayload['username'];
+$role = $userPayload['role'];
 
 $method = $_SERVER['REQUEST_METHOD'];
 $type = isset($_GET['type']) ? $_GET['type'] : '';
@@ -102,17 +108,17 @@ if ($method === 'POST') {
         echo json_encode(["success" => true, "id" => $survey_id]);
     } catch (Exception $e) {
         $pdo->rollBack();
-        echo json_encode(["error" => $e->getMessage()]);
+        error_log("Failed to save irrigation survey: " . $e->getMessage());
+        http_response_code(500);
+        echo json_encode(["error" => "Failed to save survey due to an internal server error."]);
     }
 } elseif ($method === 'GET') {
-    $user = isset($_GET['user']) ? $_GET['user'] : '';
-    
     try {
-        if ($user === 'admin') {
+        if ($role === 'admin') {
             $stmt = $pdo->query("SELECT * FROM $mainTable ORDER BY created_at DESC LIMIT 100");
         } else {
             $stmt = $pdo->prepare("SELECT * FROM $mainTable WHERE surveyor_id = ? ORDER BY created_at DESC LIMIT 100");
-            $stmt->execute([$user]);
+            $stmt->execute([$username]);
         }
         
         $surveys = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -129,9 +135,18 @@ if ($method === 'POST') {
 
         echo json_encode($surveys);
     } catch (Exception $e) {
-        echo json_encode(["error" => $e->getMessage()]);
+        error_log("Failed to fetch irrigation surveys: " . $e->getMessage());
+        http_response_code(500);
+        echo json_encode(["error" => "Failed to fetch surveys due to an internal server error."]);
     }
 } elseif ($method === 'DELETE') {
+    // Only admins can delete
+    if ($role !== 'admin') {
+        http_response_code(403);
+        echo json_encode(["error" => "Only administrators can delete surveys"]);
+        exit;
+    }
+
     $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
     if (!$id) {
         echo json_encode(["error" => "Survey ID is required for deletion"]);
@@ -168,8 +183,9 @@ if ($method === 'POST') {
 
         echo json_encode(["success" => true, "message" => "Survey deleted successfully from phpMyAdmin database"]);
     } catch (Exception $e) {
+        error_log("Failed to delete irrigation survey: " . $e->getMessage());
         http_response_code(500);
-        echo json_encode(["error" => "Failed to delete survey: " . $e->getMessage()]);
+        echo json_encode(["error" => "Failed to delete survey due to an internal server error."]);
     }
 }
 ?>

@@ -1,7 +1,13 @@
 <?php
 require_once '../db.php';
+require_once '../jwt.php';
 
 header('Content-Type: application/json');
+
+// This will block requests without a valid Bearer token
+$userPayload = JWT::authenticate();
+$username = $userPayload['username'];
+$role = $userPayload['role'];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
@@ -93,7 +99,8 @@ try {
     ]);
 
 } catch (Exception $e) {
+    error_log("Failed to fetch analytics: " . $e->getMessage());
     http_response_code(500);
-    echo json_encode(["error" => "Failed to fetch analytics: " . $e->getMessage()]);
+    echo json_encode(["error" => "Failed to fetch analytics due to an internal server error."]);
 }
 ?>

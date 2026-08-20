@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 
 import { useState, useEffect } from 'react';
+import { api } from '../lib/api';
 
 export default function Dashboard() {
   const { t } = useTranslation();
@@ -24,15 +25,11 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/php-backend/api/surveys.php?user=${username}`);
-        if (response.ok) {
-          const data = await response.json();
-          if (Array.isArray(data)) {
-            setSurveys(data);
-          } else {
-            console.error('API returned non-array data:', data);
-          }
+        const data = await api.get(`/surveys.php`);
+        if (Array.isArray(data)) {
+          setSurveys(data);
+        } else {
+          console.error('API returned non-array data:', data);
         }
       } catch (error) {
         console.error('Error fetching surveys:', error);

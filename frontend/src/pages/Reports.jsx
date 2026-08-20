@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Bar, Pie, Doughnut } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
+import { api } from '../lib/api';
 
 ChartJS.register(
   CategoryScale,
@@ -29,12 +30,8 @@ export default function Reports() {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        const response = await fetch(`${apiUrl}/php-backend/api/analytics.php`);
-        if (response.ok) {
-          const result = await response.json();
-          setData(result);
-        }
+        const result = await api.get('/analytics.php');
+        setData(result);
       } catch (error) {
         console.error('Failed to fetch analytics:', error);
       } finally {
