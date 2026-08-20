@@ -10,24 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 $host = 'localhost'; // Usually localhost on Hostinger
-
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 
-if ($type === 'hnss') {
-    // HNSS Database Credentials
-    $dbname = 'u110415653_Charan';
-    $username = 'u110415653_charan';
-    $password = 'Charan@18042004'; 
-} else if ($type === 'palar') {
-    // Palar Database Credentials
-    $dbname = 'u110415653_Charan';
-    $username = 'u110415653_charan';
-    $password = 'Charan@18042004'; 
+if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1') {
+    // Local development credentials
+    $dbname = 'rws_borewell';
+    $username = 'root';
+    $password = '';
 } else {
-    // Default fallback to Borewell Database
-    $dbname = 'u110415653_Charan'; 
-    $username = 'u110415653_charan'; 
-    $password = 'Charan@18042004'; 
+    // Hostinger production credentials
+    if ($type === 'hnss' || $type === 'palar') {
+        $dbname = 'u110415653_Charan';
+        $username = 'u110415653_charan';
+        $password = 'Charan@18042004'; 
+    } else {
+        $dbname = 'u110415653_Charan'; 
+        $username = 'u110415653_charan'; 
+        $password = 'Charan@18042004'; 
+    }
 }
 
 try {

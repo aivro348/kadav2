@@ -9,10 +9,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-$host = 'localhost';
-$dbname = 'u110415653_Charan';
-$username = 'u110415653_charan';
-$password = 'Charan@18042004'; 
+if ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1') {
+    // Local development credentials
+    $host = 'localhost';
+    $dbname = 'rws_borewell';
+    $username = 'root';
+    $password = ''; 
+} else {
+    // Hostinger production credentials
+    $host = 'localhost';
+    $dbname = 'u110415653_Charan';
+    $username = 'u110415653_charan';
+    $password = 'Charan@18042004'; 
+}
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
