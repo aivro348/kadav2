@@ -129,8 +129,6 @@ export default function NewSurvey() {
     };
 
     try {
-      // Determine API URL (use relative path for Hostinger)
-      const apiUrl = import.meta.env.VITE_API_URL || '';
 
       const result = await api.post('/surveys.php', payload);
       console.log('Survey saved successfully:', result);

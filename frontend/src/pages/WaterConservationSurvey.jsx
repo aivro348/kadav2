@@ -130,7 +130,6 @@ export default function WaterConservationSurvey() {
     localStorage.setItem('water_surveys', JSON.stringify(existing));
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || '';
       
       const result = await api.post('/water_conservation.php', payload);
       console.log('Survey saved to API successfully:', result);

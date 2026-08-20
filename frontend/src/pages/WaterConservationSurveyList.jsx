@@ -14,7 +14,6 @@ export default function WaterConservationSurveyList() {
   const username = sessionStorage.getItem('rws_username') || 'surveyor';
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
-  const apiUrl = import.meta.env.VITE_API_URL || '';
 
   useEffect(() => {
     const fetchSurveys = async () => {

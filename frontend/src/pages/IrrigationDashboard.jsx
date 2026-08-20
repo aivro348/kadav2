@@ -9,7 +9,6 @@ export default function IrrigationDashboard({ surveyType }) {
   const username = sessionStorage.getItem('rws_username') || 'surveyor';
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
-  const apiUrl = import.meta.env.VITE_API_URL || '';
   
   const surveyTitle = surveyType === 'hnss' ? 'HNSS Dashboard' : 'Palar River Dashboard';
 

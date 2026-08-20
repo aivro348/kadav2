@@ -43,7 +43,6 @@ export default function NewIrrigationSurvey({ surveyType }) {
   const [activePointId, setActivePointId] = useState(null);
 
   const surveyTitle = surveyType === 'hnss' ? 'HNSS Survey' : 'Palar River Survey';
-  const apiUrl = import.meta.env.VITE_API_URL || '';
   const username = sessionStorage.getItem('rws_username') || 'surveyor';
   const isAdmin = username === 'admin';
   const basePath = isAdmin ? '/admin' : '/surveyor';
