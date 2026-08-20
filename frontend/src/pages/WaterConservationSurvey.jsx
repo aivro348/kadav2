@@ -133,8 +133,8 @@ export default function WaterConservationSurvey() {
       const apiUrl = import.meta.env.VITE_API_URL || '';
       
       const result = await api.post('/water_conservation.php', payload);
-        console.log('Survey saved to API successfully:', result);
-      }
+      console.log('Survey saved to API successfully:', result);
+      
       localStorage.removeItem('waterSurveyDraft');
     } catch (error) {
       console.warn('Backend API sync notice:', error.message);

@@ -130,22 +130,9 @@ export default function NewIrrigationSurvey({ surveyType }) {
     };
 
     try {
-      const response = await fetch(`${apiUrl}/php-backend/api/irrigation.php?type=${surveyType}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      const result = await api.post(`/irrigation.php?type=${surveyType}`, payload);
 
-      const responseText = await response.text();
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error('Server returned non-JSON response:', responseText);
-        throw new Error('Server returned an unexpected error format. Please verify server setup or try again.');
-      }
-
-      if (response.ok && result.success) {
+      if (result.success) {
         setIsSubmitted(true);
         setTimeout(() => {
           const targetPath = `${basePath}/surveys-${surveyType}`;
