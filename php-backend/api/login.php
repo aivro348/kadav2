@@ -27,10 +27,15 @@ $username = strtolower(trim($data['username']));
 $password = $data['password'];
 
 try {
-    // 1. Fetch user from DB
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    $user = $stmt->fetch();
+    // 1. Fetch user from DB (wrap in try-catch in case table doesn't exist yet)
+    $user = null;
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch();
+    } catch (Exception $dbError) {
+        // Table might not exist, silently ignore and rely on legacy fallback below
+    }
 
     // 2. Validate user
     // Fallback logic for legacy IITK users if they aren't in DB yet
