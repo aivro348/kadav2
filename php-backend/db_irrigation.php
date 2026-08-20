@@ -15,19 +15,19 @@ $type = isset($_GET['type']) ? $_GET['type'] : '';
 
 if ($type === 'hnss') {
     // HNSS Database Credentials
-    $dbname = 'u110415653_hnss';
-    $username = 'u110415653_hnss';
-    $password = 'Charan@2004!'; 
+    $dbname = 'u110415653_Charan';
+    $username = 'u110415653_charan';
+    $password = 'Charan@18042004'; 
 } else if ($type === 'palar') {
     // Palar Database Credentials
-    $dbname = 'u110415653_palar';
-    $username = 'u110415653_palar';
-    $password = 'Charan@2004!'; 
+    $dbname = 'u110415653_Charan';
+    $username = 'u110415653_charan';
+    $password = 'Charan@18042004'; 
 } else {
     // Default fallback to Borewell Database
-    $dbname = 'u110415653_iitk'; 
-    $username = 'u110415653_admin'; 
-    $password = 'Charan@2004!'; 
+    $dbname = 'u110415653_Charan'; 
+    $username = 'u110415653_charan'; 
+    $password = 'Charan@18042004'; 
 }
 
 try {

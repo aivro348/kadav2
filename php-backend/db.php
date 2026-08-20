@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
 }
 
-$host = 'localhost'; // Usually localhost on Hostinger
-$dbname = 'u110415653_iitk'; // The DB name from your screenshot
-$username = 'u110415653_admin'; // Correct database username
-$password = 'Charan@2004!'; 
+$host = 'localhost';
+$dbname = 'u110415653_Charan';
+$username = 'u110415653_charan';
+$password = 'Charan@18042004'; 
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     // Set PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
